@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import logo from './logo.svg'
+import MaterialCard from './components/MaterialCard'
 import './App.css'
 
 function App() {
@@ -8,36 +8,28 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React! This is blazing fast</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.jsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
+        <h1>Welcome to my portfolio!</h1>
+        <MaterialCard />
       </header>
+      <div>
+        <h1>Check out some of the tools that I use to be a successful programmer.👇</h1>
+        <div className='container'>
+          <div>
+            <h2>Programming Languages</h2>
+            <ul><a href="https://javascript.info/">JavaScript</a></ul>
+            <ul><a href="https://www.typescriptlang.org/">TypeScript</a></ul>
+          </div>
+          <div>
+            <h2>Libraries and Frameworks</h2>
+            <ul><a href="https://reactjs.org/">React</a></ul>
+          </div>
+          <div>
+            <h2>Coding Games</h2>
+            <ul><a href="https://flexboxfroggy.com/">Learn FlexBox with Flexfroggy</a></ul>
+            <ul><a href="https://vim-adventures.com/">Learn Vim with Vim-adventures</a></ul>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
