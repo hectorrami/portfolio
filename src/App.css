@@ -3,6 +3,7 @@
 }
 
 .App-header {
+  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -26,7 +27,7 @@ h2 {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  height: 70vh;
+  height: auto;
 }
 
 ul {
@@ -46,4 +47,5 @@ a {
 a:hover {
   color: #61dafb;
   text-decoration: underline;
+  cursor: pointer;
 }
