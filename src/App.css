@@ -20,6 +20,16 @@ h1 {
 h2 {
   color: white;
 }
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
 
 .container {
   background-color: #0093E9;
@@ -28,6 +38,14 @@ h2 {
   flex-wrap: wrap;
   justify-content: space-around;
   height: auto;
+}
+
+.container-skills {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding: 5%;
 }
 
 ul {
@@ -48,4 +66,17 @@ a:hover {
   color: #61dafb;
   text-decoration: underline;
   cursor: pointer;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.card {
+  margin: 20px;
 }
