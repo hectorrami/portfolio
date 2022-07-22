@@ -1,25 +1,28 @@
 import React from 'react';
-import NavBar from './components/NavBar';
 import MaterialCard from './components/MaterialCard';
-import Skills from './components/Skills';
 import './App.css';
-import logo from './logo.svg';
-
-const skillList = [{ name: 'React', image: logo }, { name: 'JavaScript', image: logo }, { name: 'TypeScript', image: logo }];
+import ErrorLogo from './img/404.png';
 
 function App() {
   return (
     <div className="App">
-      <NavBar />
       <header className="App-header">
-        <h1>⚡️ Welcome to my portfolio! ⚡️</h1>
-        <MaterialCard />
+        <div>
+          <h1>
+            Welcome to my
+            {' '}
+            <span className="text-gradient">portfolio</span>
+          </h1>
+          <p>Hi, 👋 My name is Hector.I am a highly driven Software Engineer from in Houston, Tx.</p>
+        </div>
+        <div><MaterialCard /></div>
       </header>
-      <h1>SKILLS</h1>
-      <div className="container-skills">
-        {
-        skillList.map((skill) => <Skills skill={skill.name} image={skill.image} />)
-      }
+      <div className="App-work">
+        <img src={ErrorLogo} className="img" alt="404" />
+        <p>
+          Please check back later. My website is currently under development,
+          but I am constantly updating it..
+        </p>
       </div>
     </div>
   );
