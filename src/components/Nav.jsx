@@ -4,9 +4,8 @@ import './Nav.css';
 function Nav() {
   const [show, handleShow] = useState(false);
 
-  const transitionNavbar = () => {
+  const transitionNavbar = () =>
     window.scrollY > 100 ? handleShow(true) : handleShow(false);
-  };
 
   useEffect(() => {
     window.addEventListener('scroll', transitionNavbar);

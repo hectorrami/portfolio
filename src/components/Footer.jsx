@@ -3,8 +3,11 @@ import './Footer.css';
 
 function Footer() {
   return (
-    <div className="footer">
-      <h1></h1>
+    <div>
+      <div className="footer--fadeTop" />
+      <div className="footer">
+        <p>Created by Hector Ramirez with 💖</p>
+      </div>
     </div>
   );
 }

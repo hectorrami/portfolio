@@ -14,9 +14,7 @@ function Header() {
         <h1 className="header_title">
           Hector <span className="text-gradient">Ramirez</span>
         </h1>
-        <h1 className="header_description">
-          Welcome to my portfolio! I'm a software engineer from Houston, Texas.
-        </h1>
+        <h1 className="header_description">Welcome to my portfolio!</h1>
       </div>
       <div className="header--fadeBottom" />
     </header>

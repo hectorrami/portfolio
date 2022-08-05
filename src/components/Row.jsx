@@ -1,18 +1,23 @@
 import React from 'react';
 import './Row.css';
 
-function Row({ images }) {
+// To Do : Add Prop Validation
+function Row({ projects }) {
   return (
     <div className="row">
-      <h2>PROJECTS</h2>
+      <h1>PROJECTS</h1>
       <div className="row_posters">
-        {images.map((img) => (
+        {projects.map((project) => (
           <div>
-            <img src={img} alt="project" className="row_poster" />
-            <h3 className="row-text">Netlix Clone</h3>
+            <img src={project.img} alt="project" className="row_poster" />
+            <h3 className="row-text">{project.title}</h3>
             <div className="banner_buttons">
-              <button className="banner_button">GitHub</button>
-              <button className="banner_button">Preview</button>
+              <button className="banner_button" type="button">
+                GitHub
+              </button>
+              <button className="banner_button" type="button">
+                Preview
+              </button>
             </div>
           </div>
         ))}

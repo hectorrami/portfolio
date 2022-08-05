@@ -1,0 +1,72 @@
+.experience {
+  color: white;
+  margin-left: 20px;
+  padding-top: 3rem;
+}
+
+.experience-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.experience-item {
+  width: 350px;
+  padding-top: 3px;
+}
+
+.fromLeft {
+  animation-name: fromLeft;
+  animation-duration: 5s;
+}
+
+.fromRight {
+  animation-name: fromRight;
+  animation-duration: 3s;
+}
+
+.fromBehind {
+  animation-name: fromBehind;
+  animation-duration: 5s;
+}
+
+@keyframes fromLeft {
+  0% {
+    transform: translateX(-120px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fromBehind {
+  0% {
+    transform: translateZ(-100px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateZ(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fromRight {
+  0% {
+    transform: translateX(30px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+ ul {
+  list-style-type: none;
+  padding-left: 0;
+ }
