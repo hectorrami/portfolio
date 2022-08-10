@@ -17,7 +17,7 @@
 }
 
 .row_poster {
-  max-height: 250px;
+  max-height: 300px;
   margin-right: 10px;
   transition: transform 450ms;
   object-fit: contain;
@@ -25,7 +25,7 @@
 }
 
 .row_poster:hover {
-  transform: scale(1.09);
+  transform: scale(1.04);
   opacity: 1;
 }
 
