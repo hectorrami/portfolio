@@ -12,16 +12,17 @@ function Header() {
     >
       <div className="header_contents">
         <h1 className="header_title">
-          <span className="text-gradient">Hector</span> Ramirez
+          <span>Hector</span> Ramirez
         </h1>
-        <p className="header_description">
-          Hi. I'm a software engineer from Houston, Tx.
-          <br /> I have professional experience with React, JavaScript,
-          TypeScript, Java, and many other programming languages and tools.
-          <br /> My goal is to continue learning and growing as a developer.
-        </p>
+        <h2>
+          <span className="text-gradient">Software Engineer</span>
+        </h2>
+        <h5 className="fromLeft">
+          Hi👋I have professional experience working with React, TypeScript,
+          JavaScript, and many other programming languages and tools. I love new
+          challenges, learning, and creating.
+        </h5>
       </div>
-      <div className="header--fadeBottom" />
     </header>
   );
 }

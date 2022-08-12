@@ -5,12 +5,17 @@ import Header from './Header';
 import Footer from './Footer';
 import Experience from './Experience';
 import NetflixClone from '../img/netflixclone.png';
-import AmazonClone from '../img/amazonclone.png';
 
 function Home() {
   const projects = [
-    { img: NetflixClone, title: 'Netflix Clone' },
-    { img: AmazonClone, title: 'Amazon Clone' },
+    {
+      img: NetflixClone,
+      title: 'Netflix Clone',
+      githubLink:
+        'https://github.com/hectorrami/Neflix-clone/tree/main/netflix-clone',
+      previewLink: 'https://netflix-clone-39324.web.app/',
+      completed: true,
+    },
   ];
   return (
     <div>

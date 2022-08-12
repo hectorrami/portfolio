@@ -13,10 +13,10 @@ function Row({ projects }) {
             <h3 className="row-text">{project.title}</h3>
             <div className="banner_buttons">
               <button className="banner_button" type="button">
-                GitHub
+                <a href={project.githubLink}>Github</a>
               </button>
               <button className="banner_button" type="button">
-                Preview
+                <a href={project.previewLink}>Demo</a>
               </button>
             </div>
           </div>
