@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { ThemeContext } from '../Providers/ThemeContext'; // Import context
+import {Bedtime, WbSunny} from '@mui/icons-material';
+import {IconButton} from "@mui/material";
 import global from '../Styles/global.css'
 import './Nav.css';
 
@@ -17,9 +19,9 @@ function Nav() {
 
   return (
     <div className={`nav ${theme} ${show && 'transition'}`}>
-        <button onClick={toggleTheme}>
-          toggle
-        </button>
+        <IconButton onClick={toggleTheme}>
+          {theme === 'light' ? <Bedtime className={`${theme}`}/> : <WbSunny className={`${theme}`}/>}
+        </IconButton >
     </div>
   );
 }
