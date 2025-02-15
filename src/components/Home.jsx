@@ -22,7 +22,7 @@ function Home() {
       <Nav />
       <Header />
       <Row projects={projects} />
-      <Experience />
+      {/* <Experience /> */}
       <Footer />
     </div>
   );

@@ -1,19 +1,16 @@
 .header {
-  position: relative;
-  color: white;
-  color: white;
-  object-fit: contain;
-  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .header_contents {
-  margin-left: 30px;
   padding-top: 140px;
   height: 190px;
 }
 
 .header_title {
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: 800;
   padding-bottom: .3rem;
 }
@@ -22,6 +19,9 @@
   background: linear-gradient(90deg,#00dbde, #fc00ff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .header_description {
@@ -36,5 +36,11 @@
 .header--fadeBottom {
   height: 7.4rem;
   background-image: linear-gradient(180deg, transparent, rgba(37,37,37,.61), #111);
+}
+
+h5 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 

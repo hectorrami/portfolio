@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { ThemeContext } from '../Providers/ThemeContext'; // Import context
+import global from '../Styles/global.css'
 import './Nav.css';
 
 function Nav() {
+  const {theme, toggleTheme} = useContext(ThemeContext);
   const [show, handleShow] = useState(false);
 
   const transitionNavbar = () =>
@@ -13,8 +16,10 @@ function Nav() {
   }, []);
 
   return (
-    <div className={`nav ${show && 'nav_black'}`}>
-      <div className="nav_contents">🚀</div>
+    <div className={`nav ${theme} ${show && 'transition'}`}>
+        <button onClick={toggleTheme}>
+          toggle
+        </button>
     </div>
   );
 }
