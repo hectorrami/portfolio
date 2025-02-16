@@ -21,9 +21,6 @@ function Footer() {
               <a href={'https://www.linkedin.com/in/hector-ramirez-14ab63185'} target={'_blank'}>
                   <LinkedIn className={`${theme}`}/>
               </a>
-              <a href={'#'} target={'_blank'}>
-                  <Email className={`${theme}`}/>
-              </a>
           </div>
       </div>
   );
