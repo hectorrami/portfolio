@@ -17,6 +17,7 @@ function Home() {
       completed: true,
     },
   ];
+
   return (
     <div>
       <Nav />
