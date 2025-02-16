@@ -1,7 +1,23 @@
 .footer {
   height: 20vh;
   display: flex;
-  justify-content: center;
-  flex-direction: column;
   align-items: center;
+  justify-content: space-between;
+  padding: 0 20px; /* Adds padding for better spacing */
+  flex-wrap: wrap; /* Allows wrapping when screen shrinks */
+}
+
+.footer-text,
+.footer-link {
+}
+
+/* When screen gets small, stack text above the link */
+@media (max-width: 900px) {
+  .footer {
+    flex-direction: column;
+    text-align: center;
+    justify-content: center; /* Centers content when stacked */
+    height: auto; /* Adjusts height dynamically */
+    gap: 10px; /* Adds spacing between stacked items */
+  }
 }
