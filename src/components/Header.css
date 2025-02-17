@@ -1,12 +1,11 @@
 .header {
   display: flex;
+  height: 40vh;
   align-items: center;
   justify-content: center;
 }
 
 .header_contents {
-  padding-top: 140px;
-  height: 190px;
 }
 
 .header_title {
@@ -31,11 +30,6 @@
   font-size: .8rem;
   max-width: 280px;
   height: 80px;
-}
-
-.header--fadeBottom {
-  height: 7.4rem;
-  background-image: linear-gradient(180deg, transparent, rgba(37,37,37,.61), #111);
 }
 
 h5 {

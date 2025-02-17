@@ -6,9 +6,7 @@ import './App.css';
 function App() {
   return (
       <ThemeProvider>
-        <div>
-            <Home />
-        </div>
+          <Home />
       </ThemeProvider>
   );
 }

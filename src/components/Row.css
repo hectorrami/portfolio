@@ -1,6 +1,12 @@
 .row {
-  color: white;
-  cursor: pointer;
+}
+
+.row-light {
+  background-image: conic-gradient(from 90deg at -10% 100%, #bcc1cd 0deg, #bcc1cd 90deg, #fff 1turn);
+}
+
+.row-dark {
+ background-image: conic-gradient(from 90deg at -10% 100%, #2b303b 0deg, #2b303b 90deg, #16181d 1turn);
 }
 
 .row_posters {
@@ -49,6 +55,7 @@
   padding-right: 2rem;
   padding-top: .5rem;
   padding-bottom: .5rem;
+  height: 20px;
 }
 
 .banner_button:hover {
@@ -66,6 +73,5 @@
 }
 
 a {
-    color: #FFFFFF;
     text-decoration: none;
 }

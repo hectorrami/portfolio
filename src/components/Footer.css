@@ -1,5 +1,5 @@
 .footer {
-  height: 20vh;
+  height: 300px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -7,8 +7,19 @@
   flex-wrap: wrap; /* Allows wrapping when screen shrinks */
 }
 
-.footer-text,
 .footer-link {
+  padding: 5px;
+}
+
+.footer-link a {
+  transition: transform 0.3s ease, color 0.3s ease;
+  display: inline-block; /* Prevents weird spacing issues */
+  padding: 5px;
+}
+
+.footer-link a:hover {
+  transform: scale(1.2); /* Slight zoom effect */
+  color: lightblue; /* Change color when hovered */
 }
 
 /* When screen gets small, stack text above the link */
