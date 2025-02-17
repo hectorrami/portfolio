@@ -4,7 +4,6 @@ import SkillsChart from "./SkillsChart";
 import global from '../Styles/global.css'
 import './Row.css';
 
-// To Do : Add Prop Validation
 function Row({ projects }) {
     const {theme} = useContext(ThemeContext);
 
