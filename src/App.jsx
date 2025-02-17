@@ -1,5 +1,5 @@
 import React from 'react';
-import Home from './components/Home';
+import Home from './Components/Home';
 import { ThemeProvider } from './Providers/ThemeContext';
 import './App.css';
 
