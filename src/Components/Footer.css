@@ -3,8 +3,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px; /* Adds padding for better spacing */
   flex-wrap: wrap; /* Allows wrapping when screen shrinks */
+  padding: 50px;
 }
 
 .footer-link {
