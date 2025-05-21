@@ -1,9 +1,9 @@
-import {useContext, useEffect, useRef} from "react";
+import { useContext, useEffect, useRef } from "react";
 import Highcharts from "highcharts";
-import {ThemeContext} from "../Providers/ThemeContext";
+import { ThemeContext } from "../Providers/ThemeContext";
 
 const SkillsChart = () => {
-  const {theme} = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   const chartRef = useRef(null);
 
   useEffect(() => {
@@ -15,7 +15,7 @@ const SkillsChart = () => {
         },
         title: {
           text: "My Technical Skills",
-          style: {color: theme === 'dark' ? '#fff' : '#000',}
+          style: { color: theme === 'dark' ? '#fff' : '#000', }
         },
         xAxis: {
           categories: [
@@ -24,16 +24,15 @@ const SkillsChart = () => {
             "Java",
             "Spring Boot",
             "AWS",
-            "Docker",
           ],
           title: { text: null },
-          labels: {style: {color: theme === 'dark' ? '#fff' : '#000'}}, // Make labels visible on dark background
+          labels: { style: { color: theme === 'dark' ? '#fff' : '#000' } }, // Make labels visible on dark background
         },
         yAxis: {
           min: 0,
           max: 100,
-          title: { text: "Proficiency (%)", align: "high", style: {color: theme === 'dark' ? '#fff' : '#000'}},
-          labels: { style: { color: theme === 'dark' ? "#fff" : '#000'}},
+          title: { text: "Proficiency (%)", align: "high", style: { color: theme === 'dark' ? '#fff' : '#000' } },
+          labels: { style: { color: theme === 'dark' ? "#fff" : '#000' } },
         },
         tooltip: {
           valueSuffix: "%",
@@ -41,7 +40,7 @@ const SkillsChart = () => {
         series: [
           {
             name: "Proficiency",
-            data: [95, 90, 60, 60, 50, 70],
+            data: [95, 90, 80, 80, 90],
             color: "#92a0d7",
           },
         ],
