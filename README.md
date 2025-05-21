@@ -71,8 +71,16 @@ This guide provides step-by-step instructions to deploy your Vite-powered applic
 2. **Deploy to GitHub Pages**:
 
    ```bash
-   npm run deploy
+	 git add dist -f
    ```
+
+	```bash
+	 git commit -m "your commit message"
+   ```
+
+	```bash
+	git subtree push --prefix dist origin gh-pages
+   ``` 
 
    This command will build the project and push the contents of the `dist` directory to the `gh-pages` branch of your repository.
 
@@ -87,5 +95,3 @@ https://your-username.github.io/your-repo-name/
 Replace `your-username` and `your-repo-name` with your actual GitHub username and repository name.
 
 ---
-
-Feel free to customize this `README.md` further to suit your project's specific needs. If you require additional assistance or have questions about customizing your deployment, feel free to ask!
