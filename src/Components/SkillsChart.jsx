@@ -40,7 +40,7 @@ const SkillsChart = () => {
         series: [
           {
             name: "Proficiency",
-            data: [95, 90, 80, 80, 90],
+            data: [95, 90, 80, 80, 92],
             color: "#92a0d7",
           },
         ],
