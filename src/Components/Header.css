@@ -3,38 +3,40 @@
   height: 40vh;
   align-items: center;
   justify-content: center;
+  text-align: center;
+  /* center text inside the container */
 }
 
 .header_contents {
+  padding: 2rem 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .header_title {
-  font-size: 2rem;
-  font-weight: 800;
-  padding-bottom: .3rem;
+  margin-top: 1.5rem;
 }
 
 .text-gradient {
-  background: linear-gradient(90deg,#00dbde, #fc00ff);
+  background: linear-gradient(90deg, #00dbde, #fc00ff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-.header_description {
-  width: 45rem;
-  line-height: 1.3;
-  padding-top: 1rem;
-  font-size: .8rem;
-  max-width: 280px;
-  height: 80px;
+.text-gradient.light {
+  background-image: linear-gradient(90deg, #00dbde, #fc00ff);
+  /* bright colors */
 }
 
-h5 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.text-gradient.dark {
+  background-image: linear-gradient(90deg, #fc00ff, #00dbde);
+  /* cooler tones for dark theme */
 }
 
+.about-me {
+  max-width: 600px;
+  margin: 1.5rem auto 0 auto;
+  font-size: 1rem;
+  line-height: 1.5;
+}

@@ -10,40 +10,59 @@ const SkillsChart = () => {
     if (chartRef.current) {
       Highcharts.chart(chartRef.current, {
         chart: {
-          type: "bar",
+          polar: true,
+          type: "column",
           backgroundColor: "transparent",
         },
         title: {
           text: "My Technical Skills",
-          style: { color: theme === 'dark' ? '#fff' : '#000', }
+          style: {
+            color: theme === "dark" ? "#fff" : "#000",
+          },
+        },
+        pane: {
+          size: "85%",
         },
         xAxis: {
-          categories: [
-            "JavaScript",
-            "React",
-            "Java",
-            "Spring Boot",
-            "AWS",
-          ],
-          title: { text: null },
-          labels: { style: { color: theme === 'dark' ? '#fff' : '#000' } }, // Make labels visible on dark background
+          categories: ["JavaScript", "React", "Java", "Spring Boot", "AWS"],
+          tickmarkPlacement: "on",
+          lineWidth: 0,
+          labels: {
+            style: {
+              color: theme === "dark" ? "#fff" : "#000",
+              fontWeight: "bold",
+            },
+          },
         },
         yAxis: {
           min: 0,
           max: 100,
-          title: { text: "Proficiency (%)", align: "high", style: { color: theme === 'dark' ? '#fff' : '#000' } },
-          labels: { style: { color: theme === 'dark' ? "#fff" : '#000' } },
+          endOnTick: false,
+          showLastLabel: true,
+          gridLineInterpolation: "polygon",
+          lineWidth: 0,
+          labels: {
+            style: {
+              color: theme === "dark" ? "#fff" : "#000",
+            },
+          },
         },
         tooltip: {
-          valueSuffix: "%",
+          shared: true,
+          pointFormat: "<span>{point.category}</span>: <b>{point.y}%</b><br/>",
         },
         series: [
           {
             name: "Proficiency",
             data: [95, 90, 80, 80, 92],
-            color: "#92a0d7",
+            pointPlacement: "on",
+            colorByPoint: true,
+            colors: ["#00dbde", "#fc00ff", "#7F00FF", "#00C9FF", "#92a0d7"],
           },
         ],
+        credits: {
+          enabled: false,
+        },
       });
     }
   }, [theme]);

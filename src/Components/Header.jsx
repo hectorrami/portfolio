@@ -1,23 +1,24 @@
-import React, {useContext} from 'react';
-import {ThemeContext} from "../Providers/ThemeContext";
+import React, { useContext } from 'react';
+import { ThemeContext } from "../Providers/ThemeContext";
 import './Header.css';
 import global from '../Styles/global.css'
+import { ABOUT_ME } from '../Constants/constants';
 
 function Header() {
-  const {theme} = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   return (
     <header className={`header ${theme}`}>
       <div className="header_contents">
         <h1 className={`header_title ${theme}`}>
-         Hector Ramirez
+          Hector Ramirez
         </h1>
         <h2>
-          <span className="text-gradient">Software Developer</span>
+          <span className={`text-gradient ${theme}`}>Software Developer</span>
         </h2>
-        <h5>
-          Houston, Tx.
-        </h5>
+        <p className={`about-me ${theme}`}>
+          {ABOUT_ME}
+        </p>
       </div>
     </header>
   );

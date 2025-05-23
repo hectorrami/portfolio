@@ -1,0 +1,1 @@
+export const ABOUT_ME = "I'm a full-stack developer with a strong focus on front-end technologies. I love crafting clean, responsive user interfaces and building web experiences that are both functional and enjoyable. When I'm not coding, you can usually find me exploring new places — I’m always up for an adventure and love combining my passion for tech with my love of travel."
