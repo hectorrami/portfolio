@@ -3,8 +3,4 @@ export const ABOUT_ME = {
   role: "Fullstack Developer",
   location: "Houston, TX",
   interests: ["Coding", "Traveling", "Coffee", "Gaming"],
-  experience:[
-    { JPMorganChase: "Associate Software Engineer" },
-    { PROS: "Software Engineer" }
-  ]
 };
