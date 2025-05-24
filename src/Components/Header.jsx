@@ -16,9 +16,6 @@ function Header() {
         <h2>
           <span className={`text-gradient ${theme}`}>Software Developer</span>
         </h2>
-        <p className={`about-me ${theme}`}>
-          {ABOUT_ME}
-        </p>
       </div>
     </header>
   );
