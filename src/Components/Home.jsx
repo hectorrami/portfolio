@@ -15,6 +15,7 @@ function Home() {
         'https://github.com/hectorrami/Neflix-clone/tree/main/netflix-clone',
       previewLink: 'https://netflix-clone-39324.web.app/',
       completed: true,
+      description: 'A simple UI clone of Netflix built with React and The Movie Database'
     },
   ];
 

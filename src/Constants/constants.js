@@ -1,1 +1,10 @@
-export const ABOUT_ME = "I'm a full-stack developer with a strong focus on front-end technologies. I love crafting clean, responsive user interfaces and building web experiences that are both functional and enjoyable. When I'm not coding, you can usually find me exploring new places — I’m always up for an adventure and love combining my passion for tech with my love of travel."
+export const ABOUT_ME = {
+  name: "Hector Ramirez",
+  role: "Fullstack Developer",
+  location: "Houston, TX",
+  interests: ["Coding", "Traveling", "Coffee", "Gaming"],
+  experience:[
+    { JPMorganChase: "Associate Software Engineer" },
+    { PROS: "Software Engineer" }
+  ]
+};

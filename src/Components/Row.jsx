@@ -7,7 +7,6 @@ import './Row.css';
 function Row({ projects }) {
   const { theme } = useContext(ThemeContext);
 
-  console.log('here:')
   return (
     <div className={`row ${theme} ${theme === 'light' ? 'row-light' : 'row-dark'}`}>
       <h3 className="row-text">Projects</h3>
@@ -15,7 +14,8 @@ function Row({ projects }) {
         {projects && projects.map((project) => (
           <div>
             <img src={project.img} alt="project" className="row_poster" />
-            <h3 className="row-text">Netlix Clone</h3>
+            <h3 className="row-text">{project.title}</h3>
+            <p className="row-text">{project.description}</p>
             <div className="banner_buttons">
               <a className={'banner_button'} href={project.githubLink}>Github</a>
               <a className={'banner_button'} href={project.previewLink}>Demo</a>
