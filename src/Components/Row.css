@@ -25,9 +25,9 @@
   max-height: 25rem;
   margin-right: 10px;
   transition: transform 450ms;
-  object-fit: contain;
+  object-fit: fill;
   border-radius: 10px;
-  width: 100%;
+  width: 80%;
 }
 
 .row_poster:hover {
