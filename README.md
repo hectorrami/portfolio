@@ -1,97 +1,81 @@
-# 🚀 Deploying a Vite App to GitHub Pages
+# Portfolio Website
 
-This guide provides step-by-step instructions to deploy your Vite-powered application to GitHub Pages.
+Welcome to my personal portfolio website, showcasing my projects, skills, and experiences. This site is built using Vite and deployed to GitHub Pages.
 
-## 📦 Prerequisites
+## 🚀 Features
 
-* **Node.js** and **npm** installed on your machine.
-* A Vite project initialized.
-* A GitHub repository created and linked to your local project.
+- **Fast and modern build tool**: Utilizing Vite for a swift development experience.
+- **Continuous Deployment**: Automated deployment to GitHub Pages via GitHub Actions.
+- **Responsive Design**: Optimized for both desktop and mobile views.
 
-## 🛠️ Installation
+## 🔧 Technologies Used
 
-1. **Clone your repository** (if you haven't already):
+- **Vite**: A next-generation, fast build tool.
+- **GitHub Actions**: For continuous integration and deployment.
+- **GitHub Pages**: Hosting the static si
 
-   ```bash
-   git clone https://github.com/your-username/your-repo-name.git
-   cd your-repo-name
-   ```
+- **React**: For frontend development
 
-2. **Install dependencies**:
+## 📦 Setup & Installation
+To run this project locally:
 
-   ```bash
-   npm install
-   ```
-
-3. **Install `gh-pages` package** as a development dependency:
-
-   ```bash
-   npm install --save-dev gh-pages
-   ```
-
-## ⚙️ Configuration
-
-1. **Update `vite.config.js`**:
-
-   Modify the `base` property to match your repository name:
-
-   ```javascript
-   // vite.config.js
-   export default {
-     base: '/your-repo-name/',
-     // ...other configurations
-   };
-   ```
-
-   Replace `'your-repo-name'` with the actual name of your GitHub repository.
-
-2. **Update `package.json`**:
-
-   Add the following scripts:
-
-   ```json
-   {
-     "scripts": {
-       "dev": "vite",
-       "build": "vite build",
-       "preview": "vite preview",
-       "deploy": "npm run build && gh-pages -d dist"
-     }
-   }
-   ```
-
-## 🚀 Deployment
-
-1. **Build the project**:
-
-   ```bash
-   npm run build
-   ```
-
-2. **Deploy to GitHub Pages**:
-
-   ```bash
-	 git add dist -f
-   ```
-
-	```bash
-	 git commit -m "your commit message"
-   ```
-
-	```bash
-	git subtree push --prefix dist origin gh-pages
-   ``` 
-
-   This command will build the project and push the contents of the `dist` directory to the `gh-pages` branch of your repository.
-
-## 🌐 Accessing Your Deployed Site
-
-After deployment, your site will be available at:
-
+1. Clone the repository:
+```bash
+git clone https://github.com/hectorrami/portfolio.git
+cd portfolio
 ```
-https://your-username.github.io/your-repo-name/
+2. Install dependencies
+```bash
+npm install
+```
+3. Start the development server:
+```bash
+npm run dev
 ```
 
-Replace `your-username` and `your-repo-name` with your actual GitHub username and repository name.
+## 📄 Deployment Workflow
 
----
+This project employs a GitHub Actions workflow to automate deployment to GitHub Pages. The workflow is defined in `.github/workflows/deploy.yml` and runs on every push to the `main` branch.
+
+### Workflow Overview
+
+1. **Checkout Code** – Retrieves the latest source code.
+2. **Set Up Node.js** – Prepares the Node.js environment.
+3. **Install Dependencies** – Installs necessary npm packages.
+4. **Build Project** – Builds the
+5. **Deploy to GitHub Pages** – Publishes the site to the `gh-pages` branch.
+
+### GitHub Actions Configuration
+
+```yaml
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
