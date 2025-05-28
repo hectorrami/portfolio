@@ -7,8 +7,10 @@
   cursor: pointer;
 
   display: flex;
-  justify-content: flex-end;  /* This will space out the contents */
-  align-items: center;            /* Vertically center the content */
+  justify-content: flex-end;
+  /* This will space out the contents */
+  align-items: center;
+  /* Vertically center the content */
 
   /*Animations*/
   transition-timing-function: ease-in;
@@ -26,4 +28,28 @@
 .transition {
   /* Add some depth with a shadow */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2), 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav_icons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  /* Adjust spacing here */
+  margin-right: 20px;
+  /* Optional: some padding from the right */
+}
+
+.nav_contents {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 20px;
+}
+
+.nav_left,
+.nav_right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
