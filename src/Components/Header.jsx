@@ -25,8 +25,10 @@ function Header() {
   }, [fullText]);
 
   return (
-    <header className={`json-container ${theme}`}>
-      <pre>{typedText}</pre>
+    <header className={`json-header-container ${theme}`}>
+      <div className="json-glass-box">
+        <pre>{typedText}</pre>
+      </div>
     </header>
   );
 }

@@ -1,16 +1,69 @@
-.json-container {
+.json-header-container {
   display: flex;
-  height: 60vh;
-  align-items: center;
   justify-content: center;
-  color: #9cdcfe;
-  font-family: monospace;
-  font-size: 14px;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  align-items: center;
+  padding: 2rem;
 }
 
-.json-container.light {
-  color: black;
+.json-glass-box {
+  background: rgba(255, 255, 255, 0.05);
+  /* Light glass effect */
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 20px;
+  padding: 2rem;
+  max-width: 800px;
+  width: 100%;
+  color: var(--text-color);
+  font-family: 'Fira Code', monospace;
+  font-size: 0.95rem;
+  overflow-x: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+}
+
+.json-header-container.dark .json-glass-box {
+  background: rgba(255, 255, 255, 0.05);
+  color: #e0e0e0;
+}
+
+.json-header-container.light .json-glass-box {
+  background: rgba(0, 0, 0, 0.05);
+  color: #111;
+}
+
+
+.json-glass-box:hover {
+  transform: scale(1.02);
+  /* subtle zoom */
+  box-shadow: 0 6px 25px rgba(255, 255, 255, 0.2), 0 0 10px rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.json-header-container.dark .json-glass-box:hover {
+  box-shadow: 0 6px 30px rgba(0, 255, 255, 0.2), 0 0 15px rgba(0, 255, 255, 0.1);
+}
+
+.json-header-container.light .json-glass-box:hover {
+  box-shadow: 0 6px 30px rgba(0, 255, 255, 0.2), 0 0 15px rgba(0, 255, 255, 0.1);
+}
+
+
+pre::after {
+  content: "_";
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
 }
