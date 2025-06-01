@@ -42,9 +42,6 @@
 }
 
 .banner_button {
-  background-color: #e50914;
-  /* Netflix red */
-  color: #ffffff;
   font-weight: bold;
   font-size: 16px;
   padding: 12px 24px;
@@ -60,10 +57,9 @@
 }
 
 .banner_button:hover {
-  background-color: #f2f2f2;
   transition: all .2s;
   text-decoration: none;
-  color: #111;
+  color: rgb(105, 167, 248)
 }
 
 .row-text {

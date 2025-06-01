@@ -16,9 +16,9 @@ function Row({ projects }) {
             <img src={project.img} alt="project" className="row_poster" />
             <h3 className="row-text">{project.title}</h3>
             <p className="row-text">{project.description}</p>
-            <div className="banner_buttons">
-              <a className={'banner_button'} href={project.githubLink}>Github</a>
-              <a className={'banner_button'} href={project.previewLink}>Demo</a>
+            <div className={`banner_buttons`}>
+              <a className={`banner_button  ${theme}`} href={project.githubLink}>Github</a>
+              <a className={`banner_button  ${theme}`} href={project.previewLink}>Demo</a>
             </div>
           </div>
         ))}
