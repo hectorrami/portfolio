@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { ThemeContext } from "../Providers/ThemeContext";
 import SkillsChart from "./SkillsChart";
-import global from '../Styles/global.css'
 import './Row.css';
 
 function Row({ projects }) {

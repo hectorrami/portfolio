@@ -12,12 +12,6 @@ function Header() {
       <div className="header_contents">
         <Avatar className="avatar" alt="Hector Ramirez" src={Me} sx={{ width: 200, height: 200 }}
         />
-        <h1 className={`header_title ${theme}`}>
-          Hector Ramirez
-        </h1>
-        <h2>
-          <span className={`${theme}`}>Software Developer based in Houston, Texas</span>
-        </h2>
       </div>
     </header>
   );
