@@ -4,7 +4,7 @@ import Row from './Row';
 import Header from './Header';
 import Footer from './Footer';
 import Experience from './Experience';
-import NetflixClone from '../img/netflixclone.png';
+import NetflixClone from '../img/netflixclonest.png';
 
 function Home() {
   const projects = [
