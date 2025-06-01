@@ -11,7 +11,7 @@ const AboutExperience = () => {
 						<hr className="pt-4" />
 						<p className="text-black dark:text-dm-foreground leading-snug">
 							I'm a software engineer based in Houston, Texas, currently working as a full-stack developer at
-							<a href="https://www.jpmorganchase.com/" className="text-cblack hover:text-cblack border-b-2 border-cgreen/40 hover:border-cgreen transition-colors after:ml-1"> JPMorganChase</a>.
+							<a href="https://www.jpmorganchase.com/" className="text-cblack hover:text-cblack border-b-2 border-cgreen/40 hover:border-cgreen transition-colors after:ml-1"> JPMorganChase.</a>
 						</p>
 						<br></br>
 						<p className="text-black dark:text-dm-foreground leading-snug">Connect with me :
