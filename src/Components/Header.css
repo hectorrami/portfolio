@@ -1,10 +1,10 @@
 .header {
   display: flex;
-  height: 40vh;
   align-items: center;
   justify-content: center;
   text-align: center;
-  /* center text inside the container */
+  padding: 2rem 1rem;
+  flex-direction: column;
 }
 
 .header_contents {
@@ -16,6 +16,8 @@
 
 .avatar {
   margin: auto;
+  width: 150px !important;
+  height: 150px !important;
 }
 
 .header_title {
@@ -43,4 +45,20 @@
   margin: 1.5rem auto 0 auto;
   font-size: 1rem;
   line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+  .avatar {
+    width: 100px !important;
+    height: 100px !important;
+  }
+
+  .header_title {
+    font-size: 1.5rem;
+  }
+
+  h2 span,
+  h5 {
+    font-size: 1rem;
+  }
 }
