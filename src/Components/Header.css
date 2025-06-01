@@ -21,7 +21,8 @@
 }
 
 .header_title {
-  margin-top: 1.5rem;
+  margin-top: 1rem;
+  margin-bottom: 0rem;
 }
 
 .text-gradient {
@@ -40,17 +41,10 @@
   /* cooler tones for dark theme */
 }
 
-.about-me {
-  max-width: 600px;
-  margin: 1.5rem auto 0 auto;
-  font-size: 1rem;
-  line-height: 1.5;
-}
-
 @media (max-width: 600px) {
   .avatar {
-    width: 100px !important;
-    height: 100px !important;
+    width: 150px !important;
+    height: 150px !important;
   }
 
   .header_title {

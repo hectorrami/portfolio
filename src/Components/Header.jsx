@@ -16,11 +16,8 @@ function Header() {
           Hector Ramirez
         </h1>
         <h2>
-          <span className={`text-gradient ${theme}`}>Software Developer</span>
+          <span className={`${theme}`}>Software Developer based in Houston, Texas</span>
         </h2>
-        <h5>
-          Houston, Tx.
-        </h5>
       </div>
     </header>
   );
