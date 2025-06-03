@@ -20,6 +20,35 @@ const AboutExperience = () => {
 							<a href="https://github.com/hectorrami"> <GitHub fontSize='small' /></a>
 						</p>
 					</div>
+					<div>
+						<h1 className="text-center font-medium mb-0">Experience</h1>
+						<hr className="pt-4" />
+						<div className="text-black dark:text-dm-foreground leading-snug space-y-4">
+							<div>
+								<h2 className="font-semibold">JPMorgan Chase & Co. — Associate Software Engineer</h2>
+								<p className="text-sm text-cgray dark:text-gray-400">Houston, TX | Oct 2022 – Present</p>
+								<ul className="list-disc list-inside mt-2 space-y-1">
+									<li>Modernized an internal web application using React, React Query, and Java.</li>
+									<li>Replaced a legacy Excel system with an intuitive UI for editing and submitting forms.</li>
+									<li>Resolved critical defects and led production deployments for smooth releases.</li>
+									<li>Collaborated with cross-functional teams to gather requirements and prioritize development.</li>
+									<li>Worked on microservices architecture to ensure modular and scalable codebases.</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+					<div>
+						<h2 className="font-semibold">PROS, Inc. — Software Engineer</h2>
+						<p className="text-sm text-cgray dark:text-gray-400">Houston, TX | Aug 2020 – Aug 2022</p>
+						<ul className="list-disc list-inside mt-2 space-y-1">
+							<li>Maintained and enhanced a data visualization app with 1,000+ monthly users.</li>
+							<li>Built UI enhancements using React, JavaScript, TypeScript, and Highcharts.</li>
+							<li>Achieved 100% test coverage using Jest and React Testing Library.</li>
+							<li>Helped migrate a legacy system to React, improving usability and adoption.</li>
+							<li>Collaborated with UX engineers and Product Managers to deliver complex features.</li>
+						</ul>
+					</div>
 				</main>
 			</div>
 		</div>
