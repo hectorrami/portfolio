@@ -1,19 +1,12 @@
-import React, { useContext } from 'react';
-import { ThemeContext } from "../Providers/ThemeContext";
-import './Footer.css';
+import React from 'react';
 
 function Footer() {
-    const { theme } = useContext(ThemeContext);
-
-    const copyright = () => {
-        const year = new Date().getFullYear();
-        return `© ${year} Hector Ramirez. All rights reserved.`;
-    }
-
     return (
-        <div className={`footer ${theme}`}>
-            <p className={'footer-text'}>{copyright()}</p>
-        </div>
+        <footer className="w-full bg-white dark:bg-gray-900 py-4 px-4 text-center text-sm text-gray-800 dark:text-white ">
+        <p>
+          © {new Date().getFullYear()} Hector Ramirez
+        </p>
+      </footer>
     );
 }
 
