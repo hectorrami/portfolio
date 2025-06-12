@@ -5,7 +5,7 @@ function DarkModeToggle() {
 	const [darkMode, setDarkMode] = useState(() => {
     if (typeof window !== 'undefined') {
       return localStorage.getItem('darkMode') === 'true' 
-        || window.matchMedia('(prefers-color-scheme: dark)').matches;
+        || window.matchMedia('(prefers-color-scheme: light)').matches;
     }
     return false;
   });
