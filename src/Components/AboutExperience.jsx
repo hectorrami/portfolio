@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { GitHub, LinkedIn, Email } from '@mui/icons-material';
+import { GitHub, LinkedIn, Email, Launch } from '@mui/icons-material';
 import JobExperience from './JobExperience';
+import ProjectsSection from './ProjectSection';
 
 function AboutExperience() {
 	const [aboutVisible, setAboutVisible] = useState(false);
@@ -71,6 +72,14 @@ function AboutExperience() {
 						]}
 					/>
 				</div>
+
+				{/*Project Section*/}
+				<div
+					className={`transition-opacity duration-1000 ${experienceVisible ? 'opacity-100' : 'opacity-0'}`}
+				>
+					<ProjectsSection />
+				</div>
+
 			</main>
 		</div>
 	);
