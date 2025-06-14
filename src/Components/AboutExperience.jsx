@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { GitHub, LinkedIn, Email } from '@mui/icons-material';
+import JobExperience from './JobExperience';
 
 function AboutExperience() {
 	const [aboutVisible, setAboutVisible] = useState(false);
@@ -10,7 +11,7 @@ function AboutExperience() {
 
 		const timer = setTimeout(() => {
 			setExperienceVisible(true);
-		}, 300);
+		}, 200);
 
 		// Cleanup the timer if the component unmounts
 		return () => clearTimeout(timer);
@@ -43,30 +44,32 @@ function AboutExperience() {
 				>
 					<h1 className="text-center font-medium mb-0">Experience</h1>
 					<hr className="pt-4" />
-					<div>
-						<div>
-							<h2 className="font-semibold">JPMorgan Chase & Co. — Associate Software Engineer</h2>
-							<p className="text-sm text-cgray dark:text-gray-400">Houston, TX | Oct 2022 – Present</p>
-							<ul className="list-disc list-inside mt-2 space-y-1">
-								<li>Modernized an internal web application using React, React Query, and Java.</li>
-								<li>Replaced a legacy Excel system with an intuitive UI for editing and submitting forms.</li>
-								<li>Resolved critical defects and led production deployments for smooth releases.</li>
-								<li>Collaborated with cross-functional teams to gather requirements and prioritize development.</li>
-								<li>Worked on microservices architecture to ensure modular and scalable codebases.</li>
-							</ul>
-						</div>
-					</div>
-					<div>
-						<h2 className="font-semibold">PROS, Inc. — Software Engineer</h2>
-						<p className="text-sm text-cgray dark:text-gray-400">Houston, TX | Aug 2020 – Aug 2022</p>
-						<ul className="list-disc list-inside mt-2 space-y-1">
-							<li>Maintained and enhanced a data visualization app with 1,000+ monthly users.</li>
-							<li>Built UI enhancements using React, JavaScript, TypeScript, and Highcharts.</li>
-							<li>Achieved 100% test coverage using Jest and React Testing Library.</li>
-							<li>Helped migrate a legacy system to React, improving usability and adoption.</li>
-							<li>Collaborated with UX engineers and Product Managers to deliver complex features.</li>
-						</ul>
-					</div>
+					<JobExperience
+						company="JPMorgan Chase & Co."
+						title="Associate Software Engineer"
+						location="Houston, TX"
+						dateRange="Oct 2022 – Present"
+						responsibilities={[
+							"Modernized an internal web application using React, React Query, and Java.",
+							"Replaced a legacy Excel system with an intuitive UI for editing and submitting forms.",
+							"Resolved critical defects and led production deployments for smooth releases.",
+							"Collaborated with cross-functional teams to gather requirements and prioritize development.",
+							"Worked on microservices architecture to ensure modular and scalable codebases."
+						]}
+					/>
+					<JobExperience
+						company="PROS, Inc."
+						title="Software Engineer"
+						location="Houston, TX"
+						dateRange="Aug 2020 – Aug 2022"
+						responsibilities={[
+							"Maintained and enhanced a data visualization app with 1,000+ monthly users.",
+							"Built UI enhancements using React, JavaScript, TypeScript, and Highcharts.",
+							"Achieved 100% test coverage using Jest and React Testing Library.",
+							"Helped migrate a legacy system to React, improving usability and adoption.",
+							"Collaborated with UX engineers and Product Managers to deliver complex features."
+						]}
+					/>
 				</div>
 			</main>
 		</div>
