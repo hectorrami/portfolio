@@ -20,7 +20,7 @@ function AboutExperience() {
 
 	return (
 		<div className={`min-h-screen flex flex-col justify-between pt-0 md:pt-8 p-8 dark:bg-gray-900 text-black dark:text-white`}>
-			<main className="max-w-[60ch] mx-auto w-full space-y-6 mb-12 md:mb-14">
+			<main className="max-w-[70ch] mx-auto w-full space-y-2 mb-12 md:mb-14">
 				{/* About Section */}
 				<div
 					className={`transition-opacity duration-1000 ${aboutVisible ? 'opacity-100' : 'opacity-0'}`}
@@ -32,10 +32,29 @@ function AboutExperience() {
 						<a href="https://www.jpmorganchase.com/" className="text-cblack hover:text-cblack border-b-2 border-cgreen/40 hover:border-cgreen transition-colors after:ml-1"> JPMorganChase.</a>
 					</p>
 					<br />
-					<p className="text-black dark:text-white leading-snug">Connect with me :
-						<a href="mailto:heramire09@gmail.com"> <Email fontSize='small' /></a>,
-						<a href="https://www.linkedin.com/in/hector-ramirez-14ab63185"> <LinkedIn fontSize='small' /></a>,
-						<a href="https://github.com/hectorrami"> <GitHub fontSize='small' /></a>
+					<p className="text-black dark:text-white leading-snug">Connect with me:
+						<a
+							href="https://www.linkedin.com/in/hector-ramirez-14ab63185"
+							className="ml-2  no-underline hover:underline transition-colors"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							LinkedIn<span className="inline-block ml-1 text-xs align-super">&#x2197;</span>
+						</a>
+						<a
+							href="https://github.com/hectorrami"
+							className="ml-2  no-underline hover:underline transition-colors"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							GitHub<span className="inline-block ml-1 text-xs align-super">&#x2197;</span>
+						</a>
+						<a
+							href="mailto:heramire09@gmail.com"
+							className="ml-2  no-underline hover:underline transition-colors"
+						>
+							Email
+						</a>
 					</p>
 				</div>
 
@@ -79,7 +98,6 @@ function AboutExperience() {
 				>
 					<ProjectsSection />
 				</div>
-
 			</main>
 		</div>
 	);
