@@ -30,6 +30,8 @@ function AboutExperience() {
 					<p className="text-black dark:text-white leading-snug">
 						I am a software engineer based in Houston, Texas, currently working as a full-stack developer at
 						<a href="https://www.jpmorganchase.com/" className="text-cblack hover:text-cblack border-b-2 border-cgreen/40 hover:border-cgreen transition-colors after:ml-1"> JPMorganChase.</a>
+						In my free time, I enjoy traveling to new places and creating content for my
+						<a href="https://www.instagram.com/instatravel_hj/" className="text-cblack hover:text-cblack border-b-2 border-cgreen/40 hover:border-cgreen transition-colors after:ml-1"> Travel Blog.</a>
 					</p>
 					<br />
 					<p className="text-black dark:text-white leading-snug">Connect with me:
