@@ -28,13 +28,13 @@ function AboutExperience() {
 					<h1 className="text-center font-medium mb-0">About</h1>
 					<hr className="pt-4" />
 					<p className="text-black dark:text-white leading-snug">
-						I am a software engineer based in Houston, Texas, currently working as a full-stack developer at
-						<a href="https://www.jpmorganchase.com/" className="text-cblack hover:text-cblack border-b-2 border-cgreen/40 hover:border-cgreen transition-colors after:ml-1"> JPMorganChase.</a>
-						In my free time, I enjoy traveling to new places and creating content for my
-						<a href="https://www.instagram.com/instatravel_hj/" className="text-cblack hover:text-cblack border-b-2 border-cgreen/40 hover:border-cgreen transition-colors after:ml-1"> Travel Blog.</a>
+						Software engineer based in Houston, Texas, currently working at
+						<a href="https://www.jpmorganchase.com/" className="text-cblack hover:text-cblack border-b-2 border-cgreen/40 hover:border-cgreen transition-colors after:ml-1"> JPMorganChase</a>
+						<span className="inline-block ml-1 text-xs align-super">&#x2197;</span>
 					</p>
+					<p>Dedicated to crafting efficient, scalable applications and resilient user experiences.</p>
 					<br />
-					<p className="text-black dark:text-white leading-snug">Connect with me:
+					<p className="text-black dark:text-white leading-snug">Connect:
 						<a
 							href="https://www.linkedin.com/in/hector-ramirez-14ab63185"
 							className="ml-2  no-underline hover:underline transition-colors"
@@ -58,6 +58,21 @@ function AboutExperience() {
 							Email
 						</a>
 					</p>
+				</div>
+				{/* Education Section */}
+				<div
+					className={`transition-opacity duration-1000 ${experienceVisible ? 'opacity-100' : 'opacity-0'}`}
+				>
+					<h1 className="text-center font-medium mb-0">Education</h1>
+					<hr className="pt-4" />
+					<JobExperience
+						company="University of Houston"
+						title="Bachelor of Science in Computer Science, Minor in Mathematics"
+						location="Houston, TX"
+						dateRange="Aug 2020"
+						responsibilities={[
+						]}
+					/>
 				</div>
 
 				{/* Experience Section */}
