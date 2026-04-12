@@ -1,14 +1,30 @@
 import React from 'react';
-import { Avatar } from '@mui/material';
-import headshot from '../img/headshot.png';
+import './Header.css';
 
 function Header() {
+  const asciiArt = `
+ ██╗  ██╗███████╗ ██████╗████████╗ ██████╗ ██████╗ 
+ ██║  ██║██╔════╝██╔════╝╚══██╔══╝██╔═══██╗██╔══██╗
+ ███████║█████╗  ██║       ██║   ██║   ██║██████╔╝
+ ██╔══██║██╔══╝  ██║       ██║   ██║   ██║██╔══██╗
+ ██║  ██║███████╗╚██████╗  ██║   ╚██████╔╝██║  ██║
+ ╚═╝  ╚═╝╚══════╝ ╚═════╝  ╚═╝    ╚═════╝ ╚═╝  ╚═╝
+
+ ██████╗  █████╗ ███╗   ███╗██╗██████╗ ███████╗███████╗ 
+ ██╔══██╗██╔══██╗████╗ ████║██║██╔══██╗██╔════╝╚════██║
+ ██████╔╝███████║██╔████╔██║██║██████╔╝█████╗     ██╔╝ 
+ ██╔══██╗██╔══██║██║╚██╔╝██║██║██╔══██╗██╔══╝    ██╔╝  
+ ██║  ██║██║  ██║██║ ╚═╝ ██║██║██║  ██║███████╗ ██║██║██║  
+ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝╚═╝  ╚═╝╚══════╝ ╚══════╝  
+  `;
 
   return (
-      <div className="pt-24 pb-10 flex flex-col items-center dark:bg-gray-900">
-        <Avatar className="avatar" alt="Hector Ramirez" src={headshot} sx={{ width: 200, height: 200 }}
-        />
-      </div>
+    <div className="relative pt-32 pb-32 flex flex-col items-center justify-center dark:bg-gray-900 bg-white overflow-hidden min-h-screen">
+      {/* ASCII Art Name */}
+      <pre className="ascii-art text-transparent bg-clip-text bg-gradient-to-r from-green-500 via-blue-500 to-purple-500 dark:from-green-400 dark:via-blue-400 dark:to-purple-400 font-mono text-xs md:text-sm lg:text-base leading-tight mx-4">
+        {asciiArt}
+      </pre>
+    </div>
   );
 }
 

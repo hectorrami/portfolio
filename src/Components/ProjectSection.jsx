@@ -2,45 +2,62 @@ import React from 'react';
 import { GitHub, Launch } from '@mui/icons-material';
 
 function ProjectsSection() {
+	const projects = [
+		{
+			title: "Netflix Clone",
+			description: "A front-end recreation of the Netflix user interface, demonstrating responsive design and dynamic content display",
+			techStack: ["React", "Netlify"],
+			github: "https://github.com/hectorrami/Neflix-clone/tree/main/netflix-clone",
+			liveDemo: "https://netflix-clone-39324.web.app/"
+		},
+		{
+			title: "Portfolio Website",
+			description: "The very portfolio you're viewing, built from scratch to showcase skills and projects.",
+			techStack: ["React", "Vite", "Tailwind CSS"],
+			github: "https://github.com/hectorrami/portfolio",
+			liveDemo: null
+		}
+	];
+
 	return (
 		<div>
-			<h1 className="text-center font-medium mb-0">Projects</h1>
+			<h1 className="text-center font-medium mb-0 font-mono text-lg">
+				<span className="text-green-500 dark:text-green-400">$</span> ls ./projects
+			</h1>
 			<hr className="pt-4" />
 
-			{/* Project 1 */}
-			<div className="mb-8">
-				<h2 className="font-semibold text-lg mb-1">Netflix Clone</h2>
-				<p className="text-sm text-cgray dark:text-gray-400 mb-2">
-					A front-end recreation of the Netflix user interface, demonstrating responsive design and dynamic content display
-				</p>
-				<p className="text-sm mb-2">
-					<span className="font-medium">Tech Stack:</span> React, Netlify
-				</p>
-				<div className="flex items-center space-x-4">
-					<a href="https://github.com/hectorrami/Neflix-clone/tree/main/netflix-clone" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-600 flex items-center">
-						<GitHub fontSize='small' className="mr-1" /> GitHub Repo
-					</a>
-					<a href="https://netflix-clone-39324.web.app/" target="_blank" rel="noopener noreferrer" className="text-green-500 hover:text-green-700 dark:text-green-400 dark:hover:text-green-600 flex items-center">
-						<Launch fontSize='small' className="mr-1" /> Live Demo
-					</a>
-				</div>
-				{/* Placeholder for an image */}
-			</div>
+			<div className="space-y-6">
+				{projects.map((project, index) => (
+					<div key={index} className="border border-gray-300 dark:border-gray-700 rounded-lg p-4 bg-gray-50 dark:bg-gray-800/50 hover:border-green-400 dark:hover:border-green-500 transition-colors">
+						<h2 className="font-semibold text-lg mb-2 font-mono text-green-600 dark:text-green-400">
+							{'>'} {project.title}
+						</h2>
+						<p className="text-sm text-gray-700 dark:text-gray-300 mb-3">
+							{project.description}
+						</p>
 
-			{/* Project 2 */}
-			<div className="mb-8">
-				<h2 className="font-semibold text-lg mb-1">Portfolio Website</h2>
-				<p className="text-sm text-cgray dark:text-gray-400 mb-2">
-					The very portfolio you're viewing, built from scratch to showcase skills and projects.
-				</p>
-				<p className="text-sm mb-2">
-					<span className="font-medium">Tech Stack:</span> React, Vite, Tailwind CSS
-				</p>
-				<div className="flex items-center space-x-4">
-					<a href="https://github.com/hectorrami/portfolio" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-600 flex items-center">
-						<GitHub fontSize='small' className="mr-1" /> GitHub Repo
-					</a>
-				</div>
+						{/* Tech Stack Badges */}
+						<div className="flex flex-wrap gap-2 mb-3">
+							{project.techStack.map((tech, techIndex) => (
+								<span key={techIndex} className="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-mono rounded border border-green-300 dark:border-green-700">
+									{tech}
+								</span>
+							))}
+						</div>
+
+						{/* Links */}
+						<div className="flex items-center space-x-4">
+							<a href={project.github} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 flex items-center text-sm font-mono hover:underline">
+								<GitHub fontSize='small' className="mr-1" /> GitHub
+							</a>
+							{project.liveDemo && (
+								<a href={project.liveDemo} target="_blank" rel="noopener noreferrer" className="text-green-500 hover:text-green-700 dark:text-green-400 dark:hover:text-green-300 flex items-center text-sm font-mono hover:underline">
+									<Launch fontSize='small' className="mr-1" /> Live Demo
+								</a>
+							)}
+						</div>
+					</div>
+				))}
 			</div>
 		</div>
 	);

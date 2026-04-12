@@ -25,45 +25,54 @@ function AboutExperience() {
 				<div
 					className={`transition-opacity duration-1000 ${aboutVisible ? 'opacity-100' : 'opacity-0'}`}
 				>
-					<h1 className="text-center font-medium mb-0">About</h1>
+					<h1 className="text-center font-medium mb-0 font-mono text-lg">
+						<span className="text-green-500 dark:text-green-400">$</span> cat about.md
+					</h1>
 					<hr className="pt-4" />
-					<p className="text-black dark:text-white leading-snug">
-						Software engineer based in Houston, Texas, currently working at
-						<a href="https://www.jpmorganchase.com/" className="text-cblack hover:text-cblack border-b-2 border-cgreen/40 hover:border-cgreen transition-colors after:ml-1"> JPMorganChase</a>
-						<span className="inline-block ml-1 text-xs align-super">&#x2197;</span>
-					</p>
-					<p>Dedicated to crafting efficient, scalable applications and resilient user experiences.</p>
-					<br />
-					<p className="text-black dark:text-white leading-snug">Connect:
-						<a
-							href="https://www.linkedin.com/in/hector-ramirez-14ab63185"
-							className="ml-2  no-underline hover:underline transition-colors"
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							LinkedIn<span className="inline-block ml-1 text-xs align-super">&#x2197;</span>
-						</a>
-						<a
-							href="https://github.com/hectorrami"
-							className="ml-2  no-underline hover:underline transition-colors"
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							GitHub<span className="inline-block ml-1 text-xs align-super">&#x2197;</span>
-						</a>
-						<a
-							href="mailto:heramire09@gmail.com"
-							className="ml-2  no-underline hover:underline transition-colors"
-						>
-							Email
-						</a>
-					</p>
+					<div className="space-y-3">
+						<div className="border border-gray-300 dark:border-gray-700 rounded-lg p-4 bg-gray-50 dark:bg-gray-800/50 hover:border-green-400 dark:hover:border-green-500 transition-colors">
+							<h2 className="font-mono font-semibold text-green-600 dark:text-green-400 mb-2">Location</h2>
+							<p className="font-mono text-sm text-gray-700 dark:text-gray-300">Houston, Texas</p>
+						</div>
+
+						<div className="border border-gray-300 dark:border-gray-700 rounded-lg p-4 bg-gray-50 dark:bg-gray-800/50 hover:border-green-400 dark:hover:border-green-500 transition-colors">
+							<h2 className="font-mono font-semibold text-green-600 dark:text-green-400 mb-2">Current Role</h2>
+							<p className="font-mono text-sm text-gray-700 dark:text-gray-300">
+								Software Engineer @{' '}
+								<a href="https://www.jpmorganchase.com/" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-400 underline">
+									JPMorgan Chase
+								</a>
+							</p>
+						</div>
+
+						<div className="border border-gray-300 dark:border-gray-700 rounded-lg p-4 bg-gray-50 dark:bg-gray-800/50 hover:border-green-400 dark:hover:border-green-500 transition-colors">
+							<h2 className="font-mono font-semibold text-green-600 dark:text-green-400 mb-2">Focus</h2>
+							<p className="font-mono text-sm text-gray-700 dark:text-gray-300">Crafting efficient, scalable applications and resilient user experiences.</p>
+						</div>
+
+						<div className="border border-gray-300 dark:border-gray-700 rounded-lg p-4 bg-gray-50 dark:bg-gray-800/50 hover:border-green-400 dark:hover:border-green-500 transition-colors">
+							<h2 className="font-mono font-semibold text-green-600 dark:text-green-400 mb-3">Connect</h2>
+							<div className="flex items-center space-x-4">
+								<a href="https://www.linkedin.com/in/hector-ramirez-14ab63185" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-400 underline font-mono text-sm">
+									LinkedIn
+								</a>
+								<a href="https://github.com/hectorrami" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-400 underline font-mono text-sm">
+									GitHub
+								</a>
+								<a href="mailto:heramire09@gmail.com" className="text-blue-500 hover:text-blue-400 underline font-mono text-sm">
+									Email
+								</a>
+							</div>
+						</div>
+					</div>
 				</div>
 				{/* Education Section */}
 				<div
 					className={`transition-opacity duration-1000 ${experienceVisible ? 'opacity-100' : 'opacity-0'}`}
 				>
-					<h1 className="text-center font-medium mb-0">Education</h1>
+					<h1 className="text-center font-medium mb-0 font-mono text-lg">
+						<span className="text-green-500 dark:text-green-400">$</span> cat education.md
+					</h1>
 					<hr className="pt-4" />
 					<JobExperience
 						company="University of Houston"
@@ -79,13 +88,16 @@ function AboutExperience() {
 				<div
 					className={`transition-opacity duration-1000 ${experienceVisible ? 'opacity-100' : 'opacity-0'}`}
 				>
-					<h1 className="text-center font-medium mb-0">Experience</h1>
+					<h1 className="text-center font-medium mb-0 font-mono text-lg">
+						<span className="text-green-500 dark:text-green-400">$</span> cat experience.md
+					</h1>
 					<hr className="pt-4" />
 					<JobExperience
 						company="JPMorgan Chase & Co."
 						title="Associate Software Engineer"
 						location="Houston, TX"
 						dateRange="Oct 2022 – Present"
+						tools={["React", "React Query", "Java", "TypeScript", "Spring Boot"]}
 						responsibilities={[
 							"Modernized an internal web application using React, React Query, and Java.",
 							"Replaced a legacy Excel system with an intuitive UI for editing and submitting forms.",
@@ -99,6 +111,7 @@ function AboutExperience() {
 						title="Software Engineer"
 						location="Houston, TX"
 						dateRange="Aug 2020 – Aug 2022"
+						tools={["React", "JavaScript", "TypeScript", "Highcharts", "Jest", "React Testing Library"]}
 						responsibilities={[
 							"Maintained and enhanced a data visualization app with 1,000+ monthly users.",
 							"Built UI enhancements using React, JavaScript, TypeScript, and Highcharts.",

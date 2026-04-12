@@ -1,0 +1,13 @@
+pre.ascii-art {
+	white-space: pre;
+	overflow-x: auto;
+	margin: 0;
+	letter-spacing: 0.05em;
+}
+
+@media (max-width: 768px) {
+	pre.ascii-art {
+		font-size: 0.65rem;
+		line-height: 1.2;
+	}
+}
