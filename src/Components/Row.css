@@ -1,9 +1,19 @@
 .row-light {
-  background-image: conic-gradient(from 90deg at -10% 100%, #bcc1cd 0deg, #bcc1cd 90deg, #fff 1turn);
+  background-image: conic-gradient(
+    from 90deg at -10% 100%,
+    #bcc1cd 0deg,
+    #bcc1cd 90deg,
+    #fff 1turn
+  );
 }
 
 .row-dark {
-  background-image: conic-gradient(from 90deg at -10% 100%, #2b303b 0deg, #2b303b 90deg, #16181d 1turn);
+  background-image: conic-gradient(
+    from 90deg at -10% 100%,
+    #2b303b 0deg,
+    #2b303b 90deg,
+    #16181d 1turn
+  );
 }
 
 .row_posters {
@@ -49,7 +59,9 @@
   border-radius: 4px;
   /* Or 0 for square look */
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -57,9 +69,9 @@
 }
 
 .banner_button:hover {
-  transition: all .2s;
+  transition: all 0.2s;
   text-decoration: none;
-  color: rgb(105, 167, 248)
+  color: rgb(105, 167, 248);
 }
 
 .row-text {
