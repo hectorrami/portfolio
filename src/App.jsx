@@ -1,8 +1,18 @@
 import React from 'react';
-import Home from './Components/Home';
+import Nav from './components/nav/Nav';
+import Header from './components/header/Header';
+import AboutExperience from './components/about/AboutExperience';
+import Footer from './components/footer/Footer';
 
 function App() {
-  return <Home />;
+  return (
+    <div>
+      <Nav />
+      <Header />
+      <AboutExperience />
+      <Footer />
+    </div>
+  );
 }
 
 export default App;
