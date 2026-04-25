@@ -1,26 +1,8 @@
 import React from 'react';
 import { GitHub, Launch } from '@mui/icons-material';
+import { projects } from '../../data/projects';
 
 function ProjectsSection() {
-  const projects = [
-    {
-      title: 'Netflix Clone',
-      description:
-        'A front-end recreation of the Netflix user interface, demonstrating responsive design and dynamic content display',
-      techStack: ['React', 'Netlify'],
-      github: 'https://github.com/hectorrami/Neflix-clone/tree/main/netflix-clone',
-      liveDemo: 'https://netflix-clone-39324.web.app/',
-    },
-    {
-      title: 'Portfolio Website',
-      description:
-        "The very portfolio you're viewing, built from scratch to showcase skills and projects.",
-      techStack: ['React', 'Vite', 'Tailwind CSS'],
-      github: 'https://github.com/hectorrami/portfolio',
-      liveDemo: null,
-    },
-  ];
-
   return (
     <div>
       <h1 className="text-center font-medium mb-0 font-mono text-lg">
@@ -29,9 +11,9 @@ function ProjectsSection() {
       <hr className="pt-4" />
 
       <div className="space-y-6">
-        {projects.map((project, index) => (
+        {projects.map((project) => (
           <div
-            key={index}
+            key={project.id}
             className="border border-gray-300 dark:border-gray-700 rounded-lg p-4 bg-gray-50 dark:bg-gray-800/50 hover:border-green-400 dark:hover:border-green-500 transition-colors"
           >
             <h2 className="font-semibold text-lg mb-2 font-mono text-green-600 dark:text-green-400">
@@ -41,9 +23,9 @@ function ProjectsSection() {
 
             {/* Tech Stack Badges */}
             <div className="flex flex-wrap gap-2 mb-3">
-              {project.techStack.map((tech, techIndex) => (
+              {project.techStack.map((tech) => (
                 <span
-                  key={techIndex}
+                  key={tech}
                   className="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-mono rounded border border-green-300 dark:border-green-700"
                 >
                   {tech}

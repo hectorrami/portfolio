@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import JobExperience from './JobExperience';
 import ProjectsSection from '../projects/ProjectSection';
+import { education, experience } from '../../data/experience';
+import { PERSONAL } from '../../data/personal';
 
 function AboutExperience() {
   const [aboutVisible, setAboutVisible] = useState(false);
@@ -35,7 +37,9 @@ function AboutExperience() {
               <h2 className="font-mono font-semibold text-green-600 dark:text-green-400 mb-2">
                 Location
               </h2>
-              <p className="font-mono text-sm text-gray-700 dark:text-gray-300">Houston, Texas</p>
+              <p className="font-mono text-sm text-gray-700 dark:text-gray-300">
+                {PERSONAL.location}
+              </p>
             </div>
 
             <div className="border border-gray-300 dark:border-gray-700 rounded-lg p-4 bg-gray-50 dark:bg-gray-800/50 hover:border-green-400 dark:hover:border-green-500 transition-colors">
@@ -45,12 +49,12 @@ function AboutExperience() {
               <p className="font-mono text-sm text-gray-700 dark:text-gray-300">
                 Software Engineer @{' '}
                 <a
-                  href="https://www.jpmorganchase.com/"
+                  href={PERSONAL.employer.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-500 hover:text-blue-400 underline"
                 >
-                  JPMorgan Chase
+                  {PERSONAL.employer.name}
                 </a>
               </p>
             </div>
@@ -59,9 +63,7 @@ function AboutExperience() {
               <h2 className="font-mono font-semibold text-green-600 dark:text-green-400 mb-2">
                 Focus
               </h2>
-              <p className="font-mono text-sm text-gray-700 dark:text-gray-300">
-                Crafting efficient, scalable applications and resilient user experiences.
-              </p>
+              <p className="font-mono text-sm text-gray-700 dark:text-gray-300">{PERSONAL.focus}</p>
             </div>
 
             <div className="border border-gray-300 dark:border-gray-700 rounded-lg p-4 bg-gray-50 dark:bg-gray-800/50 hover:border-green-400 dark:hover:border-green-500 transition-colors">
@@ -70,7 +72,7 @@ function AboutExperience() {
               </h2>
               <div className="flex items-center space-x-4">
                 <a
-                  href="https://www.linkedin.com/in/hector-ramirez-14ab63185"
+                  href={PERSONAL.links.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-500 hover:text-blue-400 underline font-mono text-sm"
@@ -78,7 +80,7 @@ function AboutExperience() {
                   LinkedIn
                 </a>
                 <a
-                  href="https://github.com/hectorrami"
+                  href={PERSONAL.links.github}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-500 hover:text-blue-400 underline font-mono text-sm"
@@ -86,7 +88,7 @@ function AboutExperience() {
                   GitHub
                 </a>
                 <a
-                  href="mailto:heramire09@gmail.com"
+                  href={`mailto:${PERSONAL.links.email}`}
                   className="text-blue-500 hover:text-blue-400 underline font-mono text-sm"
                 >
                   Email
@@ -103,13 +105,16 @@ function AboutExperience() {
             <span className="text-green-500 dark:text-green-400">$</span> cat education.md
           </h1>
           <hr className="pt-4" />
-          <JobExperience
-            company="University of Houston"
-            title="Bachelor of Science in Computer Science, Minor in Mathematics"
-            location="Houston, TX"
-            dateRange="Aug 2020"
-            responsibilities={[]}
-          />
+          {education.map((entry) => (
+            <JobExperience
+              key={entry.id}
+              company={entry.company}
+              title={entry.title}
+              location={entry.location}
+              dateRange={entry.dateRange}
+              responsibilities={entry.responsibilities}
+            />
+          ))}
         </div>
 
         {/* Experience Section */}
@@ -120,41 +125,17 @@ function AboutExperience() {
             <span className="text-green-500 dark:text-green-400">$</span> cat experience.md
           </h1>
           <hr className="pt-4" />
-          <JobExperience
-            company="JPMorgan Chase & Co."
-            title="Associate Software Engineer"
-            location="Houston, TX"
-            dateRange="Oct 2022 – Present"
-            tools={['React', 'React Query', 'Java', 'TypeScript', 'Spring Boot']}
-            responsibilities={[
-              'Modernized an internal web application using React, React Query, and Java.',
-              'Replaced a legacy Excel system with an intuitive UI for editing and submitting forms.',
-              'Resolved critical defects and led production deployments for smooth releases.',
-              'Collaborated with cross-functional teams to gather requirements and prioritize development.',
-              'Worked on microservices architecture to ensure modular and scalable codebases.',
-            ]}
-          />
-          <JobExperience
-            company="PROS, Inc."
-            title="Software Engineer"
-            location="Houston, TX"
-            dateRange="Aug 2020 – Aug 2022"
-            tools={[
-              'React',
-              'JavaScript',
-              'TypeScript',
-              'Highcharts',
-              'Jest',
-              'React Testing Library',
-            ]}
-            responsibilities={[
-              'Maintained and enhanced a data visualization app with 1,000+ monthly users.',
-              'Built UI enhancements using React, JavaScript, TypeScript, and Highcharts.',
-              'Achieved 100% test coverage using Jest and React Testing Library.',
-              'Helped migrate a legacy system to React, improving usability and adoption.',
-              'Collaborated with UX engineers and Product Managers to deliver complex features.',
-            ]}
-          />
+          {experience.map((entry) => (
+            <JobExperience
+              key={entry.id}
+              company={entry.company}
+              title={entry.title}
+              location={entry.location}
+              dateRange={entry.dateRange}
+              responsibilities={entry.responsibilities}
+              tools={entry.tools}
+            />
+          ))}
         </div>
 
         {/* Project Section */}
