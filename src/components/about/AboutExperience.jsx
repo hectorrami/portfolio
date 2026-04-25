@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import JobExperience from './JobExperience';
-import ProjectsSection from './ProjectSection';
+import ProjectsSection from '../projects/ProjectSection';
 
 function AboutExperience() {
   const [aboutVisible, setAboutVisible] = useState(false);
