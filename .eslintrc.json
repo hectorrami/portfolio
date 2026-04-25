@@ -13,6 +13,17 @@
     "sourceType": "module"
   },
   "plugins": ["react"],
+  "overrides": [
+    {
+      "files": ["**/*.test.js", "**/*.test.jsx", "src/test/**/*.js"],
+      "env": { "vitest-globals/env": true },
+      "plugins": ["vitest-globals"],
+      "rules": {
+        "react/jsx-props-no-spreading": "off",
+        "import/no-extraneous-dependencies": "off"
+      }
+    }
+  ],
   "rules": {
     "react/prop-types": "off",
     "react/function-component-definition": "off",
