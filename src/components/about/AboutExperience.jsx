@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import JobExperience from './JobExperience';
 import ProjectsSection from '../projects/ProjectSection';
 import { education, experience } from '../../data/experience';
@@ -143,6 +144,60 @@ function AboutExperience() {
           className={`transition-opacity duration-1000 ${experienceVisible ? 'opacity-100' : 'opacity-0'}`}
         >
           <ProjectsSection />
+        </div>
+
+        {/* Work In Progress Section */}
+        <div
+          className={`transition-opacity duration-1000 ${experienceVisible ? 'opacity-100' : 'opacity-0'}`}
+        >
+          <h1 className="text-center font-medium mb-0 font-mono text-lg">
+            <span className="text-green-500 dark:text-green-400">$</span> ls ./in-progress
+          </h1>
+          <hr className="pt-4" />
+
+          <Link to="/stockanalysis" className="block group">
+            <div className="border border-gray-300 dark:border-gray-700 rounded-lg p-4 bg-gray-50 dark:bg-gray-800/50 hover:border-green-400 dark:hover:border-green-500 transition-colors relative overflow-hidden">
+              {/* Accent bar */}
+              <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[#c8ff00] via-[#00d4ff] to-[#ff6b35]" />
+
+              <div className="flex items-start justify-between mb-2">
+                <h2 className="font-semibold text-lg font-mono text-green-600 dark:text-green-400">
+                  {'>'} stockanalysis
+                </h2>
+                <span className="px-2 py-0.5 text-xs font-mono rounded-full border border-yellow-400/50 text-yellow-400 bg-yellow-400/10">
+                  in progress
+                </span>
+              </div>
+
+              <p className="text-sm text-gray-700 dark:text-gray-300 mb-3">
+                Full-stack stock intelligence platform for long-term buy-and-hold growth investors.
+                Analyses stocks through an opinionated investment framework — scorecards, AI
+                summaries, risk analysis, and portfolio tracking. Not a data dump.
+              </p>
+
+              <div className="flex flex-wrap gap-2 mb-3">
+                {['React', 'Node.js', 'Express', 'Supabase', 'Claude API', 'FMP API', 'Stripe'].map(
+                  (tech) => (
+                    <span
+                      key={tech}
+                      className="px-2 py-1 text-xs font-mono rounded border"
+                      style={{
+                        background: 'rgba(200,255,0,0.08)',
+                        borderColor: 'rgba(200,255,0,0.3)',
+                        color: '#c8ff00',
+                      }}
+                    >
+                      {tech}
+                    </span>
+                  )
+                )}
+              </div>
+
+              <span className="text-sm font-mono text-green-500 dark:text-green-400 group-hover:underline">
+                → View mockup
+              </span>
+            </div>
+          </Link>
         </div>
       </main>
     </div>
