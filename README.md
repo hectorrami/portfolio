@@ -37,6 +37,7 @@ npm run build  # production build + RSS feed + 404 fallback
   each build.
 - `dist/404.html` is a copy of `index.html` so GitHub Pages serves the SPA for
   direct links to `/posts/...`.
-- Dark mode follows the system preference (`prefers-color-scheme`) — no toggle.
+- Dark mode defaults to the system preference; the header toggle overrides it
+  and persists the choice in localStorage.
 - Deployment is handled by `.github/workflows/deploy.yml` on every push to
   `main`.
