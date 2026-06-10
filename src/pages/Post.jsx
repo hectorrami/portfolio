@@ -32,8 +32,17 @@ function Post() {
         </h1>
       </header>
       <div className="prose prose-zinc dark:prose-invert prose-headings:tracking-tight prose-a:underline-offset-4 leading-relaxed">
-        <ReactMarkdown>{post.content}</ReactMarkdown>
+        {/* skipHtml keeps raw HTML (e.g. draft comments) out of the rendered page */}
+        <ReactMarkdown skipHtml>{post.content}</ReactMarkdown>
       </div>
+      <footer className="mt-12 pt-8 border-t border-zinc-200 dark:border-zinc-700">
+        <Link
+          to="/"
+          className="text-zinc-600 dark:text-zinc-300 hover:underline underline-offset-4"
+        >
+          ← Back to all posts
+        </Link>
+      </footer>
     </article>
   );
 }

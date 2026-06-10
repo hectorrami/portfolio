@@ -24,8 +24,16 @@ describe('Post', () => {
   it('renders the markdown body', () => {
     const post = posts[0];
     renderPost(post.slug);
-    const firstSentence = post.content.trim().split(/[.\n]/)[0];
+    // HTML comments are dropped by react-markdown, so sample visible text only
+    const visibleText = post.content.replace(/<!--[\s\S]*?-->/g, '').trim();
+    const firstSentence = visibleText.split(/[.\n]/)[0];
     expect(screen.getByText(new RegExp(firstSentence.slice(0, 40)))).toBeInTheDocument();
+  });
+
+  it('renders a back-to-posts link at the bottom of the post', () => {
+    renderPost(posts[0].slug);
+    const back = screen.getByRole('link', { name: /back to all posts/i });
+    expect(back).toHaveAttribute('href', '/');
   });
 
   it('shows a not-found message for an unknown slug', () => {
