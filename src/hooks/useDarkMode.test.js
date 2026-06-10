@@ -4,44 +4,36 @@ import useDarkMode from './useDarkMode';
 beforeEach(() => {
   localStorage.clear();
   document.documentElement.classList.remove('dark');
+  window.matchMedia = vi.fn().mockReturnValue({ matches: false });
 });
 
 describe('useDarkMode', () => {
-  it('defaults to false when localStorage is empty and no system preference', () => {
-    window.matchMedia = vi.fn().mockReturnValue({ matches: false });
-    const { result } = renderHook(() => useDarkMode());
-    expect(result.current[0]).toBe(false);
-  });
-
-  it('initializes to true when localStorage has darkMode=true', () => {
-    localStorage.setItem('darkMode', 'true');
-    window.matchMedia = vi.fn().mockReturnValue({ matches: false });
+  it('defaults to the system preference when nothing is stored', () => {
+    window.matchMedia = vi.fn().mockReturnValue({ matches: true });
     const { result } = renderHook(() => useDarkMode());
     expect(result.current[0]).toBe(true);
-  });
-
-  it('adds dark class to document when dark mode is on', () => {
-    localStorage.setItem('darkMode', 'true');
-    window.matchMedia = vi.fn().mockReturnValue({ matches: false });
-    renderHook(() => useDarkMode());
     expect(document.documentElement.classList.contains('dark')).toBe(true);
   });
 
-  it('removes dark class from document when dark mode is off', () => {
-    document.documentElement.classList.add('dark');
-    localStorage.setItem('darkMode', 'false');
-    window.matchMedia = vi.fn().mockReturnValue({ matches: false });
-    renderHook(() => useDarkMode());
+  it('uses the stored theme over the system preference', () => {
+    window.matchMedia = vi.fn().mockReturnValue({ matches: true });
+    localStorage.setItem('theme', 'light');
+    const { result } = renderHook(() => useDarkMode());
+    expect(result.current[0]).toBe(false);
     expect(document.documentElement.classList.contains('dark')).toBe(false);
   });
 
-  it('toggle flips dark mode and persists to localStorage', () => {
-    window.matchMedia = vi.fn().mockReturnValue({ matches: false });
+  it('toggles the dark class and persists the choice', () => {
     const { result } = renderHook(() => useDarkMode());
+    expect(result.current[0]).toBe(false);
 
     act(() => result.current[1]());
-
     expect(result.current[0]).toBe(true);
-    expect(localStorage.getItem('darkMode')).toBe('true');
+    expect(document.documentElement.classList.contains('dark')).toBe(true);
+    expect(localStorage.getItem('theme')).toBe('dark');
+
+    act(() => result.current[1]());
+    expect(document.documentElement.classList.contains('dark')).toBe(false);
+    expect(localStorage.getItem('theme')).toBe('light');
   });
 });
