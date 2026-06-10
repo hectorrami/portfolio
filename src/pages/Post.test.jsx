@@ -1,0 +1,36 @@
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import { MemoryRouter, Routes, Route } from 'react-router-dom';
+import Post from './Post';
+import { posts } from '../lib/posts';
+
+const renderPost = (slug) =>
+  render(
+    <MemoryRouter initialEntries={[`/posts/${slug}`]}>
+      <Routes>
+        <Route path="/posts/:slug" element={<Post />} />
+      </Routes>
+    </MemoryRouter>,
+  );
+
+describe('Post', () => {
+  it('renders the post title and date for a valid slug', () => {
+    const post = posts[0];
+    renderPost(post.slug);
+    expect(screen.getByRole('heading', { name: post.title })).toBeInTheDocument();
+    expect(document.querySelector('time')).toHaveAttribute('dateTime', post.date);
+  });
+
+  it('renders the markdown body', () => {
+    const post = posts[0];
+    renderPost(post.slug);
+    const firstSentence = post.content.trim().split(/[.\n]/)[0];
+    expect(screen.getByText(new RegExp(firstSentence.slice(0, 40)))).toBeInTheDocument();
+  });
+
+  it('shows a not-found message for an unknown slug', () => {
+    renderPost('does-not-exist');
+    expect(screen.getByText(/post not found/i)).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /back to all posts/i })).toBeInTheDocument();
+  });
+});

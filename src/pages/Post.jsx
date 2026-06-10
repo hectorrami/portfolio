@@ -1,0 +1,36 @@
+import React from 'react';
+import { Link, useParams } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
+import { getPost, formatDate } from '../lib/posts';
+
+function Post() {
+  const { slug } = useParams();
+  const post = getPost(slug);
+
+  if (!post) {
+    return (
+      <div>
+        <h1 className="text-2xl font-semibold tracking-tight mb-4">Post not found</h1>
+        <Link to="/" className="text-zinc-600 dark:text-zinc-300 hover:underline">
+          ← Back to all posts
+        </Link>
+      </div>
+    );
+  }
+
+  return (
+    <article>
+      <header className="mb-8">
+        <h1 className="text-3xl font-semibold tracking-tight">{post.title}</h1>
+        <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-2">
+          <time dateTime={post.date}>{formatDate(post.date)}</time>
+        </p>
+      </header>
+      <div className="prose prose-zinc dark:prose-invert">
+        <ReactMarkdown>{post.content}</ReactMarkdown>
+      </div>
+    </article>
+  );
+}
+
+export default Post;

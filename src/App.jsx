@@ -1,17 +1,20 @@
 import React from 'react';
-import Nav from './components/nav/Nav';
-import Header from './components/header/Header';
-import AboutExperience from './components/about/AboutExperience';
-import Footer from './components/footer/Footer';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Layout from './components/Layout';
+import Home from './pages/Home';
+import Post from './pages/Post';
 
 function App() {
   return (
-    <div>
-      <Nav />
-      <Header />
-      <AboutExperience />
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/posts/:slug" element={<Post />} />
+          <Route path="*" element={<Post />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
