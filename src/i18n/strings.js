@@ -5,6 +5,7 @@ export const STRINGS = {
     switchLanguage: 'Cambiar a español',
     dateLocale: 'en-US',
     otherLanguage: 'ES',
+    email: 'Email',
   },
   es: {
     backToPosts: '← Volver a todas las entradas',
@@ -12,6 +13,7 @@ export const STRINGS = {
     switchLanguage: 'Switch to English',
     dateLocale: 'es-ES',
     otherLanguage: 'EN',
+    email: 'Correo',
   },
 };
 
