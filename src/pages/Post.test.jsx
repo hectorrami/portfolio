@@ -1,16 +1,23 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
+import { LanguageProvider } from '../i18n/LanguageContext';
 import Post from './Post';
 import { posts } from '../lib/posts';
 
+beforeEach(() => {
+  localStorage.clear();
+});
+
 const renderPost = (slug) =>
   render(
-    <MemoryRouter initialEntries={[`/posts/${slug}`]}>
-      <Routes>
-        <Route path="/posts/:slug" element={<Post />} />
-      </Routes>
-    </MemoryRouter>,
+    <LanguageProvider>
+      <MemoryRouter initialEntries={[`/posts/${slug}`]}>
+        <Routes>
+          <Route path="/posts/:slug" element={<Post />} />
+        </Routes>
+      </MemoryRouter>
+    </LanguageProvider>,
   );
 
 describe('Post', () => {
@@ -34,6 +41,15 @@ describe('Post', () => {
     renderPost(posts[0].slug);
     const back = screen.getByRole('link', { name: /back to all posts/i });
     expect(back).toHaveAttribute('href', '/');
+  });
+
+  it('renders the Spanish translation when one exists and Spanish is selected', () => {
+    const translated = posts.find((post) => post.es);
+    expect(translated).toBeTruthy();
+    localStorage.setItem('lang', 'es');
+    renderPost(translated.slug);
+    expect(screen.getByRole('heading', { name: translated.es.title })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /volver a todas las entradas/i })).toBeInTheDocument();
   });
 
   it('shows a not-found message for an unknown slug', () => {

@@ -19,7 +19,11 @@ const escapeXml = (text) =>
     .replaceAll('>', '&gt;')
     .replaceAll('"', '&quot;');
 
-const files = (await readdir(postsDir)).filter((file) => file.endsWith('.md'));
+// Spanish variants (slug.es.md) share their base post's URL, so only the
+// English files become feed items.
+const files = (await readdir(postsDir)).filter(
+  (file) => file.endsWith('.md') && !file.endsWith('.es.md'),
+);
 
 const posts = await Promise.all(
   files.map(async (file) => {

@@ -20,6 +20,11 @@ Post body in markdown.
 The filename becomes the URL slug (`src/posts/my-post.md` → `/posts/my-post`).
 Commit and push to `main` — GitHub Actions builds and deploys automatically.
 
+To offer a post in Spanish, add `my-post.es.md` next to it with translated
+frontmatter and body (the `date` comes from the English file). The EN/ES
+toggle in the header switches between them; posts without a translation stay
+in English.
+
 ## Development
 
 ```bash

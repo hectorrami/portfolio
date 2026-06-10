@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import ThemeToggle from './ThemeToggle';
+import LanguageToggle from './LanguageToggle';
 
 function Layout() {
   return (
@@ -12,7 +13,10 @@ function Layout() {
         >
           Hector Ramirez
         </Link>
-        <ThemeToggle />
+        <div className="flex items-center gap-1">
+          <LanguageToggle />
+          <ThemeToggle />
+        </div>
       </header>
       <main className="max-w-2xl w-full mx-auto px-6 py-8 flex-1">
         <Outlet />
