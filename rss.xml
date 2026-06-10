@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Hector Ramirez</title>
+    <link>https://hectorramirez.xyz</link>
+    <description>Hector Ramirez's blog — writing about software.</description>
+    <language>en-us</language>
+    <item>
+      <title>Claude Fable 5, by the numbers</title>
+      <link>https://hectorramirez.xyz/posts/claude-fable-5-by-the-numbers</link>
+      <guid>https://hectorramirez.xyz/posts/claude-fable-5-by-the-numbers</guid>
+      <pubDate>Tue, 09 Jun 2026 00:00:00 GMT</pubDate>
+      <description>Anthropic's new top-tier model — pricing, context window, and how it fits into the lineup.</description>
+    </item>
+    <item>
+      <title>Hello, world</title>
+      <link>https://hectorramirez.xyz/posts/hello-world</link>
+      <guid>https://hectorramirez.xyz/posts/hello-world</guid>
+      <pubDate>Tue, 09 Jun 2026 00:00:00 GMT</pubDate>
+      <description>Why I scrapped my portfolio and started a blog.</description>
+    </item>
+  </channel>
+</rss>
