@@ -21,6 +21,19 @@ describe('posts', () => {
   });
 });
 
+describe('tags', () => {
+  it('parses comma-separated tags from frontmatter', () => {
+    const post = getPost('hello-world');
+    expect(post.tags).toEqual(['meta', 'writing']);
+  });
+
+  it('defaults to an empty array when no tags are set', () => {
+    posts.forEach((post) => {
+      expect(Array.isArray(post.tags)).toBe(true);
+    });
+  });
+});
+
 describe('translations', () => {
   it('does not list Spanish variant files as their own posts', () => {
     posts.forEach((post) => {

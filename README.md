@@ -12,6 +12,7 @@ Create a markdown file in `src/posts/`:
 title: My Post Title
 date: 2026-06-09
 description: One sentence shown in the post list and RSS feed.
+tags: comma, separated, topics
 ---
 
 Post body in markdown.

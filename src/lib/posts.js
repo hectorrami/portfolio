@@ -17,6 +17,12 @@ const parsed = Object.entries(modules).map(([path, raw]) => {
     title: data.title || slug,
     date: data.date || '',
     description: data.description || '',
+    tags: data.tags
+      ? data.tags
+          .split(',')
+          .map((tag) => tag.trim())
+          .filter(Boolean)
+      : [],
     content,
   };
 });

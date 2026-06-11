@@ -23,7 +23,8 @@ function mulberry32(seed) {
 /* eslint-enable no-bitwise, operator-assignment */
 
 // Nodes 0..postCount-1 are posts; the rest are ambient dots.
-function buildGraph(postCount) {
+function buildGraph(postList) {
+  const postCount = postList.length;
   const rand = mulberry32(2026);
 
   // Post nodes stay anchored so they're easy to click; only ambient dots drift.
@@ -61,14 +62,18 @@ function buildGraph(postCount) {
     });
     return [postCount + i, nearest];
   });
-  for (let i = 0; i < postCount - 1; i += 1) {
-    edges.push([i, i + 1]);
+  // Posts that share a tag are connected — the network reflects topics.
+  for (let i = 0; i < postCount; i += 1) {
+    for (let j = i + 1; j < postCount; j += 1) {
+      const shared = postList[i].tags.some((tag) => postList[j].tags.includes(tag));
+      if (shared) edges.push([i, j]);
+    }
   }
 
   return { nodes, edges };
 }
 
-const GRAPH = buildGraph(posts.length);
+const GRAPH = buildGraph(posts);
 
 // Decorative duplicate of the post list below, so it's hidden from assistive
 // tech and skipped in tab order — the list remains the accessible navigation.

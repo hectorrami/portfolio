@@ -37,6 +37,15 @@ describe('Post', () => {
     expect(screen.getByText(new RegExp(firstSentence.slice(0, 40)))).toBeInTheDocument();
   });
 
+  it('renders the post tags', () => {
+    const tagged = posts.find((post) => post.tags.length > 0);
+    expect(tagged).toBeTruthy();
+    renderPost(tagged.slug);
+    tagged.tags.forEach((tag) => {
+      expect(screen.getByText(tag)).toBeInTheDocument();
+    });
+  });
+
   it('renders a back-to-posts link at the bottom of the post', () => {
     renderPost(posts[0].slug);
     const back = screen.getByRole('link', { name: /back to all posts/i });
