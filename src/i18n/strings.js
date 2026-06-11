@@ -6,6 +6,7 @@ export const STRINGS = {
     dateLocale: 'en-US',
     otherLanguage: 'ES',
     email: 'Email',
+    about: 'About',
   },
   es: {
     backToPosts: '← Volver a todas las entradas',
@@ -14,6 +15,7 @@ export const STRINGS = {
     dateLocale: 'es-ES',
     otherLanguage: 'EN',
     email: 'Correo',
+    about: 'Sobre mí',
   },
 };
 

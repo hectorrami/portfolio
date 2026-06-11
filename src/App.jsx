@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { LanguageProvider } from './i18n/LanguageContext';
 import Layout from './components/Layout';
 import Home from './pages/Home';
+import About from './pages/About';
 import Post from './pages/Post';
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
         <Routes>
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
             <Route path="/posts/:slug" element={<Post />} />
             <Route path="*" element={<Post />} />
           </Route>

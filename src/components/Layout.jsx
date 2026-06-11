@@ -71,6 +71,12 @@ function Layout() {
           Hector Ramirez
         </Link>
         <div className="flex items-center gap-1">
+          <Link
+            to="/about"
+            className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors mr-3"
+          >
+            {t.about}
+          </Link>
           <LanguageToggle />
           <ThemeToggle />
         </div>
