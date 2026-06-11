@@ -1,8 +1,10 @@
 import React from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 
 function About() {
   const { t } = useLanguage();
+  useDocumentTitle(t.about);
 
   return (
     <article>
