@@ -11,6 +11,8 @@
       <guid>https://hectorramirez.xyz/posts/claude-fable-5-by-the-numbers</guid>
       <pubDate>Tue, 09 Jun 2026 00:00:00 GMT</pubDate>
       <description>Anthropic's new top-tier model — pricing, context window, and how it fits into the lineup.</description>
+      <category>ai</category>
+      <category>llms</category>
     </item>
     <item>
       <title>Hello, world</title>
@@ -18,6 +20,8 @@
       <guid>https://hectorramirez.xyz/posts/hello-world</guid>
       <pubDate>Tue, 09 Jun 2026 00:00:00 GMT</pubDate>
       <description>Why I scrapped my portfolio and started a blog.</description>
+      <category>meta</category>
+      <category>writing</category>
     </item>
   </channel>
 </rss>
