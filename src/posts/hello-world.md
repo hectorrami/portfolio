@@ -2,6 +2,7 @@
 title: Hello, world
 date: 2026-06-09
 description: Why I scrapped my portfolio and started a blog.
+tags: meta, writing
 ---
 
 For years this domain hosted a portfolio: a terminal-themed page, project cards, and a copy of my resume. It looked busy and said very little.

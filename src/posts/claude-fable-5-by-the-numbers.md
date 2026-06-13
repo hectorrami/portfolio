@@ -2,6 +2,7 @@
 title: Claude Fable 5, by the numbers
 date: 2026-06-09
 description: Anthropic's new top-tier model — pricing, context window, and how it fits into the lineup.
+tags: ai, llms
 ---
 
 Anthropic's model lineup has a new top tier. Claude Fable 5 (API id
@@ -48,5 +49,5 @@ only if you measure a difference that's worth 2× the cost. The interesting
 thing about Fable 5 isn't any single number above — it's that Anthropic decided
 Opus needed a tier above it at all.
 
-*Specs from Anthropic's published model documentation and API pricing as of
-June 2026.*
+_Specs from Anthropic's published model documentation and API pricing as of
+June 2026._

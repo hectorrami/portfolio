@@ -3,9 +3,12 @@ import { Link } from 'react-router-dom';
 import { posts, localized, formatDate } from '../lib/posts';
 import { useLanguage } from '../i18n/LanguageContext';
 import PostGraph from '../components/PostGraph';
+import TagList from '../components/TagList';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 
 function Home() {
   const { lang, t } = useLanguage();
+  useDocumentTitle(null);
 
   return (
     <>
@@ -29,6 +32,9 @@ function Home() {
                   {description}
                 </p>
               )}
+              <div className="mt-3">
+                <TagList tags={post.tags} />
+              </div>
             </li>
           );
         })}

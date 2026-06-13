@@ -34,6 +34,12 @@ const posts = await Promise.all(
       title: data.title || file,
       date: data.date || '',
       description: data.description || '',
+      tags: data.tags
+        ? data.tags
+            .split(',')
+            .map((tag) => tag.trim())
+            .filter(Boolean)
+        : [],
     };
   }),
 );
@@ -43,12 +49,15 @@ posts.sort((a, b) => b.date.localeCompare(a.date));
 const items = posts
   .map((post) => {
     const url = `${SITE_URL}/posts/${post.slug}`;
+    const categories = post.tags
+      .map((tag) => `\n      <category>${escapeXml(tag)}</category>`)
+      .join('');
     return `    <item>
       <title>${escapeXml(post.title)}</title>
       <link>${url}</link>
       <guid>${url}</guid>
       <pubDate>${new Date(post.date).toUTCString()}</pubDate>
-      <description>${escapeXml(post.description)}</description>
+      <description>${escapeXml(post.description)}</description>${categories}
     </item>`;
   })
   .join('\n');
