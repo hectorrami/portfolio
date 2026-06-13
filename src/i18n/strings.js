@@ -7,6 +7,8 @@ export const STRINGS = {
     otherLanguage: 'ES',
     email: 'Email',
     about: 'About',
+    intro: 'Notes on software and smart investing, from Houston, TX.',
+    allPosts: 'All',
   },
   es: {
     backToPosts: '← Volver a todas las entradas',
@@ -16,6 +18,8 @@ export const STRINGS = {
     otherLanguage: 'EN',
     email: 'Correo',
     about: 'Sobre mí',
+    intro: 'Notas sobre software e inversión inteligente, desde Houston, TX.',
+    allPosts: 'Todo',
   },
 };
 
