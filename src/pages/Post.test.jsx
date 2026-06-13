@@ -31,10 +31,15 @@ describe('Post', () => {
   it('renders the markdown body', () => {
     const post = posts[0];
     renderPost(post.slug);
-    // HTML comments are dropped by react-markdown, so sample visible text only
-    const visibleText = post.content.replace(/<!--[\s\S]*?-->/g, '').trim();
+    // Sample visible text only: drop HTML comments and image lines, then
+    // escape the snippet since it feeds a RegExp.
+    const visibleText = post.content
+      .replace(/<!--[\s\S]*?-->/g, '')
+      .replace(/^!\[.*$/gm, '')
+      .trim();
     const firstSentence = visibleText.split(/[.\n]/)[0];
-    expect(screen.getByText(new RegExp(firstSentence.slice(0, 40)))).toBeInTheDocument();
+    const escaped = firstSentence.slice(0, 40).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    expect(screen.getByText(new RegExp(escaped))).toBeInTheDocument();
   });
 
   it('renders the post tags', () => {
