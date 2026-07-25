@@ -32,3 +32,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
+          # Replace gh-pages with a single commit each deploy instead of
+          # appending. Without this the branch accumulates every past bundle
+          # and image forever — it had grown to 21 MB of dead build output.
+          force_orphan: true

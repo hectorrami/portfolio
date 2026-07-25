@@ -5,7 +5,7 @@ description: Market cap, speculating vs. investing, risk tolerance, time horizon
 tags: investing, basics
 ---
 
-![Comic-style illustration of a rocket labeled "Mars Bound" blasting toward an orange planet](/images/mars.png)
+![Illustration of a rocket labeled "Mars Bound" climbing a dashed trajectory toward an orange Mars, captioned "Destination: priced in. Arrival: unscheduled."](/images/mars.svg)
 
 Okay, let's talk about the SpaceX IPO. It's everywhere. The company priced
 the largest IPO in history this week — 555.6 million shares at $135, raising
