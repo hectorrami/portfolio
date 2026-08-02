@@ -1,0 +1,20 @@
+{
+  "obra/superpowers": {
+    "name": "superpowers",
+    "owner": "obra",
+    "url": "https://github.com/obra/superpowers",
+    "stars": 264829,
+    "language": "Shell",
+    "license": "MIT",
+    "avatar": "/images/oss/obra.png"
+  },
+  "react/react": {
+    "name": "react",
+    "owner": "react",
+    "url": "https://github.com/react/react",
+    "stars": 246846,
+    "language": "JavaScript",
+    "license": "MIT",
+    "avatar": "/images/oss/react.png"
+  }
+}

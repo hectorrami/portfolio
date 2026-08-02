@@ -1,14 +1,25 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import { LanguageProvider } from '../i18n/LanguageContext';
 import Home from './Home';
 import { posts, localized } from '../lib/posts';
+import { projects } from '../lib/oss';
 
 beforeEach(() => {
   localStorage.clear();
 });
+
+// The page also links out to each open source project, so link assertions about
+// the post list have to be scoped to internal post links. Each post link wraps
+// the whole entry — date, title, description, tags — so its accessible name is
+// all of that text concatenated; match on href instead.
+const postLinks = () =>
+  screen.getAllByRole('link').filter((link) => link.getAttribute('href').startsWith('/posts/'));
+
+const postLink = (slug) =>
+  screen.getAllByRole('link').find((link) => link.getAttribute('href') === `/posts/${slug}`);
 
 const renderHome = () =>
   render(
@@ -20,11 +31,12 @@ const renderHome = () =>
   );
 
 describe('Home', () => {
-  it('renders a link to every post', () => {
+  it('links the whole entry to every post', () => {
     renderHome();
     posts.forEach((post) => {
-      const link = screen.getByRole('link', { name: post.title });
-      expect(link).toHaveAttribute('href', `/posts/${post.slug}`);
+      const link = postLink(post.slug);
+      expect(link).toBeTruthy();
+      expect(within(link).getByRole('heading', { name: post.title })).toBeInTheDocument();
     });
   });
 
@@ -50,10 +62,10 @@ describe('Home', () => {
     const matching = posts.filter((post) => post.tags.includes(tag));
 
     await user.click(screen.getByRole('button', { name: tag }));
-    expect(screen.getAllByRole('link')).toHaveLength(matching.length);
+    expect(postLinks()).toHaveLength(matching.length);
 
     await user.click(screen.getByRole('button', { name: 'All' }));
-    expect(screen.getAllByRole('link')).toHaveLength(posts.length);
+    expect(postLinks()).toHaveLength(posts.length);
   });
 
   it('renders translated titles when Spanish is selected', () => {
@@ -61,7 +73,41 @@ describe('Home', () => {
     renderHome();
     posts.forEach((post) => {
       const { title } = localized(post, 'es');
-      expect(screen.getByRole('link', { name: title })).toBeInTheDocument();
+      expect(within(postLink(post.slug)).getByRole('heading', { name: title })).toBeInTheDocument();
+    });
+  });
+});
+
+describe('open source section', () => {
+  it('renders a heading and a card per project', () => {
+    renderHome();
+    expect(
+      screen.getByRole('heading', { name: 'Open source I keep coming back to' }),
+    ).toBeInTheDocument();
+    projects.forEach((project) => {
+      expect(screen.getByRole('heading', { name: project.github.name })).toBeInTheDocument();
+    });
+  });
+
+  it('translates the section heading', () => {
+    localStorage.setItem('lang', 'es');
+    renderHome();
+    expect(
+      screen.getByRole('heading', { name: 'Código abierto al que siempre vuelvo' }),
+    ).toBeInTheDocument();
+  });
+
+  it('is not affected by the post tag filter', async () => {
+    const user = userEvent.setup();
+    renderHome();
+    const tag = posts.find((post) => post.tags.length > 0).tags[0];
+
+    await user.click(screen.getByRole('button', { name: tag }));
+    expect(
+      screen.getByRole('heading', { name: 'Open source I keep coming back to' }),
+    ).toBeInTheDocument();
+    projects.forEach((project) => {
+      expect(screen.getByRole('heading', { name: project.github.name })).toBeInTheDocument();
     });
   });
 });

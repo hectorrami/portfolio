@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node scripts/generate-rss.mjs && node scripts/generate-sitemap.mjs && node scripts/prerender.mjs && cp dist/index.html dist/404.html",
+    "build": "node scripts/fetch-repos.mjs && vite build && node scripts/generate-rss.mjs && node scripts/generate-sitemap.mjs && node scripts/prerender.mjs && cp dist/index.html dist/404.html",
     "preview": "vite preview",
     "deploy": "gh-pages -d dist",
     "lint": "eslint . --ext .js, .jsx",

@@ -26,6 +26,25 @@ frontmatter and body (the `date` comes from the English file). The EN/ES
 toggle in the header switches between them; posts without a translation stay
 in English.
 
+## Adding an open source project
+
+Create a markdown file in `src/oss/`:
+
+```markdown
+---
+repo: obra/superpowers
+added: 2026-08-01
+---
+
+One or two sentences on why you keep coming back to it.
+```
+
+The repo name, owner, avatar, language, star count and license are fetched from
+GitHub by `scripts/fetch-repos.mjs` during the build and written to
+`src/data/repos.json`, which is committed. If the fetch fails the last known
+values are reused, so a rate limit or an outage never breaks the build. Spanish
+translations work like posts: add `superpowers.es.md` beside it.
+
 ## Development
 
 ```bash
