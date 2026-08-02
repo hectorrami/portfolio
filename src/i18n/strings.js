@@ -9,6 +9,7 @@ export const STRINGS = {
     about: 'About',
     intro: 'Notes on software and smart investing, from Houston, TX.',
     allPosts: 'All',
+    ossHeading: 'Open source I keep coming back to',
   },
   es: {
     backToPosts: '← Volver a todas las entradas',
@@ -20,6 +21,7 @@ export const STRINGS = {
     about: 'Sobre mí',
     intro: 'Notas sobre software e inversión inteligente, desde Houston, TX.',
     allPosts: 'Todo',
+    ossHeading: 'Código abierto al que siempre vuelvo',
   },
 };
 

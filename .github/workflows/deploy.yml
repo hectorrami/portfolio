@@ -26,6 +26,10 @@ jobs:
 
       - name: Build project
         run: npm run build
+        env:
+          # Raises the GitHub API rate limit for scripts/fetch-repos.mjs from 60
+          # to 5000 requests/hour. The build still succeeds without it.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4

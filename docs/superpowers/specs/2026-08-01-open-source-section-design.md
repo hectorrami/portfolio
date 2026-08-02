@@ -144,10 +144,13 @@ readers announce "52,100 stars" rather than "star five two point one k".
 
 ### Homepage section
 
-Appended to `src/pages/Home.jsx` below the post list:
+Added to `src/pages/Home.jsx` between the intro line and the post list, so the
+higher-cadence content leads. The tag pills stay attached to the post list and
+pick up the separating top border:
 
-- Heading with a top border (`border-zinc-200`/`zinc-800`) separating it from
-  the posts, plus a one-line note beneath.
+- Heading ("Open source I keep coming back to") with a top border
+  (`border-zinc-200`/`zinc-800`) separating it from the posts. The heading
+  carries the framing on its own; no note beneath it.
 - Grid of `RepoCard`s: one column on mobile, two from `sm:` up.
 - The entire section — heading, note, and grid — is omitted when `src/oss/` is
   empty, matching how the tag pills already hide themselves when there are no
