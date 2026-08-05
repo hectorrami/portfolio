@@ -23,7 +23,7 @@ const postLink = (slug) =>
 
 const renderHome = () =>
   render(
-    <LanguageProvider>
+    <LanguageProvider enabled>
       <MemoryRouter>
         <Home />
       </MemoryRouter>
@@ -54,9 +54,7 @@ describe('Home', () => {
 
   it('renders each post date', () => {
     renderHome();
-    // Repo rows carry a <time> too, so count only the ones inside post links.
-    const dates = postLinks().flatMap((link) => [...link.querySelectorAll('time')]);
-    expect(dates).toHaveLength(posts.length);
+    expect(document.querySelectorAll('time')).toHaveLength(posts.length);
   });
 
   it('renders the intro line and a filter pill per tag', () => {

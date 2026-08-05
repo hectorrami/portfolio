@@ -10,7 +10,7 @@ beforeEach(() => {
 
 const renderToggle = () =>
   render(
-    <LanguageProvider>
+    <LanguageProvider enabled>
       <LanguageToggle />
     </LanguageProvider>,
   );

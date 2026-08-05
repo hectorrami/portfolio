@@ -7,17 +7,8 @@ const compact = new Intl.NumberFormat('en-US', {
   maximumFractionDigits: 1,
 });
 
-const shortDate = (isoDate, locale) => {
-  if (!isoDate) return '';
-  return new Date(isoDate).toLocaleDateString(locale, {
-    month: 'short',
-    day: 'numeric',
-    timeZone: 'UTC',
-  });
-};
-
-function RepoCard({ project, blurb, locale = 'en-US' }) {
-  const { github, repo, added } = project;
+function RepoCard({ project, blurb }) {
+  const { github, repo } = project;
   const [fallbackOwner, fallbackName] = repo.split('/');
   const name = github?.name || fallbackName || repo;
   const owner = github?.owner || fallbackOwner || '';
@@ -45,12 +36,6 @@ function RepoCard({ project, blurb, locale = 'en-US' }) {
             <>
               <span className="mx-1.5">·</span>
               {owner}
-            </>
-          )}
-          {added && (
-            <>
-              <span className="mx-1.5">·</span>
-              <time dateTime={added}>{shortDate(added, locale)}</time>
             </>
           )}
         </p>

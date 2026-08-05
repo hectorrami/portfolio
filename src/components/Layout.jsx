@@ -59,7 +59,7 @@ function RssIcon() {
 }
 
 function Layout() {
-  const { t } = useLanguage();
+  const { t, languageEnabled } = useLanguage();
 
   return (
     <div className="min-h-screen flex flex-col bg-white dark:bg-surface text-zinc-800 dark:text-ink">
@@ -77,7 +77,7 @@ function Layout() {
           >
             {t.about}
           </Link>
-          <LanguageToggle />
+          {languageEnabled && <LanguageToggle />}
           <ThemeToggle />
         </div>
       </header>

@@ -27,22 +27,18 @@ describe('RepoCard', () => {
     expect(link).toHaveAttribute('rel', 'noopener noreferrer');
   });
 
-  it('renders the name, owner, date, blurb, language, and license', () => {
+  it('renders the name, owner, blurb, language, and license', () => {
     render(<RepoCard project={project} blurb="A skills library." />);
     expect(screen.getByText('superpowers')).toBeInTheDocument();
     expect(screen.getByText(/obra/)).toBeInTheDocument();
     expect(screen.getByText('A skills library.')).toBeInTheDocument();
     expect(screen.getByText('Shell')).toBeInTheDocument();
     expect(screen.getByText('MIT')).toBeInTheDocument();
-
-    const time = document.querySelector('time');
-    expect(time).toHaveAttribute('datetime', '2026-08-01');
-    expect(time).toHaveTextContent('Aug 1');
   });
 
-  it('formats the date in the requested locale', () => {
-    render(<RepoCard project={project} blurb="A skills library." locale="es-ES" />);
-    expect(document.querySelector('time')).toHaveTextContent('1 ago');
+  it('does not show the added date', () => {
+    const { container } = render(<RepoCard project={project} blurb="A skills library." />);
+    expect(container.querySelector('time')).toBeNull();
   });
 
   it('abbreviates the star count visually but exposes the full number', () => {

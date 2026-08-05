@@ -39,7 +39,6 @@ function Home() {
                 key={project.slug}
                 project={project}
                 blurb={localizedBlurb(project, lang)}
-                locale={t.dateLocale}
               />
             ))}
           </div>

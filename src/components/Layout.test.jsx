@@ -13,7 +13,7 @@ beforeEach(() => {
 
 const renderLayout = () =>
   render(
-    <LanguageProvider>
+    <LanguageProvider enabled>
       <MemoryRouter>
         <Layout />
       </MemoryRouter>
@@ -49,5 +49,21 @@ describe('Layout', () => {
     localStorage.setItem('lang', 'es');
     renderLayout();
     expect(screen.getByRole('link', { name: 'Correo' })).toBeInTheDocument();
+  });
+
+  it('shows the language toggle while Spanish is enabled', () => {
+    renderLayout();
+    expect(screen.getByRole('button', { name: /cambiar a español/i })).toBeInTheDocument();
+  });
+
+  it('hides the language toggle while Spanish is switched off', () => {
+    render(
+      <LanguageProvider enabled={false}>
+        <MemoryRouter>
+          <Layout />
+        </MemoryRouter>
+      </LanguageProvider>,
+    );
+    expect(screen.queryByRole('button', { name: /cambiar a español/i })).not.toBeInTheDocument();
   });
 });

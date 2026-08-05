@@ -18,7 +18,7 @@ function Probe() {
 
 const renderProbe = () =>
   render(
-    <LanguageProvider>
+    <LanguageProvider enabled>
       <Probe />
     </LanguageProvider>,
   );
@@ -52,5 +52,29 @@ describe('LanguageProvider', () => {
     await user.click(screen.getByRole('button', { name: 'toggle' }));
     expect(screen.getByTestId('lang')).toHaveTextContent('en');
     expect(localStorage.getItem('lang')).toBe('en');
+  });
+});
+
+describe('LanguageProvider when Spanish is switched off', () => {
+  const renderDisabled = () =>
+    render(
+      <LanguageProvider enabled={false}>
+        <Probe />
+      </LanguageProvider>,
+    );
+
+  it('stays in English despite a stored Spanish preference', () => {
+    localStorage.setItem('lang', 'es');
+    renderDisabled();
+    expect(screen.getByTestId('lang')).toHaveTextContent('en');
+  });
+
+  it('ignores toggle attempts', async () => {
+    const user = userEvent.setup();
+    renderDisabled();
+
+    await user.click(screen.getByRole('button', { name: 'toggle' }));
+    expect(screen.getByTestId('lang')).toHaveTextContent('en');
+    expect(localStorage.getItem('lang')).toBeNull();
   });
 });
