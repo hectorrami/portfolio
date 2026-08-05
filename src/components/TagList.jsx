@@ -8,7 +8,7 @@ function TagList({ tags }) {
       {tags.map((tag) => (
         <li
           key={tag}
-          className="text-xs rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 px-2.5 py-0.5"
+          className="text-xs rounded-full bg-zinc-100 dark:bg-surface-2 text-zinc-600 dark:text-ink-body px-2.5 py-0.5"
         >
           {tag}
         </li>

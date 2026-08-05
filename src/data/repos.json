@@ -1,18 +1,36 @@
 {
+  "facebook/docusaurus": {
+    "name": "docusaurus",
+    "owner": "facebook",
+    "url": "https://github.com/facebook/docusaurus",
+    "stars": 65820,
+    "language": "TypeScript",
+    "license": "MIT",
+    "avatar": "/images/oss/facebook.png"
+  },
   "obra/superpowers": {
     "name": "superpowers",
     "owner": "obra",
     "url": "https://github.com/obra/superpowers",
-    "stars": 266458,
+    "stars": 266470,
     "language": "Shell",
     "license": "MIT",
     "avatar": "/images/oss/obra.png"
+  },
+  "open-webui/open-webui": {
+    "name": "open-webui",
+    "owner": "open-webui",
+    "url": "https://github.com/open-webui/open-webui",
+    "stars": 147855,
+    "language": "Python",
+    "license": null,
+    "avatar": "/images/oss/open-webui.png"
   },
   "react/react": {
     "name": "react",
     "owner": "react",
     "url": "https://github.com/react/react",
-    "stars": 246955,
+    "stars": 246957,
     "language": "JavaScript",
     "license": "MIT",
     "avatar": "/images/oss/react.png"

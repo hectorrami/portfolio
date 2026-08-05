@@ -2,6 +2,22 @@
 @plugin '@tailwindcss/typography';
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* Dark-mode neutrals, warmed from zinc to Radix "sand". Each token sits at
+   roughly the same lightness as the zinc value it replaces, so the existing
+   contrast hierarchy is untouched — only the temperature moves. Light mode
+   still uses zinc throughout. */
+@theme {
+  --color-surface: #161615; /* sand1  — was zinc-900 */
+  --color-surface-2: #282826; /* sand4  — was zinc-800 */
+  --color-surface-3: #3e3e3a; /* sand7  — was zinc-700 */
+  --color-line: #282826; /* sand4  — was zinc-800 */
+  --color-line-2: #3e3e3a; /* sand7  — was zinc-700 */
+  --color-ink: #ededec; /* sand12 — was zinc-100 */
+  --color-ink-body: #d5d4cf; /* warm counterpart of zinc-300 */
+  --color-ink-muted: #a1a09a; /* sand11 — was zinc-400 */
+  --color-ink-faint: #717069; /* sand9  — was zinc-500 */
+}
+
 html {
   color-scheme: light;
   -webkit-font-smoothing: antialiased;
@@ -12,13 +28,21 @@ html.dark {
   color-scheme: dark;
 }
 
-/* Repo card plate. Mixing the language color against the page background
-   (rather than using a fixed alpha) is what keeps these tints from turning
-   into muddy grey rectangles in dark mode. */
-.oss-plate {
-  background: color-mix(in srgb, var(--lang) 8%, #ffffff);
-}
-
-html.dark .oss-plate {
-  background: color-mix(in srgb, var(--lang) 14%, #18181b);
+/* The typography plugin's inverted palette is zinc-based; retint it so post
+   bodies match the rest of dark mode. Code block colors are left alone — those
+   come from the one highlight.js theme used in both modes. */
+html.dark .prose-invert {
+  --tw-prose-invert-body: #d5d4cf;
+  --tw-prose-invert-headings: #ededec;
+  --tw-prose-invert-lead: #a1a09a;
+  --tw-prose-invert-links: #ededec;
+  --tw-prose-invert-bold: #ededec;
+  --tw-prose-invert-counters: #a1a09a;
+  --tw-prose-invert-bullets: #3e3e3a;
+  --tw-prose-invert-hr: #282826;
+  --tw-prose-invert-quotes: #ededec;
+  --tw-prose-invert-quote-borders: #282826;
+  --tw-prose-invert-captions: #a1a09a;
+  --tw-prose-invert-th-borders: #3e3e3a;
+  --tw-prose-invert-td-borders: #282826;
 }

@@ -1,13 +1,23 @@
 import React from 'react';
 import languageColor from '../lib/languageColors';
+import Avatar from './Avatar';
 
 const compact = new Intl.NumberFormat('en-US', {
   notation: 'compact',
   maximumFractionDigits: 1,
 });
 
-function RepoCard({ project, blurb }) {
-  const { github, repo } = project;
+const shortDate = (isoDate, locale) => {
+  if (!isoDate) return '';
+  return new Date(isoDate).toLocaleDateString(locale, {
+    month: 'short',
+    day: 'numeric',
+    timeZone: 'UTC',
+  });
+};
+
+function RepoCard({ project, blurb, locale = 'en-US' }) {
+  const { github, repo, added } = project;
   const [fallbackOwner, fallbackName] = repo.split('/');
   const name = github?.name || fallbackName || repo;
   const owner = github?.owner || fallbackOwner || '';
@@ -19,38 +29,34 @@ function RepoCard({ project, blurb }) {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="group block overflow-hidden rounded-xl border border-zinc-200 transition-colors hover:border-zinc-300 hover:bg-zinc-50 dark:border-zinc-800 dark:hover:border-zinc-700 dark:hover:bg-zinc-800/40"
+      className="group -mx-3 flex gap-3 rounded-xl px-3 py-4 transition-colors hover:bg-zinc-50 dark:hover:bg-surface-2/40"
     >
-      <div
-        className="oss-plate flex aspect-[2/1] items-center justify-center border-b border-zinc-200 dark:border-zinc-800"
-        style={{ '--lang': color }}
-      >
-        {github?.avatar ? (
-          <img
-            src={github.avatar}
-            alt=""
-            width="52"
-            height="52"
-            loading="lazy"
-            className="h-[52px] w-[52px] rounded-xl"
-          />
-        ) : (
-          <span
-            aria-hidden="true"
-            className="flex h-[52px] w-[52px] items-center justify-center rounded-xl bg-white/70 text-xl font-semibold text-zinc-500 dark:bg-zinc-900/70 dark:text-zinc-400"
-          >
-            {name.charAt(0).toUpperCase()}
+      <Avatar
+        src={github?.avatar}
+        initials={name.charAt(0).toUpperCase()}
+        className="bg-zinc-100 text-zinc-500 dark:bg-surface-2 dark:text-ink-muted"
+      />
+      <div className="min-w-0">
+        <p className="text-sm text-zinc-500 dark:text-ink-muted">
+          <span className="font-semibold text-zinc-900 underline-offset-4 group-hover:underline dark:text-ink">
+            {name}
           </span>
-        )}
-      </div>
-      <div className="p-4">
-        <h3 className="font-semibold tracking-tight text-zinc-900 group-hover:underline underline-offset-4 dark:text-zinc-100">
-          {name}
-        </h3>
-        {owner && <p className="mt-0.5 text-xs text-zinc-400 dark:text-zinc-500">{owner}</p>}
-        <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-300">{blurb}</p>
+          {owner && (
+            <>
+              <span className="mx-1.5">·</span>
+              {owner}
+            </>
+          )}
+          {added && (
+            <>
+              <span className="mx-1.5">·</span>
+              <time dateTime={added}>{shortDate(added, locale)}</time>
+            </>
+          )}
+        </p>
+        <p className="mt-1.5 leading-relaxed text-zinc-700 dark:text-ink-body">{blurb}</p>
         {github && (
-          <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-zinc-500 dark:text-zinc-400">
+          <div className="mt-2.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-zinc-400 dark:text-ink-muted">
             {github.language && (
               <span className="inline-flex items-center gap-1.5">
                 <span

@@ -15,9 +15,16 @@ describe('projects', () => {
     });
   });
 
-  it('sorts projects newest first', () => {
-    const dates = projects.map((project) => project.added);
-    expect(dates).toEqual([...dates].sort((a, b) => b.localeCompare(a)));
+  it('floats AI projects to the top, newest first within each group', () => {
+    const ranks = projects.map((project) => (project.topic === 'ai' ? 0 : 1));
+    expect(ranks).toEqual([...ranks].sort());
+
+    ['ai', ''].forEach((topic) => {
+      const dates = projects
+        .filter((project) => (topic === 'ai' ? project.topic === 'ai' : project.topic !== 'ai'))
+        .map((project) => project.added);
+      expect(dates).toEqual([...dates].sort((a, b) => b.localeCompare(a)));
+    });
   });
 
   it('does not list Spanish variant files as their own projects', () => {

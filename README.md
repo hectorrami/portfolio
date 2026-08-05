@@ -34,10 +34,15 @@ Create a markdown file in `src/oss/`:
 ---
 repo: obra/superpowers
 added: 2026-08-01
+topic: ai
 ---
 
 One or two sentences on why you keep coming back to it.
 ```
+
+`topic` is optional. Topics listed in `TOPIC_ORDER` in `src/lib/oss.js` float to
+the top of the section in that order; everything else follows. Within each
+group entries sort by `added`, newest first.
 
 The repo name, owner, avatar, language, star count and license are fetched from
 GitHub by `scripts/fetch-repos.mjs` during the build and written to

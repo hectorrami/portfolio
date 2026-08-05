@@ -22,7 +22,7 @@ function Post() {
         <h1 className="text-2xl font-semibold tracking-tight mb-4">{t.postNotFound}</h1>
         <Link
           to="/"
-          className="text-zinc-600 dark:text-zinc-300 hover:underline underline-offset-4"
+          className="text-zinc-600 dark:text-ink-body hover:underline underline-offset-4"
         >
           {t.backToPosts}
         </Link>
@@ -35,10 +35,10 @@ function Post() {
   return (
     <article>
       <header className="mb-10">
-        <p className="text-sm text-zinc-500 dark:text-zinc-400 mb-2">
+        <p className="text-sm text-zinc-500 dark:text-ink-muted mb-2">
           <time dateTime={post.date}>{formatDate(post.date, t.dateLocale)}</time>
         </p>
-        <h1 className="text-3xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
+        <h1 className="text-3xl font-semibold tracking-tight text-zinc-900 dark:text-ink">
           {title}
         </h1>
         <div className="mt-3">
@@ -51,10 +51,10 @@ function Post() {
           {content}
         </ReactMarkdown>
       </div>
-      <footer className="mt-12 pt-8 border-t border-zinc-200 dark:border-zinc-700">
+      <footer className="mt-12 pt-8 border-t border-zinc-200 dark:border-line-2">
         <Link
           to="/"
-          className="text-zinc-600 dark:text-zinc-300 hover:underline underline-offset-4"
+          className="text-zinc-600 dark:text-ink-body hover:underline underline-offset-4"
         >
           {t.backToPosts}
         </Link>

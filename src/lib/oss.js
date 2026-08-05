@@ -17,9 +17,19 @@ const parsed = Object.entries(modules).map(([path, raw]) => {
     spanish,
     repo: data.repo || '',
     added: data.added || '',
+    topic: data.topic || '',
     blurb: content.trim(),
   };
 });
+
+// Topics listed here float to the top of the list, in this order. Anything
+// without a listed topic follows. Within each group, newest first.
+const TOPIC_ORDER = ['ai'];
+
+const topicRank = (topic) => {
+  const index = TOPIC_ORDER.indexOf(topic);
+  return index === -1 ? TOPIC_ORDER.length : index;
+};
 
 // Mirrors src/lib/posts.js: Spanish files (slug.es.md) attach to their English
 // base entry rather than appearing on their own, and the English file is the
@@ -35,7 +45,7 @@ export const projects = parsed
       es: translation ? { blurb: translation.blurb } : null,
     };
   })
-  .sort((a, b) => b.added.localeCompare(a.added));
+  .sort((a, b) => topicRank(a.topic) - topicRank(b.topic) || b.added.localeCompare(a.added));
 
 export function getProject(slug) {
   return projects.find((project) => project.slug === slug) || null;

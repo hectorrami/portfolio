@@ -62,18 +62,18 @@ function Layout() {
   const { t } = useLanguage();
 
   return (
-    <div className="min-h-screen flex flex-col bg-white dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200">
+    <div className="min-h-screen flex flex-col bg-white dark:bg-surface text-zinc-800 dark:text-ink">
       <header className="max-w-2xl w-full mx-auto px-6 pt-10 pb-4 flex items-center justify-between">
         <Link
           to="/"
-          className="font-semibold tracking-tight text-zinc-900 dark:text-zinc-100 hover:underline underline-offset-4"
+          className="font-semibold tracking-tight text-zinc-900 dark:text-ink hover:underline underline-offset-4"
         >
           Hector Ramirez
         </Link>
         <div className="flex items-center gap-1">
           <Link
             to="/about"
-            className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors mr-3"
+            className="text-sm text-zinc-600 dark:text-ink-muted hover:text-zinc-900 dark:hover:text-ink transition-colors mr-3"
           >
             {t.about}
           </Link>
@@ -84,7 +84,7 @@ function Layout() {
       <main className="max-w-2xl w-full mx-auto px-6 py-8 flex-1">
         <Outlet />
       </main>
-      <footer className="max-w-2xl w-full mx-auto px-6 py-10 border-t border-zinc-200 dark:border-zinc-800">
+      <footer className="max-w-2xl w-full mx-auto px-6 py-10 border-t border-zinc-200 dark:border-line">
         <div className="flex items-center gap-5 mb-3">
           <a
             href={CONTACT.github}
@@ -92,7 +92,7 @@ function Layout() {
             rel="noopener noreferrer"
             aria-label="GitHub"
             title="GitHub"
-            className="text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors"
+            className="text-zinc-500 hover:text-zinc-900 dark:text-ink-muted dark:hover:text-ink transition-colors"
           >
             <GitHubIcon />
           </a>
@@ -102,7 +102,7 @@ function Layout() {
             rel="noopener noreferrer"
             aria-label="LinkedIn"
             title="LinkedIn"
-            className="text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors"
+            className="text-zinc-500 hover:text-zinc-900 dark:text-ink-muted dark:hover:text-ink transition-colors"
           >
             <LinkedInIcon />
           </a>
@@ -110,7 +110,7 @@ function Layout() {
             href={`mailto:${CONTACT.email}`}
             aria-label={t.email}
             title={t.email}
-            className="text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors"
+            className="text-zinc-500 hover:text-zinc-900 dark:text-ink-muted dark:hover:text-ink transition-colors"
           >
             <MailIcon />
           </a>
@@ -118,12 +118,12 @@ function Layout() {
             href="/rss.xml"
             aria-label="RSS"
             title="RSS"
-            className="text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors"
+            className="text-zinc-500 hover:text-zinc-900 dark:text-ink-muted dark:hover:text-ink transition-colors"
           >
             <RssIcon />
           </a>
         </div>
-        <p className="text-sm text-zinc-500 dark:text-zinc-400">
+        <p className="text-sm text-zinc-500 dark:text-ink-muted">
           © {new Date().getFullYear()} Hector Ramirez
         </p>
       </footer>

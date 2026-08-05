@@ -40,9 +40,23 @@ describe('Home', () => {
     });
   });
 
+  it('renders the author monogram on every post entry', () => {
+    renderHome();
+    postLinks().forEach((link) => {
+      expect(within(link).getByText('HR')).toBeInTheDocument();
+    });
+  });
+
+  it('renders a Posts heading above the list', () => {
+    renderHome();
+    expect(screen.getByRole('heading', { name: 'Posts' })).toBeInTheDocument();
+  });
+
   it('renders each post date', () => {
     renderHome();
-    expect(document.querySelectorAll('time')).toHaveLength(posts.length);
+    // Repo rows carry a <time> too, so count only the ones inside post links.
+    const dates = postLinks().flatMap((link) => [...link.querySelectorAll('time')]);
+    expect(dates).toHaveLength(posts.length);
   });
 
   it('renders the intro line and a filter pill per tag', () => {
@@ -81,11 +95,9 @@ describe('Home', () => {
 describe('open source section', () => {
   it('renders a heading and a card per project', () => {
     renderHome();
-    expect(
-      screen.getByRole('heading', { name: 'Open source I keep coming back to' }),
-    ).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: "Software I'm glad exists" })).toBeInTheDocument();
     projects.forEach((project) => {
-      expect(screen.getByRole('heading', { name: project.github.name })).toBeInTheDocument();
+      expect(screen.getByText(project.github.name)).toBeInTheDocument();
     });
   });
 
@@ -93,7 +105,7 @@ describe('open source section', () => {
     localStorage.setItem('lang', 'es');
     renderHome();
     expect(
-      screen.getByRole('heading', { name: 'Código abierto al que siempre vuelvo' }),
+      screen.getByRole('heading', { name: 'Software que me alegra que exista' }),
     ).toBeInTheDocument();
   });
 
@@ -103,11 +115,9 @@ describe('open source section', () => {
     const tag = posts.find((post) => post.tags.length > 0).tags[0];
 
     await user.click(screen.getByRole('button', { name: tag }));
-    expect(
-      screen.getByRole('heading', { name: 'Open source I keep coming back to' }),
-    ).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: "Software I'm glad exists" })).toBeInTheDocument();
     projects.forEach((project) => {
-      expect(screen.getByRole('heading', { name: project.github.name })).toBeInTheDocument();
+      expect(screen.getByText(project.github.name)).toBeInTheDocument();
     });
   });
 });

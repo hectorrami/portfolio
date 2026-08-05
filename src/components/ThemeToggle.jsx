@@ -46,7 +46,7 @@ function ThemeToggle() {
       type="button"
       onClick={toggle}
       aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
-      className="p-2 -mr-2 rounded-full text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors"
+      className="p-2 -mr-2 rounded-full text-zinc-500 hover:text-zinc-900 dark:text-ink-muted dark:hover:text-ink transition-colors"
     >
       {dark ? <SunIcon /> : <MoonIcon />}
     </button>

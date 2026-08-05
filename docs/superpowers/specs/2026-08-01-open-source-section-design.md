@@ -148,7 +148,7 @@ Added to `src/pages/Home.jsx` between the intro line and the post list, so the
 higher-cadence content leads. The tag pills stay attached to the post list and
 pick up the separating top border:
 
-- Heading ("Open source I keep coming back to") with a top border
+- Heading ("Software I'm glad exists") with a top border
   (`border-zinc-200`/`zinc-800`) separating it from the posts. The heading
   carries the framing on its own; no note beneath it.
 - Grid of `RepoCard`s: one column on mobile, two from `sm:` up.
