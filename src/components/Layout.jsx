@@ -2,7 +2,6 @@ import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import ThemeToggle from './ThemeToggle';
 import LanguageToggle from './LanguageToggle';
-import Waves from './Waves';
 import { useLanguage } from '../i18n/LanguageContext';
 import { CONTACT } from '../lib/site';
 
@@ -63,9 +62,8 @@ function Layout() {
   const { t } = useLanguage();
 
   return (
-    <div className="relative min-h-screen flex flex-col bg-white dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200">
-      <Waves />
-      <header className="relative z-10 max-w-2xl w-full mx-auto px-6 pt-10 pb-4 flex items-center justify-between">
+    <div className="min-h-screen flex flex-col bg-white dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200">
+      <header className="max-w-2xl w-full mx-auto px-6 pt-10 pb-4 flex items-center justify-between">
         <Link
           to="/"
           className="font-semibold tracking-tight text-zinc-900 dark:text-zinc-100 hover:underline underline-offset-4"
@@ -83,10 +81,10 @@ function Layout() {
           <ThemeToggle />
         </div>
       </header>
-      <main className="relative z-10 max-w-2xl w-full mx-auto px-6 py-8 flex-1">
+      <main className="max-w-2xl w-full mx-auto px-6 py-8 flex-1">
         <Outlet />
       </main>
-      <footer className="relative z-10 max-w-2xl w-full mx-auto px-6 py-10 border-t border-zinc-200 dark:border-zinc-800">
+      <footer className="max-w-2xl w-full mx-auto px-6 py-10 border-t border-zinc-200 dark:border-zinc-800">
         <div className="flex items-center gap-5 mb-3">
           <a
             href={CONTACT.github}
