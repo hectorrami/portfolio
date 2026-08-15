@@ -22,10 +22,89 @@ html {
   color-scheme: light;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+
+  /* The one spot of colour on the site — the mug in the header mark. */
+  --mug: #7fa8c9;
 }
 
 html.dark {
   color-scheme: dark;
+}
+
+/* Hand-drawn header mark. Draws once on load rather than looping — a repeating
+   animation in a header gets old by the third visit. Each path carries its own
+   dash length so it draws at its own natural pace instead of all sharing one
+   oversized value. */
+.mark-stroke {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 4.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mark-handle,
+.mark-steam {
+  stroke-width: 3.4;
+}
+
+.mark-mug {
+  fill: var(--mug);
+}
+
+.mark-laptop {
+  stroke-dasharray: 420;
+  stroke-dashoffset: 420;
+  animation: mark-draw 1.5s ease-in-out forwards;
+}
+
+.mark-handle {
+  stroke-dasharray: 50;
+  stroke-dashoffset: 50;
+  animation: mark-draw 0.4s ease-out 1.5s forwards;
+}
+
+.mark-steam {
+  stroke-dasharray: 44;
+  stroke-dashoffset: 44;
+  animation: mark-draw 0.6s ease-out 1.8s forwards;
+}
+
+.mark-mug {
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(0);
+  opacity: 0;
+  animation: mark-pop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) 1.25s forwards;
+}
+
+@keyframes mark-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes mark-pop {
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Show the finished mark rather than animating into it. */
+@media (prefers-reduced-motion: reduce) {
+  .mark-laptop,
+  .mark-handle,
+  .mark-steam {
+    stroke-dashoffset: 0;
+    animation: none;
+  }
+
+  .mark-mug {
+    transform: none;
+    opacity: 1;
+    animation: none;
+  }
 }
 
 /* The typography plugin's inverted palette is zinc-based; retint it so post

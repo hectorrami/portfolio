@@ -6,6 +6,7 @@ import { useLanguage } from '../i18n/LanguageContext';
 import TagList from '../components/TagList';
 import RepoCard from '../components/RepoCard';
 import Avatar from '../components/Avatar';
+import HeaderMark from '../components/HeaderMark';
 import { AUTHOR } from '../lib/site';
 import useDocumentTitle from '../hooks/useDocumentTitle';
 
@@ -27,7 +28,15 @@ function Home() {
 
   return (
     <>
-      <p className="text-zinc-600 dark:text-ink-body leading-relaxed mb-6">{t.intro}</p>
+      <header className="mb-10">
+        <HeaderMark />
+        {/* text-balance keeps the headline from breaking to a one-word last
+            line, without hardcoding a <br> that only works at one width. */}
+        <h1 className="mt-1 text-3xl font-semibold tracking-tight text-balance text-zinc-900 sm:text-4xl dark:text-ink">
+          {t.heroTitle}
+        </h1>
+        <p className="mt-4 leading-relaxed text-zinc-600 dark:text-ink-body">{t.heroSubtitle}</p>
+      </header>
       {projects.length > 0 && (
         <section className="mb-12">
           <h2 className="font-semibold tracking-tight text-zinc-900 dark:text-ink">

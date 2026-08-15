@@ -7,7 +7,9 @@ export const STRINGS = {
     otherLanguage: 'ES',
     email: 'Email',
     about: 'About',
-    intro: 'Notes on software and smart investing, from Houston, TX.',
+    heroTitle: 'I love software that actually does something.',
+    heroSubtitle:
+      "I'm Hector — an engineer from Houston, TX. I write about the things I build, the open source I keep coming back to, and the occasional detour into finance and investing.",
     allPosts: 'All',
     posts: 'Posts',
     ossHeading: "Software I'm glad exists",
@@ -20,7 +22,9 @@ export const STRINGS = {
     otherLanguage: 'EN',
     email: 'Correo',
     about: 'Sobre mí',
-    intro: 'Notas sobre software e inversión inteligente, desde Houston, TX.',
+    heroTitle: 'Me gusta el software que de verdad sirve para algo.',
+    heroSubtitle:
+      'Soy Hector, ingeniero en Houston, TX. Escribo sobre lo que construyo, el código abierto al que siempre vuelvo, y alguna que otra incursión en finanzas e inversión.',
     allPosts: 'Todo',
     posts: 'Entradas',
     ossHeading: 'Software que me alegra que exista',

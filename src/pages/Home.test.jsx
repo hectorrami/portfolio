@@ -57,9 +57,15 @@ describe('Home', () => {
     expect(document.querySelectorAll('time')).toHaveLength(posts.length);
   });
 
-  it('renders the intro line and a filter pill per tag', () => {
+  it('renders the hero title, subheader, and a filter pill per tag', () => {
     renderHome();
-    expect(screen.getByText(/Notes on software/)).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', {
+        level: 1,
+        name: /I love software that actually does something/,
+      }),
+    ).toBeInTheDocument();
+    expect(screen.getByText(/an engineer in Houston/)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'All', pressed: true })).toBeInTheDocument();
     const tags = [...new Set(posts.flatMap((post) => post.tags))];
     tags.forEach((tag) => {
