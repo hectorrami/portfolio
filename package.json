@@ -8,7 +8,9 @@
     "build": "node scripts/fetch-repos.mjs && vite build && node scripts/generate-rss.mjs && node scripts/generate-sitemap.mjs && node scripts/prerender.mjs && cp dist/index.html dist/404.html",
     "preview": "vite preview",
     "deploy": "gh-pages -d dist",
-    "lint": "eslint . --ext .js, .jsx",
+    "lint": "eslint . --ext .js,.jsx",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "test": "vitest",
     "prepare": "husky"
   },
