@@ -11,7 +11,7 @@ beforeEach(() => {
 
 const renderPost = (slug) =>
   render(
-    <LanguageProvider>
+    <LanguageProvider enabled>
       <MemoryRouter initialEntries={[`/posts/${slug}`]}>
         <Routes>
           <Route path="/posts/:slug" element={<Post />} />

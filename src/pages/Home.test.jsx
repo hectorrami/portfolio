@@ -21,6 +21,12 @@ const postLinks = () =>
 const postLink = (slug) =>
   screen.getAllByRole('link').find((link) => link.getAttribute('href') === `/posts/${slug}`);
 
+// A project card is one link wrapping the name, owner, blurb and stats. Matching
+// on the name alone is ambiguous when a repo's owner and name are the same
+// (react/react renders "react" twice), so match on href like the post links.
+const ossLink = (url) =>
+  screen.getAllByRole('link').find((link) => link.getAttribute('href') === url);
+
 const renderHome = () =>
   render(
     <LanguageProvider enabled>
@@ -65,7 +71,7 @@ describe('Home', () => {
         name: /I love software that actually does something/,
       }),
     ).toBeInTheDocument();
-    expect(screen.getByText(/an engineer in Houston/)).toBeInTheDocument();
+    expect(screen.getByText(/an engineer from Houston/)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'All', pressed: true })).toBeInTheDocument();
     const tags = [...new Set(posts.flatMap((post) => post.tags))];
     tags.forEach((tag) => {
@@ -101,7 +107,7 @@ describe('open source section', () => {
     renderHome();
     expect(screen.getByRole('heading', { name: "Software I'm glad exists" })).toBeInTheDocument();
     projects.forEach((project) => {
-      expect(screen.getByText(project.github.name)).toBeInTheDocument();
+      expect(ossLink(project.github.url)).toBeDefined();
     });
   });
 
@@ -121,7 +127,7 @@ describe('open source section', () => {
     await user.click(screen.getByRole('button', { name: tag }));
     expect(screen.getByRole('heading', { name: "Software I'm glad exists" })).toBeInTheDocument();
     projects.forEach((project) => {
-      expect(screen.getByText(project.github.name)).toBeInTheDocument();
+      expect(ossLink(project.github.url)).toBeDefined();
     });
   });
 });
