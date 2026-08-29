@@ -9,7 +9,7 @@ beforeEach(() => {
 
 const renderAbout = () =>
   render(
-    <LanguageProvider>
+    <LanguageProvider enabled>
       <About />
     </LanguageProvider>,
   );

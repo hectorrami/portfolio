@@ -3,10 +3,10 @@ name: Deploy Vite App to GitHub Pages
 on:
   push:
     branches:
-      - main  
+      - main
 
 permissions:
-  contents: write  # Needed to push to gh-pages
+  contents: write # Needed to push to gh-pages
 
 jobs:
   deploy:
@@ -19,10 +19,15 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
 
       - name: Install dependencies
         run: npm install
+
+      - name: Run tests
+        # `npm test` starts vitest in watch mode; `vitest run` executes once and
+        # exits non-zero on failure, which is what gates the deploy.
+        run: npx vitest run
 
       - name: Build project
         run: npm run build
