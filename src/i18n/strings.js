@@ -6,13 +6,13 @@ export const STRINGS = {
     dateLocale: 'en-US',
     otherLanguage: 'ES',
     email: 'Email',
-    about: 'About',
-    heroTitle: 'I love software that actually does something.',
-    heroSubtitle:
-      "I'm Hector — an engineer from Houston, TX. I write about the things I build, the open source I keep coming back to, and the occasional detour into finance and investing.",
-    allPosts: 'All',
+    contact: 'Contact',
+    contactLead: 'For any inquiries, please send an email to',
+    heroPlace: 'Houston, TX',
+    heroLede: 'Notes on software engineering, open source, and the occasional detour into markets.',
     posts: 'Posts',
-    ossHeading: "Software I'm glad exists",
+    ossHeading: 'My Favorite Open Source Projects',
+    contents: 'Contents',
   },
   es: {
     backToPosts: '← Volver a todas las entradas',
@@ -21,13 +21,14 @@ export const STRINGS = {
     dateLocale: 'es-ES',
     otherLanguage: 'EN',
     email: 'Correo',
-    about: 'Sobre mí',
-    heroTitle: 'Me gusta el software que de verdad sirve para algo.',
-    heroSubtitle:
-      'Soy Hector, ingeniero en Houston, TX. Escribo sobre lo que construyo, el código abierto al que siempre vuelvo, y alguna que otra incursión en finanzas e inversión.',
-    allPosts: 'Todo',
+    contact: 'Contacto',
+    contactLead: 'Para cualquier consulta, envía un correo a',
+    heroPlace: 'Houston, TX',
+    heroLede:
+      'Apuntes sobre ingeniería de software, código abierto y alguna que otra incursión en los mercados.',
     posts: 'Entradas',
-    ossHeading: 'Software que me alegra que exista',
+    ossHeading: 'Mis proyectos de código abierto favoritos',
+    contents: 'Contenido',
   },
 };
 

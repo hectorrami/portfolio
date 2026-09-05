@@ -1,4 +1,4 @@
-// Writes a static HTML shell per route (dist/posts/<slug>/index.html, about)
+// Writes a static HTML shell per route (dist/posts/<slug>/index.html, contact)
 // with per-page <title> and Open Graph tags, so social previews and search
 // engines see real metadata even though the app is an SPA. The shell still
 // loads the bundle and react-router takes over. Runs after `vite build`.
@@ -68,10 +68,10 @@ await Promise.all(
   }),
 );
 
-await writeShell('about', {
-  title: 'About',
-  description: 'About Hector Ramirez — software engineer in Houston, TX.',
-  url: `${SITE_URL}/about`,
+await writeShell('contact', {
+  title: 'Contact',
+  description: 'Get in touch with Hector Ramirez — software engineer in Houston, TX.',
+  url: `${SITE_URL}/contact`,
   type: 'website',
 });
 

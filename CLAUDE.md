@@ -72,13 +72,51 @@ follow that pattern rather than mutating the flag.
 Tailwind v4, configured CSS-first in `src/index.css` (no `tailwind.config.js`). Dark mode
 is a `.dark` class via `@custom-variant`, not the `media` strategy.
 
-Dark mode uses **warm "sand" tokens** declared in `@theme` (`--color-surface`, `--color-ink`,
-`--color-ink-muted`, …); light mode still uses stock `zinc`. So classes pair as
-`text-zinc-500 dark:text-ink-muted`. Match that pairing when adding markup.
+Colours are **semantic roles, not shades**. `src/index.css` declares `--c-*` on `:root`
+and overrides them under `html.dark`; the `@theme` block maps each to a Tailwind utility
+(`--color-ink: var(--c-ink)`). So `text-ink` and `bg-paper` are already correct in both
+themes and **markup carries no `dark:` pairs** — the old `text-zinc-500 dark:text-ink-muted`
+pattern is gone. Add a role to both blocks rather than reaching for a stock zinc value.
+
+The roles: `paper` / `paper-2` (canvas, one raised plate), `rule` / `rule-strong`
+(hairlines), `ink` / `ink-body` / `ink-muted` / `ink-faint` (four text levels), and a
+single `accent` used only for links and active states — never as a fill.
+
+Light mode is the designed default: pure white `#fff`. The greys around it keep only a
+trace of warmth — against a white ground, beige-leaning hairlines read as dinginess
+rather than as warmth. Dark mode is
+**true black** `#000` for OLED. That is why the dark hairlines are lifted (`#262622`, not
+a value tuned against a lighter ground) and why `ink` stays a warm off-white instead of
+`#fff` — maximum contrast on an unlit ground smears on OLED.
+
+Three typefaces, loaded from Google Fonts in `index.html`: **Archivo** for display and UI
+(the `.display` class sets it slightly narrow via `font-stretch`), **Newsreader** for
+anything read at length, **IBM Plex Mono** for dates, counts, and labels via `.meta`.
+Metadata is sentence case — tracked-out capitals are the look this design avoids.
+
+**Layout is one rail grid.** `.shell` centres the page and `.rail-grid` splits it into a
+metadata rail and a reading column, collapsing to stacked below `62rem`. The rail carries
+section labels on the home page, the date on each post row, the language on each repo row,
+and the table of contents in an article. New surfaces should hang their metadata there
+rather than inventing a second layout.
 
 The theme class is applied by an inline script in `index.html` before paint to avoid a
 flash of the wrong theme; `src/hooks/useDarkMode.js` owns it afterwards. Both read
-`localStorage.theme`.
+`localStorage.theme`. The toggle routes through `document.startViewTransition` when it
+exists so the flip crossfades; the `theme-flip` class swaps the route transition for a
+plain fade for the duration.
+
+## The table of contents
+
+`src/components/TableOfContents.jsx` is the one bespoke element on the site. Each entry's
+slot on the spine grows with the **real pixel height** of the section it points at, so the
+marker moves at the speed the reader is actually moving. Evenly divided slots are visibly
+wrong — the marker races through long sections and stalls on short ones.
+
+Headings come from `src/lib/headings.js`, which parses the markdown source (skipping fenced
+blocks) rather than the DOM. `Post.jsx` then stamps those ids onto the rendered headings
+**by document order**, so the parser and the renderer never have to agree on a slug
+algorithm.
 
 ## SPA on GitHub Pages
 
@@ -115,5 +153,9 @@ shadow the global and is a no-op everywhere else — it does not assume a versio
 Tests that exercise Spanish must render `<LanguageProvider enabled>`; the flag is off
 in production, so a bare provider stays in English no matter what is in `localStorage`.
 
-Assert open-source cards by `href`, not by repo name — `react/react` renders "react"
+Assert open-source entries by `href`, not by repo name — `react/react` renders "react"
 as both owner and name, so a text match finds two elements.
+
+Rail metadata (a post's date, a repo's language) sits **outside** the row's link, because
+marginalia annotates an entry rather than being part of its target. Tests assert that
+explicitly, so moving it back inside the anchor will fail.

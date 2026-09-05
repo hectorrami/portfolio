@@ -1,9 +1,10 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import { LanguageProvider } from '../i18n/LanguageContext';
 import Post from './Post';
 import { posts } from '../lib/posts';
+import extractHeadings from '../lib/headings';
 
 beforeEach(() => {
   localStorage.clear();
@@ -70,5 +71,46 @@ describe('Post', () => {
     renderPost('does-not-exist');
     expect(screen.getByText(/post not found/i)).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /back to all posts/i })).toBeInTheDocument();
+  });
+});
+
+describe('table of contents', () => {
+  const sectioned = posts.find((post) => extractHeadings(post.content).length >= 2);
+  const flat = posts.find((post) => extractHeadings(post.content).length === 0);
+
+  it('lists every section of a post that has them', () => {
+    expect(sectioned).toBeTruthy();
+    renderPost(sectioned.slug);
+    const toc = screen.getByRole('navigation', { name: 'Contents' });
+    extractHeadings(sectioned.content).forEach((heading) => {
+      expect(within(toc).getByRole('link', { name: heading.text })).toHaveAttribute(
+        'href',
+        `#${heading.id}`,
+      );
+    });
+  });
+
+  it('anchors each contents entry to the heading it names', () => {
+    renderPost(sectioned.slug);
+    extractHeadings(sectioned.content).forEach((heading) => {
+      expect(document.getElementById(heading.id)).toBeTruthy();
+    });
+  });
+
+  it('marks the first section current before any scrolling has happened', () => {
+    renderPost(sectioned.slug);
+    const toc = screen.getByRole('navigation', { name: 'Contents' });
+    const [first] = extractHeadings(sectioned.content);
+    expect(within(toc).getByRole('link', { name: first.text })).toHaveAttribute(
+      'aria-current',
+      'true',
+    );
+  });
+
+  // A contents list for a post with no sections is longer than the post.
+  it('is left out of a post with no headings', () => {
+    expect(flat).toBeTruthy();
+    renderPost(flat.slug);
+    expect(screen.queryByRole('navigation', { name: 'Contents' })).not.toBeInTheDocument();
   });
 });

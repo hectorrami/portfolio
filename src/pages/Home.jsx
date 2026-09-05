@@ -1,121 +1,90 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { posts, localized, formatDate } from '../lib/posts';
 import { projects, localizedBlurb } from '../lib/oss';
 import { useLanguage } from '../i18n/LanguageContext';
 import TagList from '../components/TagList';
 import RepoCard from '../components/RepoCard';
-import Avatar from '../components/Avatar';
-import HeaderMark from '../components/HeaderMark';
-import { AUTHOR } from '../lib/site';
+import PostArtwork from '../components/PostArtwork';
 import useDocumentTitle from '../hooks/useDocumentTitle';
 
-const allTags = [...new Set(posts.flatMap((post) => post.tags))];
+// A section hangs its name in the rail and puts everything else in the column.
+// Keeping the heading out of the column is what makes the page read as a set
+// of sections rather than a scroll of blocks, and it costs no extra chrome.
+function Section({ label, children, className = '' }) {
+  return (
+    <section className={className}>
+      <div className="rail-grid border-t border-rule-strong pt-5 pb-5">
+        <h2 className="meta text-ink">{label}</h2>
+      </div>
+      {children}
+    </section>
+  );
+}
 
 function Home() {
   const { lang, t } = useLanguage();
-  const [activeTag, setActiveTag] = useState(null);
   useDocumentTitle(null);
-
-  const visiblePosts = activeTag ? posts.filter((post) => post.tags.includes(activeTag)) : posts;
-
-  const pillClass = (selected) =>
-    `text-sm rounded-full px-3 py-1 transition-colors ${
-      selected
-        ? 'bg-zinc-900 text-zinc-50 dark:bg-ink dark:text-surface'
-        : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-surface-2 dark:text-ink-body dark:hover:bg-surface-3'
-    }`;
 
   return (
     <>
-      <header className="mb-10">
-        <HeaderMark />
-        {/* text-balance keeps the headline from breaking to a one-word last
-            line, without hardcoding a <br> that only works at one width. */}
-        <h1 className="mt-1 text-3xl font-semibold tracking-tight text-balance text-zinc-900 sm:text-4xl dark:text-ink">
-          {t.heroTitle}
+      {/* No manifesto. The front page states what this is and then gets out of
+          the way — the index below is the argument, and it is more convincing
+          than a headline claiming the same thing in larger type. The rail
+          carries a dateline, so the hero sits on the same axis as every other
+          section instead of being the one unstructured spot on the page. */}
+      <header className="rail-grid mb-16">
+        <p className="meta pt-2.5">{t.heroPlace}</p>
+        <h1 className="max-w-[30rem] font-serif text-[1.5rem] leading-[1.45] text-ink sm:text-[1.75rem]">
+          {t.heroLede}
         </h1>
-        <p className="mt-4 leading-relaxed text-zinc-600 dark:text-ink-body">{t.heroSubtitle}</p>
       </header>
-      {projects.length > 0 && (
-        <section className="mb-12">
-          <h2 className="font-semibold tracking-tight text-zinc-900 dark:text-ink">
-            {t.ossHeading}
-          </h2>
-          <div className="mt-4 divide-y divide-zinc-100 border-y border-zinc-100 dark:divide-line dark:border-line">
-            {projects.map((project) => (
-              <RepoCard
-                key={project.slug}
-                project={project}
-                blurb={localizedBlurb(project, lang)}
-              />
-            ))}
-          </div>
-        </section>
-      )}
-      <section
-        className={projects.length > 0 ? 'border-t border-zinc-200 pt-8 dark:border-line' : ''}
-      >
-        <h2 className="font-semibold tracking-tight text-zinc-900 dark:text-ink">{t.posts}</h2>
-        {allTags.length > 0 && (
-          <div className="mt-5 mb-10 flex flex-wrap items-center gap-2">
-            <button
-              type="button"
-              onClick={() => setActiveTag(null)}
-              aria-pressed={activeTag === null}
-              className={pillClass(activeTag === null)}
-            >
-              {t.allPosts}
-            </button>
-            {allTags.map((tag) => (
-              <button
-                key={tag}
-                type="button"
-                onClick={() => setActiveTag(tag)}
-                aria-pressed={activeTag === tag}
-                className={pillClass(activeTag === tag)}
-              >
-                {tag}
-              </button>
-            ))}
-          </div>
-        )}
-        <ul className="space-y-4">
-          {visiblePosts.map((post) => {
+
+      <Section className="mb-20" label={t.posts}>
+        <ul className="divide-y divide-rule">
+          {posts.map((post) => {
             const { title, description } = localized(post, lang);
             return (
-              <li key={post.slug}>
-                {/* The whole entry is the target, matching the repo cards above. */}
-                <Link
-                  to={`/posts/${post.slug}`}
-                  className="group -mx-3 flex gap-3 rounded-xl px-3 py-3 transition-colors hover:bg-zinc-50 dark:hover:bg-surface-2/40"
-                >
-                  <Avatar
-                    initials={AUTHOR.initials}
-                    className="bg-zinc-900 text-zinc-50 dark:bg-ink dark:text-surface"
+              <li key={post.slug} className="rail-grid reveal py-8">
+                <div>
+                  <PostArtwork
+                    seed={post.slug}
+                    className="mb-3 aspect-square w-full max-w-[8.5rem] rounded-lg"
                   />
-                  <div className="min-w-0">
-                    <p className="text-sm text-zinc-500 dark:text-ink-muted">
-                      <time dateTime={post.date}>{formatDate(post.date, t.dateLocale)}</time>
+                  <p className="meta">
+                    <time dateTime={post.date}>{formatDate(post.date, t.dateLocale)}</time>
+                  </p>
+                </div>
+                <Link to={`/posts/${post.slug}`} viewTransition className="row-link group block">
+                  <h3 className="display text-[1.375rem] font-semibold text-ink">
+                    <span className="row-title">{title}</span>
+                  </h3>
+                  {description && (
+                    <p className="mt-2.5 font-serif text-[1.0625rem] leading-relaxed text-ink-body">
+                      {description}
                     </p>
-                    <h3 className="mt-1 text-xl font-semibold tracking-tight text-zinc-900 underline-offset-4 group-hover:underline dark:text-ink">
-                      {title}
-                    </h3>
-                    {description && (
-                      <p className="mt-2 leading-relaxed text-zinc-600 dark:text-ink-body">
-                        {description}
-                      </p>
-                    )}
-                    <div className="mt-3">
-                      <TagList tags={post.tags} />
-                    </div>
+                  )}
+                  <div className="mt-3">
+                    <TagList tags={post.tags} />
                   </div>
                 </Link>
               </li>
             );
           })}
         </ul>
-      </section>
+      </Section>
+
+      {projects.length > 0 && (
+        <Section label={t.ossHeading}>
+          <ul className="divide-y divide-rule">
+            {projects.map((project) => (
+              <li key={project.slug} className="reveal">
+                <RepoCard project={project} blurb={localizedBlurb(project, lang)} />
+              </li>
+            ))}
+          </ul>
+        </Section>
+      )}
     </>
   );
 }

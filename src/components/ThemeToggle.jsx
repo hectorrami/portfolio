@@ -11,7 +11,7 @@ function SunIcon() {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className="w-4 h-4"
+      className="h-[15px] w-[15px]"
       aria-hidden="true"
     >
       <circle cx="12" cy="12" r="4" />
@@ -30,7 +30,7 @@ function MoonIcon() {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className="w-4 h-4"
+      className="h-[15px] w-[15px]"
       aria-hidden="true"
     >
       <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
@@ -46,7 +46,7 @@ function ThemeToggle() {
       type="button"
       onClick={toggle}
       aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
-      className="p-2 -mr-2 rounded-full text-zinc-500 hover:text-zinc-900 dark:text-ink-muted dark:hover:text-ink transition-colors"
+      className="-mr-1 p-1 text-ink-muted transition-colors hover:text-ink"
     >
       {dark ? <SunIcon /> : <MoonIcon />}
     </button>

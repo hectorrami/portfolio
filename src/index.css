@@ -2,126 +2,524 @@
 @plugin '@tailwindcss/typography';
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Dark-mode neutrals, warmed from zinc to Radix "sand". Each token sits at
-   roughly the same lightness as the zinc value it replaces, so the existing
-   contrast hierarchy is untouched — only the temperature moves. Light mode
-   still uses zinc throughout. */
-@theme {
-  --color-surface: #161615; /* sand1  — was zinc-900 */
-  --color-surface-2: #282826; /* sand4  — was zinc-800 */
-  --color-surface-3: #3e3e3a; /* sand7  — was zinc-700 */
-  --color-line: #282826; /* sand4  — was zinc-800 */
-  --color-line-2: #3e3e3a; /* sand7  — was zinc-700 */
-  --color-ink: #ededec; /* sand12 — was zinc-100 */
-  --color-ink-body: #d5d4cf; /* warm counterpart of zinc-300 */
-  --color-ink-muted: #a1a09a; /* sand11 — was zinc-400 */
-  --color-ink-faint: #717069; /* sand9  — was zinc-500 */
+/* ---------------------------------------------------------------------------
+   Palette
+
+   Every colour is a semantic role, not a shade. The `--c-*` values below are
+   the only place light and dark differ; the `@theme` block maps them to
+   Tailwind utilities, so `text-ink` and `bg-paper` are correct in both modes
+   and markup carries no `dark:` pairs. Add a role here rather than reaching
+   for a stock zinc/sand value in a component.
+--------------------------------------------------------------------------- */
+:root {
+  /* Paper is the canvas; paper-2 is the only raised surface (code blocks,
+     inline code), and it is barely there. The greys below carry only a trace
+     of warmth: against a pure white ground the old beige-leaning values read
+     as dinginess rather than as warmth, which is the thing that makes an
+     off-white page look considered and a white one look unwashed. */
+  --c-paper: #ffffff;
+  --c-paper-2: #f4f4f2;
+
+  /* Hairlines. `rule` divides content, `rule-strong` closes a section. */
+  --c-rule: #e6e5e1;
+  --c-rule-strong: #d0cec8;
+
+  /* Four ink levels: headline, running text, metadata, and marks that carry
+     no information on their own. All four clear 4.5:1 on paper except faint,
+     which is only ever used for rules and inactive tick marks. */
+  --c-ink: #16150f;
+  --c-ink-body: #3f3d34;
+  --c-ink-muted: #6b6759;
+  --c-ink-faint: #93907f;
+
+  /* The one accent. Descended from the mug blue this site already used as its
+     single spot of colour, dropped to link weight (7.4:1 on paper). Links and
+     active states only — it never fills a shape. */
+  --c-accent: #35566e;
+  --c-accent-quiet: #7d99ad;
+
+  /* Code blocks keep one warm dark ground in both themes, the way a printed
+     journal sets listings on a plate regardless of the page around them. */
+  --c-code-bg: #1b1b17;
 }
 
+/* Dark mode is true black, so an OLED panel switches those pixels off rather
+   than lighting them dimly. Two consequences are designed around here: the
+   hairlines are lifted well clear of the ground, because a rule that reads on
+   #131310 disappears on #000; and the type stays a warm off-white rather than
+   going to #fff, since maximum contrast against an unlit ground is what makes
+   OLED text smear and haloes on scroll. */
+html.dark {
+  --c-paper: #000000;
+  --c-paper-2: #121210;
+  --c-rule: #262622;
+  --c-rule-strong: #3d3d36;
+  --c-ink: #f2f1ec;
+  --c-ink-body: #cbc9be;
+  --c-ink-muted: #948f83;
+  --c-ink-faint: #6b685f;
+  --c-accent: #8fb4ce;
+  --c-accent-quiet: #5d7d95;
+  --c-code-bg: #101010;
+}
+
+@theme {
+  --color-paper: var(--c-paper);
+  --color-paper-2: var(--c-paper-2);
+  --color-rule: var(--c-rule);
+  --color-rule-strong: var(--c-rule-strong);
+  --color-ink: var(--c-ink);
+  --color-ink-body: var(--c-ink-body);
+  --color-ink-muted: var(--c-ink-muted);
+  --color-ink-faint: var(--c-ink-faint);
+  --color-accent: var(--c-accent);
+  --color-accent-quiet: var(--c-accent-quiet);
+
+  /* Archivo carries display and UI, Newsreader carries anything meant to be
+     read at length, Plex Mono carries figures and labels. */
+  --font-sans:
+    'Archivo', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --font-serif: 'Newsreader', ui-serif, Georgia, Cambria, 'Times New Roman', serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+/* ---------------------------------------------------------------------------
+   Page
+--------------------------------------------------------------------------- */
 html {
   color-scheme: light;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
 
-  /* The one spot of colour on the site — the mug in the header mark. */
-  --mug: #7fa8c9;
+  /* The reading grid. One rail for metadata, one column for text. The measure
+     is ~68 characters of 19px Newsreader — the point past which the eye starts
+     losing its place on the return sweep. */
+  --rail: 8.5rem;
+  --gutter: 3rem;
+  --measure: 41rem;
+
+  /* Anchored headings clear the sticky nothing above them but still leave the
+     eye somewhere to land. */
+  scroll-padding-top: 3rem;
 }
 
 html.dark {
   color-scheme: dark;
 }
 
-/* Hand-drawn header mark. Draws once on load rather than looping — a repeating
-   animation in a header gets old by the third visit. Each path carries its own
-   dash length so it draws at its own natural pace instead of all sharing one
-   oversized value. */
-.mark-stroke {
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 4.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.mark-handle,
-.mark-steam {
-  stroke-width: 3.4;
-}
-
-.mark-mug {
-  fill: var(--mug);
-}
-
-.mark-laptop {
-  stroke-dasharray: 420;
-  stroke-dashoffset: 420;
-  animation: mark-draw 1.5s ease-in-out forwards;
-}
-
-.mark-handle {
-  stroke-dasharray: 50;
-  stroke-dashoffset: 50;
-  animation: mark-draw 0.4s ease-out 1.5s forwards;
-}
-
-.mark-steam {
-  stroke-dasharray: 44;
-  stroke-dashoffset: 44;
-  animation: mark-draw 0.6s ease-out 1.8s forwards;
-}
-
-.mark-mug {
-  transform-box: fill-box;
-  transform-origin: center;
-  transform: scale(0);
-  opacity: 0;
-  animation: mark-pop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) 1.25s forwards;
-}
-
-@keyframes mark-draw {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-@keyframes mark-pop {
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-/* Show the finished mark rather than animating into it. */
 @media (prefers-reduced-motion: reduce) {
-  .mark-laptop,
-  .mark-handle,
-  .mark-steam {
-    stroke-dashoffset: 0;
-    animation: none;
+  html {
+    scroll-behavior: auto;
   }
+}
 
-  .mark-mug {
-    transform: none;
+body {
+  background-color: var(--c-paper);
+  color: var(--c-ink-body);
+  font-family: var(--font-sans);
+  font-synthesis-weight: none;
+}
+
+/* Display type is set slightly narrow. Magazine headlines have been condensed
+   for a century for the same reason — more word per line, tighter colour — and
+   it is the one thing a variable-width grotesque can do that a UI stack can't. */
+.display {
+  font-family: var(--font-sans);
+  font-stretch: 94%;
+  letter-spacing: -0.018em;
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+/* Metadata: dates, star counts, licenses, tags. Sentence case on purpose —
+   tracked-out capitals are the tell this design is trying not to be. */
+.meta {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+  font-variant-numeric: tabular-nums;
+  color: var(--c-ink-muted);
+}
+
+/* ---------------------------------------------------------------------------
+   The rail grid
+
+   One structure, four jobs: section labels on the home page, dates in the post
+   index, the table of contents in an article, and nothing at all in the hero.
+   Below the breakpoint the rail stacks above its content instead of vanishing,
+   so the metadata never gets orphaned.
+--------------------------------------------------------------------------- */
+.shell {
+  width: 100%;
+  max-width: calc(var(--rail) + var(--gutter) + var(--measure));
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+.rail-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 0.5rem;
+}
+
+@media (min-width: 62rem) {
+  .rail-grid {
+    grid-template-columns: var(--rail) minmax(0, var(--measure));
+    column-gap: var(--gutter);
+    row-gap: 0;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Links
+
+   The underline grows from the left rather than appearing all at once. It is
+   the only hover motion on the site, so it can afford to be deliberate.
+--------------------------------------------------------------------------- */
+.link {
+  color: var(--c-accent);
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 1px;
+  transition: background-size 0.28s cubic-bezier(0.22, 0.61, 0.36, 1);
+  padding-bottom: 0.08em;
+}
+
+.link:hover,
+.link:focus-visible {
+  background-size: 100% 1px;
+}
+
+/* Titles in a list: the whole row is the target, so the underline responds to
+   the row's hover, not the text's. */
+.row-link .row-title {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 1px;
+  transition: background-size 0.28s cubic-bezier(0.22, 0.61, 0.36, 1);
+  padding-bottom: 0.06em;
+}
+
+.row-link:hover .row-title,
+.row-link:focus-visible .row-title {
+  background-size: 100% 1px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link,
+  .row-link .row-title {
+    transition: none;
+  }
+}
+
+:where(a, button, summary):focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+/* ---------------------------------------------------------------------------
+   Reveal on scroll
+
+   Scroll-driven CSS animations, so there is no observer, no JS, and no state
+   for a test to trip over: without support the rows are simply already in
+   their finished position. Applied to list rows only — one quiet gesture in
+   one place beats a fade on every section.
+--------------------------------------------------------------------------- */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 5% entry 40%;
+    }
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
     opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   View transitions
+
+   Index → article is a crossfade with a short drift, not a shared-element
+   morph: the index shows five titles and only one of them is the destination,
+   and a morph that guesses wrong is worse than no morph. The theme toggle uses
+   the same machinery with a pure crossfade, which is what stops the flip from
+   reading as a flash.
+--------------------------------------------------------------------------- */
+::view-transition-old(root) {
+  animation: vt-out 0.18s cubic-bezier(0.4, 0, 1, 1) both;
+}
+
+::view-transition-new(root) {
+  animation: vt-in 0.34s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+html.theme-flip::view-transition-old(root),
+html.theme-flip::view-transition-new(root) {
+  animation: vt-fade 0.3s ease both;
+}
+
+html.theme-flip::view-transition-old(root) {
+  animation-direction: reverse;
+}
+
+@keyframes vt-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes vt-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@keyframes vt-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
     animation: none;
   }
 }
 
-/* The typography plugin's inverted palette is zinc-based; retint it so post
-   bodies match the rest of dark mode. Code block colors are left alone — those
-   come from the one highlight.js theme used in both modes. */
-html.dark .prose-invert {
-  --tw-prose-invert-body: #d5d4cf;
-  --tw-prose-invert-headings: #ededec;
-  --tw-prose-invert-lead: #a1a09a;
-  --tw-prose-invert-links: #ededec;
-  --tw-prose-invert-bold: #ededec;
-  --tw-prose-invert-counters: #a1a09a;
-  --tw-prose-invert-bullets: #3e3e3a;
-  --tw-prose-invert-hr: #282826;
-  --tw-prose-invert-quotes: #ededec;
-  --tw-prose-invert-quote-borders: #282826;
-  --tw-prose-invert-captions: #a1a09a;
-  --tw-prose-invert-th-borders: #3e3e3a;
-  --tw-prose-invert-td-borders: #282826;
+/* ---------------------------------------------------------------------------
+   Article body
+
+   The typography plugin handles structure; everything tonal is reset here so
+   the prose sits in the same palette as the rest of the page. Both the light
+   and dark ramps are declared — light is not the plugin's default, it is a
+   choice, and it gets the same attention dark does.
+--------------------------------------------------------------------------- */
+.prose {
+  --tw-prose-body: var(--c-ink-body);
+  --tw-prose-headings: var(--c-ink);
+  --tw-prose-lead: var(--c-ink-muted);
+  --tw-prose-links: var(--c-accent);
+  --tw-prose-bold: var(--c-ink);
+  --tw-prose-counters: var(--c-ink-muted);
+  --tw-prose-bullets: var(--c-rule-strong);
+  --tw-prose-hr: var(--c-rule);
+  --tw-prose-quotes: var(--c-ink);
+  --tw-prose-quote-borders: var(--c-rule-strong);
+  --tw-prose-captions: var(--c-ink-muted);
+  --tw-prose-th-borders: var(--c-rule-strong);
+  --tw-prose-td-borders: var(--c-rule);
+
+  font-family: var(--font-serif);
+  font-size: 1.1875rem; /* 19px */
+  line-height: 1.68;
+  font-optical-sizing: auto;
+  color: var(--c-ink-body);
+  max-width: none; /* the grid already sets the measure */
+}
+
+html.dark .prose {
+  --tw-prose-body: var(--c-ink-body);
+  --tw-prose-headings: var(--c-ink);
+  --tw-prose-lead: var(--c-ink-muted);
+  --tw-prose-links: var(--c-accent);
+  --tw-prose-bold: var(--c-ink);
+  --tw-prose-counters: var(--c-ink-muted);
+  --tw-prose-bullets: var(--c-rule-strong);
+  --tw-prose-hr: var(--c-rule);
+  --tw-prose-quotes: var(--c-ink);
+  --tw-prose-quote-borders: var(--c-rule-strong);
+  --tw-prose-captions: var(--c-ink-muted);
+  --tw-prose-th-borders: var(--c-rule-strong);
+  --tw-prose-td-borders: var(--c-rule);
+}
+
+/* Headings stay in the grotesque, so the reader can tell structure from prose
+   at a glance without either one raising its voice. Space above, not below. */
+.prose :is(h2, h3, h4) {
+  font-family: var(--font-sans);
+  font-stretch: 96%;
+  letter-spacing: -0.012em;
+  color: var(--c-ink);
+}
+
+.prose h2 {
+  font-size: 1.375rem;
+  font-weight: 600;
+  line-height: 1.25;
+  margin-top: 3rem;
+  margin-bottom: 0.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--c-rule);
+}
+
+.prose h3 {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.35;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.prose :is(h2, h3):first-child {
+  margin-top: 0;
+}
+
+.prose p {
+  margin-block: 1.15em;
+}
+
+.prose a {
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 100% 1px;
+  padding-bottom: 0.06em;
+  transition: background-size 0.2s ease;
+}
+
+.prose a:hover {
+  background-size: 100% 2px;
+}
+
+/* Blockquotes hang on a hairline instead of a heavy bar, and drop the plugin's
+   automatic curly quotes — the indent already says what they are. */
+.prose blockquote {
+  font-style: normal;
+  font-weight: 400;
+  border-left-width: 1px;
+  padding-left: 1.5rem;
+  margin-inline: 0;
+  color: var(--c-ink);
+}
+
+.prose blockquote p::before,
+.prose blockquote p::after {
+  content: '';
+}
+
+/* Figures and their captions: caption small, muted, and in the mono so it
+   reads as apparatus rather than as part of the argument. */
+.prose :is(img, video) {
+  border: 1px solid var(--c-rule);
+  border-radius: 2px;
+}
+
+.prose figcaption {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+  color: var(--c-ink-muted);
+  margin-top: 0.75rem;
+}
+
+/* Code: mono at a size that sits on the serif baseline without shouting.
+   Inline code loses the plugin's backticks and takes a hairline instead. */
+.prose :where(code):not(:where(pre code)) {
+  font-family: var(--font-mono);
+  font-size: 0.8125em;
+  font-weight: 400;
+  background-color: var(--c-paper-2);
+  border-radius: 2px;
+  padding: 0.1em 0.3em;
+  color: var(--c-ink);
+}
+
+.prose :where(code):not(:where(pre code))::before,
+.prose :where(code):not(:where(pre code))::after {
+  content: '';
+}
+
+.prose pre {
+  background-color: var(--c-code-bg);
+  border-radius: 2px;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.7;
+  padding: 1.15rem 1.25rem;
+  margin-block: 1.75rem;
+}
+
+/* One highlight theme serves both modes, so its own background is overridden
+   to the site's plate colour rather than GitHub's blue-black. */
+.prose pre code.hljs,
+.prose pre .hljs {
+  background: transparent;
+  padding: 0;
+}
+
+.prose :is(ul, ol) {
+  padding-left: 1.4em;
+}
+
+.prose li {
+  margin-block: 0.35em;
+}
+
+.prose hr {
+  margin-block: 3rem;
+}
+
+.prose table {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+}
+
+.prose :is(th, td) {
+  padding-block: 0.6rem;
+}
+
+.prose th {
+  font-weight: 600;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.01em;
+  color: var(--c-ink-muted);
+}
+
+/* ---------------------------------------------------------------------------
+   Table of contents
+
+   The spine is proportional: each entry's slot grows with the real pixel
+   height of the section it points at, so the fill travelling down it moves at
+   the speed you are actually reading. Equal slots would lie about long
+   sections, and the lie is visible.
+--------------------------------------------------------------------------- */
+.toc-spine {
+  position: relative;
+  border-left: 1px solid var(--c-rule);
+}
+
+.toc-fill {
+  position: absolute;
+  left: -1px;
+  top: 0;
+  width: 1px;
+  background-color: var(--c-accent);
+  transition: height 0.12s linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toc-fill {
+    transition: none;
+  }
 }
