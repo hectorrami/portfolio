@@ -7,7 +7,7 @@ import parseFrontmatter from '../src/lib/frontmatter.js';
 const SITE_URL = 'https://hectorramirez.xyz';
 const SITE_TITLE = 'Hector Ramirez';
 const SITE_DESCRIPTION =
-  'Hector Ramirez — engineer in Houston, TX, writing about software that actually does something.';
+  'Hector Ramirez — software engineer in Houston, TX. Notes on software engineering, open source, and the occasional detour into markets.';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 const postsDir = path.join(root, '../src/posts');

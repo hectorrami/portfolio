@@ -43,15 +43,20 @@ describe('RepoCard', () => {
 
   it('abbreviates the star count visually but exposes the full number', () => {
     render(<RepoCard project={project} blurb="A skills library." />);
-    expect(screen.getByText('★ 264.8K')).toBeInTheDocument();
+    expect(screen.getByText('264.8K stars')).toBeInTheDocument();
     expect(screen.getByText('264,824 stars')).toBeInTheDocument();
   });
 
-  it('renders a decorative avatar so screen readers skip it', () => {
+  it('renders no imagery — the entry is set as type, not as a card', () => {
     const { container } = render(<RepoCard project={project} blurb="A skills library." />);
-    const avatar = container.querySelector('img');
-    expect(avatar).toHaveAttribute('src', '/images/oss/obra.png');
-    expect(avatar).toHaveAttribute('alt', '');
+    expect(container.querySelector('img')).toBeNull();
+  });
+
+  it('hangs the language in the rail, outside the link', () => {
+    render(<RepoCard project={project} blurb="A skills library." />);
+    const language = screen.getByText('Shell');
+    expect(language).toBeInTheDocument();
+    expect(language.closest('a')).toBeNull();
   });
 
   it('falls back to the repo slug and hides the stats row when github data is missing', () => {
@@ -61,13 +66,5 @@ describe('RepoCard', () => {
     expect(screen.getByText('superpowers')).toBeInTheDocument();
     expect(screen.queryByText('Shell')).not.toBeInTheDocument();
     expect(screen.queryByText(/stars/)).not.toBeInTheDocument();
-  });
-
-  it('falls back to a monogram when there is no avatar', () => {
-    const { container } = render(
-      <RepoCard project={{ ...project, github: null }} blurb="A skills library." />,
-    );
-    expect(container.querySelector('img')).toBeNull();
-    expect(screen.getByText('S')).toBeInTheDocument();
   });
 });

@@ -1,4 +1,4 @@
-// Writes dist/sitemap.xml covering the home page, about, and every post.
+// Writes dist/sitemap.xml covering the home page, contact, and every post.
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -27,7 +27,7 @@ const postEntries = await Promise.all(
 
 const entries = [
   { loc: `${SITE_URL}/`, lastmod: null },
-  { loc: `${SITE_URL}/about`, lastmod: null },
+  { loc: `${SITE_URL}/contact`, lastmod: null },
   ...postEntries,
 ];
 

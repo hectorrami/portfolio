@@ -3,7 +3,7 @@
     "name": "docusaurus",
     "owner": "facebook",
     "url": "https://github.com/facebook/docusaurus",
-    "stars": 65925,
+    "stars": 66176,
     "language": "TypeScript",
     "license": "MIT",
     "avatar": "/images/oss/facebook.png"
@@ -12,7 +12,7 @@
     "name": "brew",
     "owner": "Homebrew",
     "url": "https://github.com/Homebrew/brew",
-    "stars": 49159,
+    "stars": 49406,
     "language": "Ruby",
     "license": "BSD-2-Clause",
     "avatar": "/images/oss/Homebrew.png"
@@ -21,7 +21,7 @@
     "name": "superpowers",
     "owner": "obra",
     "url": "https://github.com/obra/superpowers",
-    "stars": 272223,
+    "stars": 281826,
     "language": "Shell",
     "license": "MIT",
     "avatar": "/images/oss/obra.png"
@@ -30,7 +30,7 @@
     "name": "react",
     "owner": "react",
     "url": "https://github.com/react/react",
-    "stars": 247237,
+    "stars": 249080,
     "language": "JavaScript",
     "license": "MIT",
     "avatar": "/images/oss/react.png"

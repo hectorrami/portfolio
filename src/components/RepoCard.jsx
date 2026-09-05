@@ -1,12 +1,19 @@
 import React from 'react';
 import languageColor from '../lib/languageColors';
-import Avatar from './Avatar';
 
 const compact = new Intl.NumberFormat('en-US', {
   notation: 'compact',
   maximumFractionDigits: 1,
 });
 
+// One entry in the open source index. Not a card: no fill, no shadow, no
+// avatar. The language hangs in the rail, where it lines up with every other
+// entry's language down the page and becomes the thing you can scan. The name
+// carries the emphasis, the blurb is set in the reading face, and the counts
+// sit on one mono line beneath it.
+//
+// The rail is deliberately outside the link: marginalia annotates the entry,
+// it isn't part of the target you click.
 function RepoCard({ project, blurb }) {
   const { github, repo } = project;
   const [fallbackOwner, fallbackName] = repo.split('/');
@@ -16,53 +23,38 @@ function RepoCard({ project, blurb }) {
   const color = languageColor(github?.language);
 
   return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group -mx-3 flex gap-3 rounded-xl px-3 py-4 transition-colors hover:bg-zinc-50 dark:hover:bg-surface-2/40"
-    >
-      <Avatar
-        src={github?.avatar}
-        initials={name.charAt(0).toUpperCase()}
-        className="bg-zinc-100 text-zinc-500 dark:bg-surface-2 dark:text-ink-muted"
-      />
-      <div className="min-w-0">
-        <p className="text-sm text-zinc-500 dark:text-ink-muted">
-          <span className="font-semibold text-zinc-900 underline-offset-4 group-hover:underline dark:text-ink">
-            {name}
+    <div className="rail-grid py-7">
+      <p className="meta pt-1.5">
+        {github?.language && (
+          <span className="inline-flex items-center gap-2">
+            <span
+              aria-hidden="true"
+              className="h-[6px] w-[6px] shrink-0 rounded-full"
+              style={{ backgroundColor: color }}
+            />
+            {github.language}
           </span>
-          {owner && (
-            <>
-              <span className="mx-1.5">·</span>
-              {owner}
-            </>
-          )}
+        )}
+      </p>
+      <a href={href} target="_blank" rel="noopener noreferrer" className="row-link group block">
+        <p className="display text-[1.0625rem] font-semibold text-ink">
+          <span className="row-title">{name}</span>
+          {owner && <span className="ml-2 font-normal text-ink-muted">{owner}</span>}
         </p>
-        <p className="mt-1.5 leading-relaxed text-zinc-700 dark:text-ink-body">{blurb}</p>
+        <p className="mt-2 font-serif text-[1.0625rem] leading-relaxed text-ink-body">{blurb}</p>
         {github && (
-          <div className="mt-2.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-zinc-400 dark:text-ink-muted">
-            {github.language && (
-              <span className="inline-flex items-center gap-1.5">
-                <span
-                  aria-hidden="true"
-                  className="h-2 w-2 rounded-full"
-                  style={{ backgroundColor: color }}
-                />
-                {github.language}
-              </span>
-            )}
+          <p className="meta mt-3 flex flex-wrap items-center gap-x-6 gap-y-1">
             {typeof github.stars === 'number' && (
-              <span className="inline-flex items-center gap-1">
-                <span aria-hidden="true">★ {compact.format(github.stars)}</span>
+              <span>
+                <span aria-hidden="true">{compact.format(github.stars)} stars</span>
                 <span className="sr-only">{github.stars.toLocaleString('en-US')} stars</span>
               </span>
             )}
             {github.license && <span>{github.license}</span>}
-          </div>
+          </p>
         )}
-      </div>
-    </a>
+      </a>
+    </div>
   );
 }
 

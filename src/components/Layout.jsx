@@ -1,131 +1,75 @@
 import React from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet } from 'react-router-dom';
 import ThemeToggle from './ThemeToggle';
 import LanguageToggle from './LanguageToggle';
 import { useLanguage } from '../i18n/LanguageContext';
 import { CONTACT } from '../lib/site';
 
-function GitHubIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5" aria-hidden="true">
-      <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-    </svg>
-  );
-}
-
-function LinkedInIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5" aria-hidden="true">
-      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z" />
-    </svg>
-  );
-}
-
-function MailIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className="w-5 h-5"
-      aria-hidden="true"
-    >
-      <rect width="20" height="16" x="2" y="4" rx="2" />
-      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-    </svg>
-  );
-}
-
-function RssIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className="w-5 h-5"
-      aria-hidden="true"
-    >
-      <path d="M4 11a9 9 0 0 1 9 9" />
-      <path d="M4 4a16 16 0 0 1 16 16" />
-      <circle cx="5" cy="20" r="1" />
-    </svg>
-  );
-}
+// The footer's links are set as text rather than icons. A row of glyphs reads
+// as a social bar; the same four words in mono read as a colophon, which is
+// what the bottom of a publication actually is.
+const COLOPHON_LINKS = (t) => [
+  { label: 'GitHub', href: CONTACT.github, external: true },
+  { label: 'LinkedIn', href: CONTACT.linkedin, external: true },
+  { label: t.email, href: `mailto:${CONTACT.email}` },
+  { label: 'RSS', href: '/rss.xml' },
+];
 
 function Layout() {
   const { t, languageEnabled } = useLanguage();
 
   return (
-    <div className="min-h-screen flex flex-col bg-white dark:bg-surface text-zinc-800 dark:text-ink">
-      <header className="max-w-2xl w-full mx-auto px-6 pt-10 pb-4 flex items-center justify-between">
-        <Link
-          to="/"
-          className="font-semibold tracking-tight text-zinc-900 dark:text-ink hover:underline underline-offset-4"
-        >
-          Hector Ramirez
-        </Link>
-        <div className="flex items-center gap-1">
-          <Link
-            to="/about"
-            className="text-sm text-zinc-600 dark:text-ink-muted hover:text-zinc-900 dark:hover:text-ink transition-colors mr-3"
-          >
-            {t.about}
+    <div className="flex min-h-screen flex-col bg-paper text-ink-body">
+      {/* The masthead spans the shell rather than the rail grid, but its two
+          ends land on the grid anyway: the wordmark on the rail's left edge,
+          the controls on the column's right edge. Centre alignment, not
+          baseline — the toggles are icons, and an icon has no baseline worth
+          aligning to. No rule beneath it: the gap to the first line of content
+          is doing that work, so a hairline would only repeat it. */}
+      <header>
+        <div className="shell flex items-center justify-between py-5">
+          <Link to="/" className="display text-base font-semibold tracking-tight text-ink">
+            Hector Ramirez
           </Link>
-          {languageEnabled && <LanguageToggle />}
-          <ThemeToggle />
+          <nav className="flex items-center gap-5">
+            <NavLink
+              to="/contact"
+              className={({ isActive }) =>
+                `text-sm transition-colors hover:text-ink ${isActive ? 'text-ink' : 'text-ink-muted'}`
+              }
+            >
+              {t.contact}
+            </NavLink>
+            {languageEnabled && <LanguageToggle />}
+            <ThemeToggle />
+          </nav>
         </div>
       </header>
-      <main className="max-w-2xl w-full mx-auto px-6 py-8 flex-1">
+
+      <main className="shell flex-1 py-16 sm:py-20">
         <Outlet />
       </main>
-      <footer className="max-w-2xl w-full mx-auto px-6 py-10 border-t border-zinc-200 dark:border-line">
-        <div className="flex items-center gap-5 mb-3">
-          <a
-            href={CONTACT.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub"
-            title="GitHub"
-            className="text-zinc-500 hover:text-zinc-900 dark:text-ink-muted dark:hover:text-ink transition-colors"
-          >
-            <GitHubIcon />
-          </a>
-          <a
-            href={CONTACT.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
-            title="LinkedIn"
-            className="text-zinc-500 hover:text-zinc-900 dark:text-ink-muted dark:hover:text-ink transition-colors"
-          >
-            <LinkedInIcon />
-          </a>
-          <a
-            href={`mailto:${CONTACT.email}`}
-            aria-label={t.email}
-            title={t.email}
-            className="text-zinc-500 hover:text-zinc-900 dark:text-ink-muted dark:hover:text-ink transition-colors"
-          >
-            <MailIcon />
-          </a>
-          <a
-            href="/rss.xml"
-            aria-label="RSS"
-            title="RSS"
-            className="text-zinc-500 hover:text-zinc-900 dark:text-ink-muted dark:hover:text-ink transition-colors"
-          >
-            <RssIcon />
-          </a>
+
+      <footer className="mt-8 border-t border-rule">
+        <div className="shell rail-grid py-8">
+          <p className="meta">© {new Date().getFullYear()} Hector Ramirez</p>
+          <ul className="flex flex-wrap gap-x-6 gap-y-1">
+            {COLOPHON_LINKS(t).map(({ label, href, external }) => (
+              <li key={label}>
+                <a
+                  href={href}
+                  target={external ? '_blank' : undefined}
+                  // Set unconditionally: harmless on the mailto and the feed,
+                  // and a conditional rel is not statically checkable.
+                  rel="noopener noreferrer"
+                  className="meta transition-colors hover:text-ink"
+                >
+                  {label}
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
-        <p className="text-sm text-zinc-500 dark:text-ink-muted">
-          © {new Date().getFullYear()} Hector Ramirez
-        </p>
       </footer>
     </div>
   );
