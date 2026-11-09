@@ -5,7 +5,6 @@ import { projects, localizedBlurb } from '../lib/oss';
 import { useLanguage } from '../i18n/LanguageContext';
 import TagList from '../components/TagList';
 import RepoCard from '../components/RepoCard';
-import PostArtwork from '../components/PostArtwork';
 import useDocumentTitle from '../hooks/useDocumentTitle';
 
 // A section hangs its name in the rail and puts everything else in the column.
@@ -46,15 +45,9 @@ function Home() {
             const { title, description } = localized(post, lang);
             return (
               <li key={post.slug} className="rail-grid reveal py-8">
-                <div>
-                  <PostArtwork
-                    seed={post.slug}
-                    className="mb-3 aspect-square w-full max-w-[8.5rem] rounded-lg"
-                  />
-                  <p className="meta">
-                    <time dateTime={post.date}>{formatDate(post.date, t.dateLocale)}</time>
-                  </p>
-                </div>
+                <p className="meta">
+                  <time dateTime={post.date}>{formatDate(post.date, t.dateLocale)}</time>
+                </p>
                 <Link to={`/posts/${post.slug}`} viewTransition className="row-link group block">
                   <h3 className="display text-[1.375rem] font-semibold text-ink">
                     <span className="row-title">{title}</span>
