@@ -58,6 +58,17 @@ describe('Home', () => {
     });
   });
 
+  // Post rows used to carry generated SVG artwork built from turbulence,
+  // displacement and blur filters. Each piece cost ~27ms to rasterize at phone
+  // resolution against ~0.5ms unfiltered, and mobile rows sat blank while it
+  // painted. The rows are text only now; keep them that way.
+  it('renders post rows without artwork', () => {
+    renderHome();
+    postLinks().forEach((link) => {
+      expect(link.closest('li').querySelector('svg')).toBeNull();
+    });
+  });
+
   it('renders a Posts heading above the list', () => {
     renderHome();
     expect(screen.getByRole('heading', { name: 'Posts' })).toBeInTheDocument();
