@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Hector Ramirez</title>
+    <link>https://hectorramirez.xyz</link>
+    <description>Hector Ramirez — software engineer in Houston, TX. Notes on software engineering, open source, and the occasional detour into markets.</description>
+    <language>en-us</language>
+    <item>
+      <title>The SpaceX IPO: a vocabulary lesson</title>
+      <link>https://hectorramirez.xyz/posts/spacex-ipo-investment-read</link>
+      <guid>https://hectorramirez.xyz/posts/spacex-ipo-investment-read</guid>
+      <pubDate>Fri, 12 Jun 2026 00:00:00 GMT</pubDate>
+      <description>Market cap, speculating vs. investing, risk tolerance, time horizons — the boring terms that matter, taught by the most exciting stock of the year.</description>
+      <category>investing</category>
+      <category>basics</category>
+    </item>
+    <item>
+      <title>Claude Fable 5, by the numbers</title>
+      <link>https://hectorramirez.xyz/posts/claude-fable-5-by-the-numbers</link>
+      <guid>https://hectorramirez.xyz/posts/claude-fable-5-by-the-numbers</guid>
+      <pubDate>Tue, 09 Jun 2026 00:00:00 GMT</pubDate>
+      <description>Anthropic's new top-tier model — pricing, context window, and how it fits into the lineup.</description>
+      <category>ai</category>
+      <category>llms</category>
+    </item>
+    <item>
+      <title>Hello, world</title>
+      <link>https://hectorramirez.xyz/posts/hello-world</link>
+      <guid>https://hectorramirez.xyz/posts/hello-world</guid>
+      <pubDate>Tue, 09 Jun 2026 00:00:00 GMT</pubDate>
+      <description>Why I scrapped my portfolio and started a blog.</description>
+      <category>meta</category>
+      <category>writing</category>
+    </item>
+  </channel>
+</rss>
