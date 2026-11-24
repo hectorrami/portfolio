@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Morse Code Tree</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Saira:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* VOICE: playful, tactile, a learning toy
+   IDEA: a sideways family tree of signals: up for dot, down for dash
+   PICTURE: the tree itself, lighting its branch as you key; KEY docked under the thumb
+   COLOUR and TYPE: dial white + graphite, signal orange for the lit path; Saira
+   LAYOUT: wheel on top, readout, then a tabbed control deck (Learn / Key / Translate / Quiz) */
+:root{color-scheme:light dark;--bg:light-dark(#eef1f4,#0f1115);--card:light-dark(#ffffff,#1a1d22);--ink:light-dark(#14171c,#eceef1);--mute:light-dark(#5b616b,#9aa1ab);--line:light-dark(#d3d8de,#2b3038);--dot:light-dark(#ffffff,#2a2f37);--dash:light-dark(#dfe4ea,#1c2026);--rim:light-dark(#14171c,#050607);--sig:#ff5a1f;--key:light-dark(#252a31,#4a525e);--bad:#d7263d}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Saira,system-ui,sans-serif;overflow-x:clip}
+main{max-width:560px;margin:0 auto;padding:18px 14px 40px}
+h1{font-size:32px;line-height:1.05;margin:4px 0 4px;font-weight:600}
+.sub{color:var(--mute);margin:0 0 14px;font-size:15px}
+.wheel{display:block;width:100%;height:auto;touch-action:manipulation}
+.sec{cursor:pointer}
+.sec .hit{fill:transparent;pointer-events:all}
+.sec .sh{fill:var(--key);transition:fill .08s}
+.sec text{fill:#fff;font:700 28px Saira,sans-serif;text-anchor:middle;dominant-baseline:central;pointer-events:none}
+.sec.lit .sh{fill:var(--sig)}.sec.bad .sh{fill:var(--bad)}
+.sec:focus{outline:none}.sec:focus-visible .sh{stroke:var(--sig);stroke-width:5}
+.br{stroke:var(--line);stroke-width:4;fill:none;stroke-linejoin:round}.br.lit{stroke:var(--sig);stroke-width:7}
+.root{fill:var(--sig)}
+.colh{fill:var(--mute);font:500 20px Saira,sans-serif;text-anchor:middle}
+.hide .sec text{opacity:0}
+.dock{position:sticky;bottom:0;z-index:5;display:flex;gap:10px;align-items:stretch;padding:10px 0 calc(10px + env(safe-area-inset-bottom));background:linear-gradient(transparent,var(--bg) 14px)}
+.dock .read{flex:1;margin:0}
+.pk{flex:none;width:110px;border:0;border-radius:18px;background:var(--sig);color:#fff;font:700 20px Saira,sans-serif;cursor:pointer;touch-action:none;-webkit-user-select:none;user-select:none;box-shadow:inset 0 -6px 0 rgba(0,0,0,.25);transition:transform .05s}
+.pk.down{transform:translateY(3px);box-shadow:inset 0 -2px 0 rgba(0,0,0,.25);filter:brightness(1.12)}
+.legend{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;font-size:14px;color:var(--mute);margin-top:6px}
+.legend .k i{background:var(--key)}.legend>span>i{display:inline-block;width:14px;height:14px;border:2px solid var(--rim);border-radius:3px;vertical-align:-2px;margin-right:6px}
+.read{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 16px;margin:14px 0;min-height:76px}
+.big{font-size:46px;font-weight:600;line-height:1;width:44px;text-align:center}
+.code{flex:1;min-height:40px;display:flex;align-items:center;gap:10px}.code i,.sym i{display:inline-block;height:12px;width:12px;border-radius:6px;background:var(--sig)}.code i.h,.sym i.h{width:36px}.sym{display:inline-flex;gap:4px;align-items:center;vertical-align:middle}.sym i{height:6px;width:6px}.sym i.h{width:18px}
+.tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:4px}
+.tabs button{border:0;background:none;color:var(--ink);font:500 15px Saira;min-height:44px;border-radius:9px;cursor:pointer}
+.tabs button[aria-selected=true]{background:var(--ink);color:var(--bg)}
+.pane{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-top:10px}
+.pane[hidden]{display:none}
+.pane p{margin:0 0 12px;color:var(--mute);font-size:15px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+button.b{font:600 16px Saira;min-height:44px;padding:0 16px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+button.b.go{background:var(--sig);border-color:var(--sig);color:#fff}
+button:focus-visible,input:focus-visible{outline:3px solid var(--sig);outline-offset:2px}
+.keys{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
+.keys button{font:700 40px Saira;min-height:64px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer;touch-action:manipulation}
+.out{font-size:26px;font-weight:600;min-height:40px;word-break:break-all;margin:10px 0;letter-spacing:2px}
+input[type=text]{width:100%;font:16px Saira;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);min-height:44px;margin-bottom:8px}
+.mstr{font-size:20px;letter-spacing:2px;margin-top:10px;line-height:1.7;word-break:break-word}
+.mstr .sym i{background:var(--mute)}.mstr .sym.on i{background:var(--sig)}.mstr .sym{margin-right:10px}
+.target{font-size:64px;font-weight:600;text-align:center;line-height:1.1}
+.fb{text-align:center;min-height:26px;font-weight:600}
+.fb.ok{color:#1e9e4a}.fb.no{color:var(--bad)}
+.set{display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-top:14px;color:var(--mute);font-size:15px}
+.set label{display:flex;align-items:center;gap:8px}
+input[type=range]{width:130px;accent-color:var(--sig)}
+input[type=checkbox]{width:20px;height:20px;accent-color:var(--sig)}
+.hint{font-size:13px;color:var(--mute);margin-top:10px}
+@media (prefers-reduced-motion:reduce){.sec .sh,.pk{transition:none}}
+</style>
+</head>
+<body>
+<main>
+<h1>Morse code tree</h1>
+<p class="sub">Start at the orange dot on the left. Each step right adds one signal: <b>dot goes up</b>, <b>dash goes down</b>. The shorter the code, the further left the letter.</p>
+
+<svg class="wheel" id="plate" viewBox="0 0 760 1090" aria-label="Morse code tree">
+  <g id="colh"></g>
+  <g id="brs"></g>
+  <circle class="root" cx="40" cy="0" r="16" id="root"/>
+  <g id="secs"></g>
+</svg>
+<div class="legend"><span><b class="sym k"><i></i></b> dot = short, go up</span><span><b class="sym k"><i class="h"></i></b> dash = long, go down</span></div>
+
+<div class="dock">
+  <div class="read" aria-live="polite"><div class="big" id="rl">·</div><div class="code" id="rc"></div></div>
+  <button class="pk" id="pkey" aria-label="Morse key: hold short for dot, long for dash">KEY</button>
+</div>
+
+<div class="tabs" role="tablist">
+  <button role="tab" data-t="learn" aria-selected="true">Learn</button>
+  <button role="tab" data-t="key" aria-selected="false">Key</button>
+  <button role="tab" data-t="tr" aria-selected="false">Translate</button>
+  <button role="tab" data-t="quiz" aria-selected="false">Quiz</button>
+</div>
+
+<section class="pane" id="p-learn">
+  <p>Tap any letter on the wheel to watch its path light up and hear it. Or hold the orange KEY at the bottom to try keying.</p>
+  <div class="row"><button class="b go" id="playAll">Play A–Z</button><button class="b" id="stop">Stop</button></div>
+</section>
+
+<section class="pane" id="p-key" hidden>
+  <p>Press the orange KEY at the bottom with your thumb: short = dot, long = dash. Pause to finish a letter. The · and − buttons work too.</p>
+  <div class="keys"><button id="kDot" aria-label="dot">·</button><button id="kDash" aria-label="dash">−</button></div>
+  <div class="out" id="out"></div>
+  <div class="row"><button class="b" id="space">Space</button><button class="b" id="back">Delete</button><button class="b" id="clr">Clear</button></div>
+  <div class="hint">Keyboard: . and - to tap, hold Space as the key, Enter to finish a letter.</div>
+</section>
+
+<section class="pane" id="p-tr" hidden>
+  <p>Type a message and play it on the tree.</p>
+  <input type="text" id="msg" value="SOS HELLO" maxlength="80" autocomplete="off">
+  <div class="row"><button class="b go" id="trPlay">Play</button><button class="b" id="trStop">Stop</button></div>
+  <div class="mstr" id="mstr"></div>
+</section>
+
+<section class="pane" id="p-quiz" hidden>
+  <div class="target" id="qt">?</div>
+  <div class="fb" id="qf"></div>
+  <div class="keys" style="margin-top:10px"><button id="qDot" aria-label="dot">·</button><button id="qDash" aria-label="dash">−</button></div>
+  <div class="row" style="margin-top:10px;justify-content:space-between"><span id="qs">Score 0 · streak 0</span><button class="b" id="qskip">Skip</button></div>
+  <div class="hint">Tip: tick “Hide letters” below to quiz from memory — the slices stay, the letters vanish.</div>
+</section>
+
+<div class="set">
+  <label>Speed <input type="range" id="wpm" min="5" max="25" value="10"> <span id="wv">10</span> wpm</label>
+  <label><input type="checkbox" id="snd" checked> Sound</label>
+  <label><input type="checkbox" id="hideL"> Hide letters</label>
+</div>
+</main>
+
+<script>
+{
+const MORSE={A:'.-',B:'-...',C:'-.-.',D:'-..',E:'.',F:'..-.',G:'--.',H:'....',I:'..',J:'.---',K:'-.-',L:'.-..',M:'--',N:'-.',O:'---',P:'.--.',Q:'--.-',R:'.-.',S:'...',T:'-',U:'..-',V:'...-',W:'.--',X:'-..-',Y:'-.--',Z:'--..'};
+const BY={};for(const k in MORSE)BY[MORSE[k]]=k;
+const $=id=>document.getElementById(id);
+const NS='http://www.w3.org/2000/svg';
+const plate=$('plate'),gS=$('secs'),gB=$('brs');
+const nodeEl={},brEl={};
+const X=[40,180,340,500,662],TOP=60,ROW=64,DD=50,DW=126;
+const mk=(tag,at,par)=>{const e=document.createElementNS(NS,tag);for(const k in at)e.setAttribute(k,at[k]);par&&par.appendChild(e);return e};
+const yOf=(k,i)=>{const span=16/2**k;return TOP+(i*span+span/2)*ROW};
+const half=c=>c===''?16:(c.endsWith('-')?DW/2:DD/2);
+const pos={'':[X[0],yOf(0,0)]};$('root').setAttribute('cy',pos[''][1]);
+['1 signal','2','3','4 signals'].forEach((t,k)=>mk('text',{x:X[k+1],y:24,class:'colh'},$('colh')).textContent=t);
+for(let k=1;k<=4;k++){
+  for(let i=0;i<2**k;i++){
+    const code=i.toString(2).padStart(k,'0').replace(/0/g,'.').replace(/1/g,'-');
+    const L=BY[code];if(!L)continue;
+    const x=X[k],y=yOf(k,i),par=code.slice(0,-1),[px,py]=pos[par];pos[code]=[x,y];
+    const sx=px+half(par),ex=x-half(code),mx=(X[k-1]+X[k])/2+6;
+    brEl[code]=mk('path',{class:'br',d:`M${sx} ${py}H${mx}V${y}H${ex}`},gB);
+    const g=mk('g',{class:'sec',tabindex:0,role:'button','aria-label':L+' '+code},gS);
+    mk('rect',{class:'hit',x:x-75,y:y-ROW/2,width:150,height:ROW},g);
+    if(code.endsWith('.'))mk('circle',{class:'sh',cx:x,cy:y,r:DD/2},g);
+    else mk('rect',{class:'sh',x:x-DW/2,y:y-DD/2,width:DW,height:DD,rx:DD/2},g);
+    mk('text',{x,y},g).textContent=L;
+    g.addEventListener('click',()=>{stopAll();playLetter(L)});
+    g.addEventListener('keydown',ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();stopAll();playLetter(L)}});
+    nodeEl[code]=g;
+  }
+}
+
+// audio
+let ac=null,osc=null,gain=null;
+const audio=()=>{if(!ac){try{ac=new (window.AudioContext||window.webkitAudioContext)();gain=ac.createGain();gain.gain.value=0;gain.connect(ac.destination);osc=ac.createOscillator();osc.frequency.value=650;osc.connect(gain);osc.start()}catch(e){}}if(ac&&ac.state==='suspended')ac.resume().catch(()=>{});};
+const toneOn=()=>{if(!$('snd').checked||!ac)return;gain.gain.cancelScheduledValues(ac.currentTime);gain.gain.setTargetAtTime(.25,ac.currentTime,.004)};
+const toneOff=()=>{if(!ac)return;gain.gain.cancelScheduledValues(ac.currentTime);gain.gain.setTargetAtTime(0,ac.currentTime,.006)};
+document.addEventListener('pointerdown',audio,{capture:true});document.addEventListener('keydown',audio,{capture:true});
+
+const unit=()=>1200/+$('wpm').value;
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const pretty=c=>c.replace(/\./g,'·').replace(/-/g,'−');
+
+function clearLit(){for(const k in nodeEl){nodeEl[k].classList.remove('lit','bad');brEl[k].classList.remove('lit')}}
+function lightPath(code){clearLit();for(let i=1;i<=code.length;i++){const c=code.slice(0,i);nodeEl[c]?.classList.add('lit');brEl[c]?.classList.add('lit')}}
+const bars=c=>[...c].map(x=>`<i class="${x==='-'?'h':''}"></i>`).join('');
+function show(letter,code){$('rl').textContent=letter||'·';$('rc').innerHTML=bars(code||'')}
+
+let run=0;
+function stopAll(){run++;toneOff();clearLit()}
+async function playLetter(L,tok=++run){
+  const code=MORSE[L];if(!code)return;audio();show(L,'');clearLit();
+  for(let i=0;i<code.length;i++){
+    if(tok!==run)return;
+    const c=code.slice(0,i+1);nodeEl[c].classList.add('lit');brEl[c].classList.add('lit');show(L,c);
+    toneOn();await sleep(code[i]==='.'?unit():unit()*3);toneOff();await sleep(unit());
+  }
+  await sleep(unit()*2);
+}
+
+// tabs
+let mode='learn';
+document.querySelectorAll('.tabs button').forEach(b=>b.addEventListener('click',()=>{
+  mode=b.dataset.t;stopAll();resetKey();
+  document.querySelectorAll('.tabs button').forEach(x=>x.setAttribute('aria-selected',x===b));
+  ['learn','key','tr','quiz'].forEach(t=>$('p-'+t).hidden=t!==mode);
+  if(mode==='quiz'&&!target)nextQ();
+}));
+
+// learn
+$('playAll').onclick=async()=>{stopAll();const tok=run;for(const L of Object.keys(MORSE)){if(tok!==run)return;await playLetter(L,tok);await sleep(unit()*2)}if(tok===run)clearLit()};
+$('stop').onclick=stopAll;
+
+// keyer (shared by Key + Quiz)
+let cur='',timer=null,downAt=0;
+function resetKey(){cur='';clearTimeout(timer);show('','')}
+function add(sym){
+  run++;clearTimeout(timer);
+  if(!nodeEl[cur+sym]){flashBad();return}
+  cur+=sym;lightPath(cur);show(BY[cur]||'?',cur);
+  timer=setTimeout(commit,Math.max(900,unit()*5));
+}
+function flashBad(){const el=nodeEl[cur];if(el){el.classList.add('bad');setTimeout(()=>el.classList.remove('bad'),300)}cur='';setTimeout(()=>{clearLit();show('','')},300)}
+function commit(){
+  clearTimeout(timer);if(!cur)return;const L=BY[cur];
+  if(mode==='key'){$('out').textContent+=L||'?'}
+  else if(mode==='quiz')checkQ(cur);
+  cur='';setTimeout(()=>{if(!cur)clearLit()},500);
+}
+async function tapSym(s){audio();toneOn();await sleep(s==='.'?unit():unit()*3);toneOff();add(s)}
+['kDot','qDot'].forEach(id=>$(id).onclick=()=>tapSym('.'));
+['kDash','qDash'].forEach(id=>$(id).onclick=()=>tapSym('-'));
+function keyDown(){audio();clearTimeout(timer);run++;downAt=performance.now();toneOn()}
+function keyUp(){if(!downAt)return;const d=performance.now()-downAt;downAt=0;toneOff();add(d<unit()*2?'.':'-')}
+{const p=$('pkey');
+  p.addEventListener('pointerdown',e=>{e.preventDefault();p.setPointerCapture?.(e.pointerId);p.classList.add('down');keyDown()});
+  ['pointerup','pointercancel','lostpointercapture'].forEach(ev=>p.addEventListener(ev,()=>{if(!p.classList.contains('down'))return;p.classList.remove('down');keyUp()}));
+  p.addEventListener('contextmenu',e=>e.preventDefault());
+  p.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&!e.repeat){e.preventDefault();e.stopPropagation();p.classList.add('down');keyDown()}});
+  p.addEventListener('keyup',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();e.stopPropagation();p.classList.remove('down');keyUp()}});
+}
+document.addEventListener('keydown',e=>{
+  if(e.target.tagName==='INPUT'||e.target.closest?.('.sec,#pkey,button'))return;
+  if(e.key==='.'){e.preventDefault();tapSym('.')}
+  else if(e.key==='-'){e.preventDefault();tapSym('-')}
+  else if(e.key==='Enter'){e.preventDefault();commit()}
+  else if(e.code==='Space'&&!e.repeat){e.preventDefault();keyDown()}
+});
+document.addEventListener('keyup',e=>{if(e.code==='Space'&&downAt&&!(e.target.closest?.('#pkey'))){e.preventDefault();keyUp()}});
+$('space').onclick=()=>{$('out').textContent+=' '};
+$('back').onclick=()=>{$('out').textContent=$('out').textContent.slice(0,-1)};
+$('clr').onclick=()=>{$('out').textContent='';resetKey();clearLit()};
+
+// translate
+function renderM(active=-1){
+  const s=$('msg').value.toUpperCase();
+  $('mstr').innerHTML=[...s].map((ch,i)=>ch===' '?' / ':`<span class="sym ${i===active?'on':''}">${MORSE[ch]?bars(MORSE[ch]):'?'}</span>`).join(' ');
+}
+$('msg').addEventListener('input',()=>renderM());renderM();
+$('trPlay').onclick=async()=>{stopAll();const tok=run;const s=$('msg').value.toUpperCase();
+  for(let i=0;i<s.length;i++){if(tok!==run)return;renderM(i);
+    if(s[i]===' '){await sleep(unit()*4);continue}
+    if(MORSE[s[i]])await playLetter(s[i],tok);
+  }
+  if(tok===run){renderM();clearLit()}};
+$('trStop').onclick=()=>{stopAll();renderM()};
+
+// quiz
+let target='',score=0,streak=0;
+function nextQ(){const ks=Object.keys(MORSE);let n;do n=ks[Math.floor(Math.random()*26)];while(n===target);target=n;$('qt').textContent=n;$('qf').textContent='';$('qf').className='fb';resetKey();clearLit()}
+function checkQ(code){
+  if(code===MORSE[target]){score++;streak++;$('qf').textContent='Correct!';$('qf').className='fb ok';setTimeout(nextQ,900)}
+  else{streak=0;$('qf').textContent=`Not quite — ${target} is ${pretty(MORSE[target])}`;$('qf').className='fb no';const t=target;setTimeout(()=>{if(target===t)playLetter(t)},400)}
+  $('qs').textContent=`Score ${score} · streak ${streak}`;
+}
+$('qskip').onclick=()=>{streak=0;$('qs').textContent=`Score ${score} · streak ${streak}`;nextQ()};
+
+// settings
+$('wpm').oninput=()=>{$('wv').textContent=$('wpm').value};
+$('hideL').onchange=()=>plate.classList.toggle('hide',$('hideL').checked);
+}
+</script>
+</body>
+</html>
